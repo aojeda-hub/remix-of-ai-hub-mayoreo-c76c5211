@@ -314,7 +314,7 @@ export default function Register() {
 
             {/* Tipo de Iniciativa */}
             <div className="space-y-2">
-              <Label>Tipo de Iniciativa</Label>
+              <Label>Estado de la Iniciativa</Label>
               <Select value={form.initiative_type} onValueChange={(v) => update("initiative_type", v)}>
                 <SelectTrigger><SelectValue placeholder="Seleccionar tipo" /></SelectTrigger>
                 <SelectContent className="bg-popover z-50">
