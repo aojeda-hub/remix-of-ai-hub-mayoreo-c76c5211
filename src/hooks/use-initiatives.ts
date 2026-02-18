@@ -24,7 +24,7 @@ export function useInitiative(id: string) {
                 .from("initiatives")
                 .select("*, profiles(full_name)")
                 .eq("id", id)
-                .single();
+                .maybeSingle();
             if (error) throw error;
             return data;
         },
