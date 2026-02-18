@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { NotificationBell } from "@/components/NotificationBell";
-import logoMayoreo from "@/assets/Logo_Mayoreo.png";
+import logoMayoreo from "@/assets/Logo_Mayoreo_Isotipo.png";
 
 export function AppLayout({ children }: { children: ReactNode }) {
   return (
