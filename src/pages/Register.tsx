@@ -108,7 +108,7 @@ export default function Register() {
     };
     const mappedStatus = statusMap[form.initiative_type] || "en_revision";
 
-    const { error } = await supabase.from("initiatives").insert({
+    const { error } = await (supabase as any).from("initiatives").insert({
       project: form.project,
       technology: form.technology,
       responsible: form.registrant_name || form.responsible,
