@@ -45,7 +45,7 @@ export default function Auth() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
-            <img src={logoMayoreo} alt="Logo Mayoreo" className="h-16 w-auto object-contain mx-auto" />
+            <img src={logoMayoreo} alt="Logo Mayoreo" className="h-20 w-auto object-contain mx-auto" />
           </div>
           <CardTitle className="text-2xl">Iniciativas IA</CardTitle>
           <CardDescription>
