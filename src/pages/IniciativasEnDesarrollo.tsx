@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, HandHelping, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { Search, HandHelping, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, ArrowRightLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
@@ -69,6 +69,36 @@ export default function IniciativasEnDesarrollo() {
 
   // Delete dialog state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
+
+  // Change status dialog state
+  const [statusInitiative, setStatusInitiative] = useState<any>(null);
+  const [newStatus, setNewStatus] = useState("");
+
+  const STATUS_OPTIONS = [
+    { label: "En Desarrollo", value: "en_progreso" },
+    { label: "En Calidad", value: "en_revision" },
+    { label: "En Productivo", value: "completado" },
+  ];
+
+  const handleChangeStatus = async () => {
+    if (!newStatus) {
+      toast.error("Selecciona un estado");
+      return;
+    }
+    try {
+      const { error } = await (supabase as any)
+        .from("initiatives")
+        .update({ status: newStatus })
+        .eq("id", statusInitiative.id);
+      if (error) throw error;
+      toast.success("Estado actualizado correctamente");
+      queryClient.invalidateQueries({ queryKey: ["initiatives-en-desarrollo"] });
+      setStatusInitiative(null);
+      setNewStatus("");
+    } catch (err: any) {
+      toast.error("Error al cambiar estado: " + err.message);
+    }
+  };
 
   const isOwner = (initiative: any) => initiative.created_by === user?.id;
   const canEditDelete = (initiative: any) => isAdmin || isOwner(initiative);
@@ -282,6 +312,10 @@ export default function IniciativasEnDesarrollo() {
                               <Trash2 className="h-4 w-4" />
                               Eliminar
                             </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => { setStatusInitiative(i); setNewStatus(i.status || ""); }} className="gap-2">
+                              <ArrowRightLeft className="h-4 w-4" />
+                              Cambiar Estado
+                            </DropdownMenuItem>
                           </>
                         )}
                         {canOfferHelp(i) && (
@@ -399,6 +433,30 @@ export default function IniciativasEnDesarrollo() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditingInitiative(null)}>Cancelar</Button>
             <Button onClick={handleSaveEdit}>Guardar Cambios</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Change Status Dialog */}
+      <Dialog open={!!statusInitiative} onOpenChange={(open) => { if (!open) { setStatusInitiative(null); setNewStatus(""); } }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Cambiar Estado — {statusInitiative?.project}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Label>Estado de la Iniciativa</Label>
+            <Select value={newStatus} onValueChange={setNewStatus}>
+              <SelectTrigger><SelectValue placeholder="Seleccionar estado" /></SelectTrigger>
+              <SelectContent className="bg-popover z-50">
+                {STATUS_OPTIONS.map((s) => (
+                  <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setStatusInitiative(null); setNewStatus(""); }}>Cancelar</Button>
+            <Button onClick={handleChangeStatus}>Guardar</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
