@@ -67,7 +67,9 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Create the user with admin client
+    // Try to create the user; if already exists, just sync profiles & roles
+    let userId: string;
+
     const { data: newUser, error: createError } = await adminClient.auth.admin.createUser({
       email,
       password,
@@ -76,29 +78,49 @@ Deno.serve(async (req) => {
     });
 
     if (createError) {
-      return new Response(JSON.stringify({ error: createError.message }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      // Check if user already exists
+      if (createError.message?.toLowerCase().includes("already") || createError.message?.toLowerCase().includes("existe")) {
+        // Find existing user by email
+        const { data: { users }, error: listError } = await adminClient.auth.admin.listUsers();
+        const existingUser = users?.find((u: any) => u.email === email);
+        if (!existingUser || listError) {
+          return new Response(JSON.stringify({ error: "Usuario existe pero no se pudo encontrar: " + (listError?.message || "no encontrado") }), {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+        userId = existingUser.id;
+        console.log("User already exists in auth, syncing profile and role for:", userId);
+      } else {
+        return new Response(JSON.stringify({ error: createError.message }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    } else {
+      userId = newUser.user!.id;
     }
 
-    // Update profile with phone if provided
-    if (phone && newUser.user) {
-      await adminClient
-        .from("profiles")
-        .update({ phone })
-        .eq("user_id", newUser.user.id);
-    }
+    // Upsert profile
+    await adminClient
+      .from("profiles")
+      .upsert({
+        id: userId,
+        full_name: full_name || "",
+        email,
+        phone: phone || null,
+      }, { onConflict: "id" });
 
-    // Update role if not default
-    if (role && role !== "colaborador" && newUser.user) {
-      await adminClient
-        .from("user_roles")
-        .update({ role })
-        .eq("user_id", newUser.user.id);
-    }
+    // Upsert role
+    const assignedRole = role || "colaborador";
+    await adminClient
+      .from("user_roles")
+      .upsert({
+        user_id: userId,
+        role: assignedRole,
+      }, { onConflict: "user_id" });
 
-    return new Response(JSON.stringify({ success: true, user_id: newUser.user?.id }), {
+    return new Response(JSON.stringify({ success: true, user_id: userId }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
