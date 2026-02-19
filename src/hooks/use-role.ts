@@ -27,5 +27,5 @@ export function useRole() {
     fetchRole();
   }, [user]);
 
-  return { role, isAdmin: role === "administrador", loading };
+  return { role, isAdmin: role === "admin", loading };
 }

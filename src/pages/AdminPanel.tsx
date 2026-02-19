@@ -304,8 +304,13 @@ export default function AdminPanel() {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-popover z-50">
-                              <SelectItem value="administrador">Administrador</SelectItem>
+                              <SelectItem value="admin">Admin</SelectItem>
+                              <SelectItem value="director">Director</SelectItem>
+                              <SelectItem value="gerente">Gerente</SelectItem>
+                              <SelectItem value="supervisor">Supervisor</SelectItem>
+                              <SelectItem value="personal">Personal</SelectItem>
                               <SelectItem value="colaborador">Colaborador</SelectItem>
+                              <SelectItem value="invitado">Invitado</SelectItem>
                             </SelectContent>
                           </Select>
                         </TableCell>
@@ -407,8 +412,13 @@ export default function AdminPanel() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-popover z-50">
-                  <SelectItem value="administrador">Administrador</SelectItem>
+                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="director">Director</SelectItem>
+                  <SelectItem value="gerente">Gerente</SelectItem>
+                  <SelectItem value="supervisor">Supervisor</SelectItem>
+                  <SelectItem value="personal">Personal</SelectItem>
                   <SelectItem value="colaborador">Colaborador</SelectItem>
+                  <SelectItem value="invitado">Invitado</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -459,8 +469,13 @@ export default function AdminPanel() {
                   <SelectValue placeholder="Selecciona un rol" />
                 </SelectTrigger>
                 <SelectContent className="bg-popover z-50">
-                  <SelectItem value="administrador">Administrador</SelectItem>
+                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="director">Director</SelectItem>
+                  <SelectItem value="gerente">Gerente</SelectItem>
+                  <SelectItem value="supervisor">Supervisor</SelectItem>
+                  <SelectItem value="personal">Personal</SelectItem>
                   <SelectItem value="colaborador">Colaborador</SelectItem>
+                  <SelectItem value="invitado">Invitado</SelectItem>
                 </SelectContent>
               </Select>
             </div>
