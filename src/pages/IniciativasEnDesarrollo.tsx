@@ -15,11 +15,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, HandHelping, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, ArrowRightLeft } from "lucide-react";
+import { Search, HandHelping, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, ArrowRightLeft, PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
 import { useRole } from "@/hooks/use-role";
+import RegisterInitiativeDialog from "@/components/RegisterInitiativeDialog";
 import * as XLSX from "xlsx";
 
 const DEPARTMENTS = [
@@ -41,6 +42,7 @@ export default function IniciativasEnDesarrollo() {
   const [filterDept, setFilterDept] = useState("all");
   const [filterCountry, setFilterCountry] = useState("all");
   const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
+  const [showRegister, setShowRegister] = useState(false);
 
   const queryClient = useQueryClient();
   const { user } = useAuth();
@@ -228,7 +230,13 @@ export default function IniciativasEnDesarrollo() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Iniciativas en Desarrollo</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Iniciativas en Desarrollo</h2>
+        <Button onClick={() => setShowRegister(true)} className="gap-2">
+          <PlusCircle className="h-4 w-4" />
+          Registrar Iniciativa
+        </Button>
+      </div>
 
       <div className="flex flex-wrap gap-3">
         <div className="relative flex-1 min-w-[200px]">
@@ -478,6 +486,13 @@ export default function IniciativasEnDesarrollo() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Register Initiative Dialog */}
+      <RegisterInitiativeDialog
+        open={showRegister}
+        onOpenChange={setShowRegister}
+        invalidateQueryKey={["initiatives-en-desarrollo"]}
+      />
     </div>
   );
 }
