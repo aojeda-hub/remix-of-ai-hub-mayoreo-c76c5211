@@ -59,7 +59,7 @@ export default function AdminPanel() {
     setLoading(true);
     const { data: profiles } = await (supabase as any)
       .from("profiles")
-      .select("user_id, full_name, email, phone, created_at");
+      .select("id, full_name, email, phone, created_at");
 
     const { data: roles } = await (supabase as any)
       .from("user_roles")
@@ -67,9 +67,9 @@ export default function AdminPanel() {
 
     if (profiles) {
       const merged: UserWithRole[] = profiles.map((p: any) => {
-        const userRole = roles?.find((r: any) => r.user_id === p.user_id);
+        const userRole = roles?.find((r: any) => r.user_id === p.id);
         return {
-          user_id: p.user_id,
+          user_id: p.id,
           full_name: p.full_name || "Sin nombre",
           email: p.email || "",
           phone: p.phone || "",
