@@ -11,9 +11,10 @@ export default function Dashboard() {
   const { data: initiatives = [], isLoading } = useInitiatives();
 
 
-  const totalCount = initiatives.length;
+  const countableInitiatives = initiatives.filter((i: any) => i.source !== "seguimiento");
+  const totalCount = countableInitiatives.length;
 
-  const activeCount = initiatives.filter((i: any) => ["en_progreso", "aprobado", "en_desarrollo", "en_pruebas"].includes(i.status)).length;
+  const activeCount = countableInitiatives.filter((i: any) => ["en_progreso", "aprobado", "en_desarrollo", "en_pruebas"].includes(i.status)).length;
 
   // Meta por compañía
   const COMPANY_TARGETS: Record<string, number> = {
@@ -27,44 +28,44 @@ export default function Dashboard() {
   };
   const companyMeta = useMemo(() => {
     const counts: Record<string, number> = {};
-    initiatives.forEach((i: any) => {
+    countableInitiatives.forEach((i: any) => {
       const c = i.company || "Sin compañía";
       counts[c] = (counts[c] || 0) + 1;
     });
     return COMPANIES.map(c => ({ company: c, count: counts[c] || 0 }));
-  }, [initiatives]);
+  }, [countableInitiatives]);
 
   // Top 3 del mes
   const top3 = useMemo(() => {
     const now = new Date();
-    const thisMonth = initiatives.filter((i: any) => {
+    const thisMonth = countableInitiatives.filter((i: any) => {
       const d = new Date(i.created_at);
       return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
     });
     return thisMonth.slice(0, 3);
-  }, [initiatives]);
+  }, [countableInitiatives]);
 
   // Área más activa
   const topDept = useMemo(() => {
     const counts: Record<string, number> = {};
-    initiatives.forEach((i: any) => {
+    countableInitiatives.forEach((i: any) => {
       const d = i.department || "Sin departamento";
       counts[d] = (counts[d] || 0) + 1;
     });
     const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
     return sorted[0]?.[0] || "—";
-  }, [initiatives]);
+  }, [countableInitiatives]);
 
   // País más activo
   const topCountry = useMemo(() => {
     const counts: Record<string, number> = {};
-    initiatives.forEach((i: any) => {
+    countableInitiatives.forEach((i: any) => {
       const c = i.country || "Sin país";
       counts[c] = (counts[c] || 0) + 1;
     });
     const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
     return sorted[0]?.[0] || "—";
-  }, [initiatives]);
+  }, [countableInitiatives]);
 
 
 

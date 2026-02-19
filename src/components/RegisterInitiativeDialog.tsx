@@ -102,7 +102,7 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
       cargo: form.cargo,
       supervisor: form.supervisor,
       created_by: user?.id,
-      source: "manual",
+      source: "seguimiento",
       status: "en_progreso" as any,
     });
 
