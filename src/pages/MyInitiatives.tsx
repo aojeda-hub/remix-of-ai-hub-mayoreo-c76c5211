@@ -12,7 +12,7 @@ export default function MyInitiatives() {
   const { data: initiatives = [], isLoading } = useQuery({
     queryKey: ["my-initiatives", user?.id],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("initiatives")
         .select("*")
         .eq("created_by", user!.id)

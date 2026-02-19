@@ -10,7 +10,7 @@ export default function TopIniciativas() {
   const { data: initiatives = [], isLoading } = useQuery({
     queryKey: ["initiatives"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("initiatives").select("*").order("created_at", { ascending: false });
+      const { data, error } = await (supabase as any).from("initiatives").select("*").order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },
@@ -19,7 +19,7 @@ export default function TopIniciativas() {
   const { data: profiles = [] } = useQuery({
     queryKey: ["profiles"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("profiles").select("*");
+      const { data, error } = await (supabase as any).from("profiles").select("*");
       if (error) throw error;
       return data;
     },
