@@ -57,11 +57,11 @@ export default function AdminPanel() {
 
   const fetchUsers = async () => {
     setLoading(true);
-    const { data: profiles } = await (supabase as any)
+    const { data: profiles } = await supabase
       .from("profiles")
       .select("user_id, full_name, email, phone, created_at");
 
-    const { data: roles } = await (supabase as any)
+    const { data: roles } = await supabase
       .from("user_roles")
       .select("id, user_id, role");
 
@@ -91,9 +91,9 @@ export default function AdminPanel() {
 
   const handleRoleChange = async (userId: string, newRole: string, currentRoleId: string | null) => {
     if (currentRoleId) {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from("user_roles")
-        .update({ role: newRole })
+        .update({ role: newRole } as any)
         .eq("id", currentRoleId);
       if (error) {
         toast.error("Error al actualizar rol: " + error.message);
@@ -174,9 +174,9 @@ export default function AdminPanel() {
 
   const handleEditSave = async () => {
     if (!editUser) return;
-    const { error: profileError } = await (supabase as any)
+    const { error: profileError } = await supabase
       .from("profiles")
-      .update({ full_name: editName })
+      .update({ full_name: editName } as any)
       .eq("user_id", editUser.user_id);
     if (profileError) {
       toast.error("Error al actualizar: " + profileError.message);

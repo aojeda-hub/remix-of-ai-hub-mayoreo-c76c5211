@@ -28,7 +28,7 @@ export default function SolicitarAcompanamiento() {
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ["accompaniment_requests", user?.id],
     queryFn: async () => {
-      const { data, error } = await (supabase as any).from("accompaniment_requests").select("*").eq("user_id", user!.id).order("created_at", { ascending: false });
+      const { data, error } = await supabase.from("accompaniment_requests").select("*").eq("user_id", user!.id).order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },
@@ -37,7 +37,7 @@ export default function SolicitarAcompanamiento() {
 
   const createRequest = useMutation({
     mutationFn: async () => {
-      const { error } = await (supabase as any).from("accompaniment_requests").insert({
+      const { error } = await supabase.from("accompaniment_requests").insert({
         user_id: user!.id,
         subject: form.subject,
         description: form.description,
