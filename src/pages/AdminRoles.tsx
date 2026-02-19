@@ -25,24 +25,24 @@ export default function AdminRoles() {
     setLoading(true);
 
     // Get profiles
-    const { data: profiles } = await supabase
+    const { data: profiles } = await (supabase as any)
       .from("profiles")
       .select("user_id, full_name");
 
     // Get roles
-    const { data: roles } = await supabase
+    const { data: roles } = await (supabase as any)
       .from("user_roles")
       .select("id, user_id, role");
 
     if (profiles) {
-      const merged: UserWithRole[] = profiles.map((p) => {
-        const userRole = roles?.find((r) => r.user_id === p.user_id);
+      const merged: UserWithRole[] = profiles.map((p: any) => {
+        const userRole = roles?.find((r: any) => r.user_id === p.user_id);
         return {
           user_id: p.user_id,
           full_name: p.full_name || "Sin nombre",
           email: "",
-          role: userRole?.role ?? "colaborador",
-          role_id: userRole?.id ?? null,
+          role: (userRole as any)?.role ?? "colaborador",
+          role_id: (userRole as any)?.id ?? null,
         };
       });
       setUsers(merged);
@@ -58,9 +58,9 @@ export default function AdminRoles() {
 
   const handleRoleChange = async (userId: string, newRole: string, currentRoleId: string | null) => {
     if (currentRoleId) {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("user_roles")
-        .update({ role: newRole } as any)
+        .update({ role: newRole })
         .eq("id", currentRoleId);
 
       if (error) {
@@ -68,9 +68,9 @@ export default function AdminRoles() {
         return;
       }
     } else {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("user_roles")
-        .insert({ user_id: userId, role: newRole } as any);
+        .insert({ user_id: userId, role: newRole });
 
       if (error) {
         toast.error("Error al asignar rol: " + error.message);
