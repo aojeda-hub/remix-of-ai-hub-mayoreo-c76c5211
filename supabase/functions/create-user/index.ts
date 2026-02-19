@@ -23,17 +23,20 @@ Deno.serve(async (req) => {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-    // Verify caller is admin using their token
+    // Verify caller using getClaims
+    const token = authHeader.replace("Bearer ", "");
     const callerClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY")!, {
       global: { headers: { Authorization: authHeader } },
     });
-    const { data: { user: caller } } = await callerClient.auth.getUser();
-    if (!caller) {
+    const { data: claimsData, error: claimsError } = await callerClient.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims) {
+      console.log("Auth error:", claimsError?.message);
       return new Response(JSON.stringify({ error: "No autorizado" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+    const callerId = claimsData.claims.sub as string;
 
     // Check admin role using service role key (bypasses RLS)
     const adminClient = createClient(supabaseUrl, serviceRoleKey, {
@@ -42,14 +45,14 @@ Deno.serve(async (req) => {
     const { data: roleData, error: roleError } = await adminClient
       .from("user_roles")
       .select("role")
-      .eq("user_id", caller.id)
+      .eq("user_id", callerId)
       .eq("role", "admin")
       .maybeSingle();
 
-    console.log("Role check for user", caller.id, ":", JSON.stringify(roleData), "error:", roleError?.message);
+    console.log("Role check for user", callerId, ":", JSON.stringify(roleData), "error:", roleError?.message);
 
     if (!roleData) {
-      return new Response(JSON.stringify({ error: "Solo administradores pueden crear usuarios", debug: { user_id: caller.id, roleError: roleError?.message } }), {
+      return new Response(JSON.stringify({ error: "Solo administradores pueden crear usuarios" }), {
         status: 403,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
