@@ -260,14 +260,19 @@ export default function ExplorarIniciativas() {
                               </DropdownMenuItem>
                             </>
                           )}
-                          {i.email && (
-                            <DropdownMenuItem asChild>
-                              <a href={`mailto:${i.email}`} className="gap-2">
-                                <Mail className="h-4 w-4" />
-                                Escribir correo
-                              </a>
-                            </DropdownMenuItem>
-                          )}
+                          <DropdownMenuItem
+                            onClick={() => {
+                              if (i.email) {
+                                window.location.href = `mailto:${i.email}?subject=Sobre la iniciativa: ${encodeURIComponent(i.project || "Sin nombre")}`;
+                              } else {
+                                toast.error("Esta iniciativa no tiene correo registrado");
+                              }
+                            }}
+                            className="gap-2"
+                          >
+                            <Mail className="h-4 w-4" />
+                            Escribir correo
+                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                       <Button
