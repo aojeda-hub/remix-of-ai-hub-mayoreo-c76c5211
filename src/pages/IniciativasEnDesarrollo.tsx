@@ -320,10 +320,6 @@ export default function IniciativasEnDesarrollo() {
                               <Trash2 className="h-4 w-4" />
                               Eliminar
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => { setStatusInitiative(i); setNewStatus(i.status || ""); }} className="gap-2">
-                              <ArrowRightLeft className="h-4 w-4" />
-                              Cambiar Estado
-                            </DropdownMenuItem>
                           </>
                         )}
                         {canOfferHelp(i) && (
