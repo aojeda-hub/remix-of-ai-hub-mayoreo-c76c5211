@@ -25,12 +25,12 @@ export default function AdminRoles() {
     setLoading(true);
 
     // Get profiles
-    const { data: profiles } = await supabase
+    const { data: profiles } = await (supabase as any)
       .from("profiles")
       .select("user_id, full_name");
 
     // Get roles
-    const { data: roles } = await supabase
+    const { data: roles } = await (supabase as any)
       .from("user_roles")
       .select("id, user_id, role");
 
@@ -58,9 +58,9 @@ export default function AdminRoles() {
 
   const handleRoleChange = async (userId: string, newRole: string, currentRoleId: string | null) => {
     if (currentRoleId) {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("user_roles")
-        .update({ role: newRole } as any)
+        .update({ role: newRole })
         .eq("id", currentRoleId);
 
       if (error) {
