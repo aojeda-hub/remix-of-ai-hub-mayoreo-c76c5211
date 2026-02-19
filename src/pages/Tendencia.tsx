@@ -30,8 +30,9 @@ export default function Tendencia() {
 
   const trendData = useMemo(() => {
     const companies = new Map<string, Map<string, number>>();
+    const countable = initiatives.filter((i: any) => i.source !== "seguimiento");
 
-    initiatives.forEach((i: any) => {
+    countable.forEach((i: any) => {
       const d = new Date(i.created_at);
       const monthKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       const company = i.company || "Sin compañía";
