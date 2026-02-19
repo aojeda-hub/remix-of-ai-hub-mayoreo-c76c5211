@@ -74,7 +74,7 @@ export default function BibliotecaIA() {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["library_resources"] });
+      queryClient.invalidateQueries({ queryKey: ["library-resources"] });
       setShowNew(false);
       setNewResource({ title: "", description: "", category: "guia", link: "" });
       setFile(null);
@@ -102,7 +102,7 @@ export default function BibliotecaIA() {
         .eq("id", editingResource.id);
       if (error) throw error;
       toast.success("Recurso actualizado correctamente");
-      queryClient.invalidateQueries({ queryKey: ["library_resources"] });
+      queryClient.invalidateQueries({ queryKey: ["library-resources"] });
       setEditingResource(null);
     } catch (err: any) {
       toast.error("Error al actualizar: " + err.message);
@@ -117,7 +117,7 @@ export default function BibliotecaIA() {
         .eq("id", deletingResource.id);
       if (error) throw error;
       toast.success("Recurso eliminado correctamente");
-      queryClient.invalidateQueries({ queryKey: ["library_resources"] });
+      queryClient.invalidateQueries({ queryKey: ["library-resources"] });
       setDeletingResource(null);
     } catch (err: any) {
       toast.error("Error al eliminar: " + err.message);
