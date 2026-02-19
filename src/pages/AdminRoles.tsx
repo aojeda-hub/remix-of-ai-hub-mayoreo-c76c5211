@@ -125,8 +125,8 @@ export default function AdminRoles() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={u.role === "administrador" ? "default" : "secondary"}>
-                        {u.role === "administrador" ? "Administrador" : "Colaborador"}
+                      <Badge variant={u.role === "admin" ? "default" : "secondary"}>
+                        {u.role}
                       </Badge>
                     </TableCell>
                     <TableCell>
@@ -138,8 +138,13 @@ export default function AdminRoles() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent className="bg-popover z-50">
-                          <SelectItem value="administrador">Administrador</SelectItem>
+                          <SelectItem value="admin">Admin</SelectItem>
+                          <SelectItem value="director">Director</SelectItem>
+                          <SelectItem value="gerente">Gerente</SelectItem>
+                          <SelectItem value="supervisor">Supervisor</SelectItem>
+                          <SelectItem value="personal">Personal</SelectItem>
                           <SelectItem value="colaborador">Colaborador</SelectItem>
+                          <SelectItem value="invitado">Invitado</SelectItem>
                         </SelectContent>
                       </Select>
                     </TableCell>
