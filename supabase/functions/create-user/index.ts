@@ -35,19 +35,21 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Check admin role
+    // Check admin role using service role key (bypasses RLS)
     const adminClient = createClient(supabaseUrl, serviceRoleKey, {
       db: { schema: "iniciativas" },
     });
-    const { data: roleData } = await adminClient
+    const { data: roleData, error: roleError } = await adminClient
       .from("user_roles")
       .select("role")
       .eq("user_id", caller.id)
       .eq("role", "admin")
       .maybeSingle();
 
+    console.log("Role check for user", caller.id, ":", JSON.stringify(roleData), "error:", roleError?.message);
+
     if (!roleData) {
-      return new Response(JSON.stringify({ error: "Solo administradores pueden crear usuarios" }), {
+      return new Response(JSON.stringify({ error: "Solo administradores pueden crear usuarios", debug: { user_id: caller.id, roleError: roleError?.message } }), {
         status: 403,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
