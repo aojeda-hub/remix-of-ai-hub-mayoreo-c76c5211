@@ -29,6 +29,7 @@ export function NotificationBell() {
       const { data, error } = await (supabase as any)
         .from("notifications")
         .select("*")
+        .eq("user_email", user.email)
         .order("created_at", { ascending: false })
         .limit(20);
       if (error) {
