@@ -114,6 +114,7 @@ export default function ExplorarIniciativas() {
   const updateEditField = (field: string, value: string) => setEditForm((f: any) => ({ ...f, [field]: value }));
 
   const filtered = initiatives.filter((i: any) => {
+    if (i.source !== "manual") return false;
     if (onlyMine && i.created_by !== user?.id) return false;
     if (search && !i.project?.toLowerCase().includes(search.toLowerCase()) && !i.technology?.toLowerCase().includes(search.toLowerCase())) return false;
     if (filterDept !== "all" && i.department !== filterDept) return false;
