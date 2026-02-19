@@ -34,7 +34,9 @@ Deno.serve(async (req) => {
       });
     }
 
-    const adminClient = createClient(supabaseUrl, serviceRoleKey);
+    const adminClient = createClient(supabaseUrl, serviceRoleKey, {
+      db: { schema: "iniciativas" },
+    });
     const { data: roleData } = await adminClient
       .from("user_roles")
       .select("role")
