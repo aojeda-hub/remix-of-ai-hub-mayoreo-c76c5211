@@ -18,7 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, Mail, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 
 import * as XLSX from "xlsx";
 import { Link } from "react-router-dom";
@@ -259,23 +259,6 @@ export default function ExplorarIniciativas() {
                                 Eliminar
                               </DropdownMenuItem>
                             </>
-                          )}
-                          {i.email ? (
-                            <DropdownMenuItem asChild className="gap-2">
-                              <a
-                                href={`mailto:${i.email}?subject=${encodeURIComponent("Sobre la iniciativa: " + (i.project || "Sin nombre"))}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <Mail className="h-4 w-4" />
-                                Escribir correo
-                              </a>
-                            </DropdownMenuItem>
-                          ) : (
-                            <DropdownMenuItem onClick={() => toast.error("Esta iniciativa no tiene correo registrado")} className="gap-2">
-                              <Mail className="h-4 w-4" />
-                              Escribir correo
-                            </DropdownMenuItem>
                           )}
                         </DropdownMenuContent>
                       </DropdownMenu>
