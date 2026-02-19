@@ -13,7 +13,8 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Plus, FileText, Video, Download, ExternalLink, BookOpen, Target, Zap, GraduationCap, Pencil, Trash2 } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Plus, FileText, Video, Download, ExternalLink, BookOpen, Target, Zap, GraduationCap, Pencil, Trash2, LayoutGrid, List } from "lucide-react";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
@@ -38,6 +39,7 @@ export default function BibliotecaIA() {
   const [newResource, setNewResource] = useState({ title: "", description: "", category: "guia", link: "" });
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   // Edit state
   const [editingResource, setEditingResource] = useState<any>(null);
@@ -132,44 +134,67 @@ export default function BibliotecaIA() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Biblioteca IA</h2>
-        <Dialog open={showNew} onOpenChange={setShowNew}>
-          <DialogTrigger asChild>
-            <Button><Plus className="mr-2 h-4 w-4" />Agregar Recurso</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader><DialogTitle>Nuevo Recurso</DialogTitle></DialogHeader>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label>Categoría</Label>
-                <Select value={newResource.category} onValueChange={(v) => setNewResource(p => ({ ...p, category: v }))}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {CATEGORIES.map(c => <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>)}
-                  </SelectContent>
-                </Select>
+        <div className="flex items-center gap-2">
+          {/* View mode toggle */}
+          <div className="flex items-center border rounded-md">
+            <Button
+              variant={viewMode === "grid" ? "default" : "ghost"}
+              size="icon"
+              className="h-9 w-9 rounded-r-none"
+              onClick={() => setViewMode("grid")}
+              title="Vista mosaico"
+            >
+              <LayoutGrid className="h-4 w-4" />
+            </Button>
+            <Button
+              variant={viewMode === "list" ? "default" : "ghost"}
+              size="icon"
+              className="h-9 w-9 rounded-l-none"
+              onClick={() => setViewMode("list")}
+              title="Vista lista"
+            >
+              <List className="h-4 w-4" />
+            </Button>
+          </div>
+          <Dialog open={showNew} onOpenChange={setShowNew}>
+            <DialogTrigger asChild>
+              <Button><Plus className="mr-2 h-4 w-4" />Agregar Recurso</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader><DialogTitle>Nuevo Recurso</DialogTitle></DialogHeader>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Categoría</Label>
+                  <Select value={newResource.category} onValueChange={(v) => setNewResource(p => ({ ...p, category: v }))}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent className="bg-popover z-50">
+                      {CATEGORIES.map(c => <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Título</Label>
+                  <Input value={newResource.title} onChange={(e) => setNewResource(p => ({ ...p, title: e.target.value }))} placeholder="Título del recurso" />
+                </div>
+                <div className="space-y-2">
+                  <Label>Descripción</Label>
+                  <Textarea value={newResource.description} onChange={(e) => setNewResource(p => ({ ...p, description: e.target.value }))} placeholder="Descripción del recurso" rows={3} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Archivo (opcional)</Label>
+                  <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Link externo (opcional)</Label>
+                  <Input value={newResource.link} onChange={(e) => setNewResource(p => ({ ...p, link: e.target.value }))} placeholder="https://..." />
+                </div>
+                <Button onClick={() => createResource.mutate()} disabled={!newResource.title || uploading} className="w-full">
+                  {uploading ? "Subiendo..." : "Agregar"}
+                </Button>
               </div>
-              <div className="space-y-2">
-                <Label>Título</Label>
-                <Input value={newResource.title} onChange={(e) => setNewResource(p => ({ ...p, title: e.target.value }))} placeholder="Título del recurso" />
-              </div>
-              <div className="space-y-2">
-                <Label>Descripción</Label>
-                <Textarea value={newResource.description} onChange={(e) => setNewResource(p => ({ ...p, description: e.target.value }))} placeholder="Descripción del recurso" rows={3} />
-              </div>
-              <div className="space-y-2">
-                <Label>Archivo (opcional)</Label>
-                <Input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
-              </div>
-              <div className="space-y-2">
-                <Label>Link externo (opcional)</Label>
-                <Input value={newResource.link} onChange={(e) => setNewResource(p => ({ ...p, link: e.target.value }))} placeholder="https://..." />
-              </div>
-              <Button onClick={() => createResource.mutate()} disabled={!newResource.title || uploading} className="w-full">
-                {uploading ? "Subiendo..." : "Agregar"}
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       {/* Category filter */}
@@ -180,53 +205,122 @@ export default function BibliotecaIA() {
         ))}
       </div>
 
-      {/* Resources grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filtered.map((r: any) => {
-          const CatIcon = CATEGORIES.find(c => c.value === r.category)?.icon || FileText;
-          return (
-            <Card key={r.id}>
-              <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CatIcon className="h-5 w-5 text-primary" />
-                    <Badge variant="outline" className="text-xs">{CAT_LABELS[r.category] || r.category}</Badge>
-                  </div>
-                  {canEditDelete(r) && (
-                    <div className="flex items-center gap-1">
-                      <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEdit(r)} title="Modificar">
-                        <Pencil className="h-3.5 w-3.5" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setDeletingResource(r)} title="Eliminar">
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </Button>
+      {/* Grid view */}
+      {viewMode === "grid" && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.map((r: any) => {
+            const CatIcon = CATEGORIES.find(c => c.value === r.category)?.icon || FileText;
+            return (
+              <Card key={r.id}>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <CatIcon className="h-5 w-5 text-primary" />
+                      <Badge variant="outline" className="text-xs">{CAT_LABELS[r.category] || r.category}</Badge>
                     </div>
-                  )}
-                </div>
-                <CardTitle className="text-sm mt-2">{r.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {r.description && <p className="text-sm text-muted-foreground mb-3">{r.description}</p>}
-                <div className="flex gap-2">
-                  {r.file_url && (
-                    <a href={r.file_url} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" size="sm"><Download className="mr-1 h-3 w-3" />Descargar</Button>
-                    </a>
-                  )}
-                  {r.link && (
-                    <a href={r.link} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" size="sm"><ExternalLink className="mr-1 h-3 w-3" />Ver</Button>
-                    </a>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-        {filtered.length === 0 && (
-          <Card className="col-span-full"><CardContent className="py-8 text-center text-muted-foreground">No hay recursos aún</CardContent></Card>
-        )}
-      </div>
+                    {canEditDelete(r) && (
+                      <div className="flex items-center gap-1">
+                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEdit(r)} title="Modificar">
+                          <Pencil className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setDeletingResource(r)} title="Eliminar">
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                  <CardTitle className="text-sm mt-2">{r.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {r.description && <p className="text-sm text-muted-foreground mb-3">{r.description}</p>}
+                  <div className="flex gap-2">
+                    {r.file_url && (
+                      <a href={r.file_url} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" size="sm"><Download className="mr-1 h-3 w-3" />Descargar</Button>
+                      </a>
+                    )}
+                    {r.link && (
+                      <a href={r.link} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" size="sm"><ExternalLink className="mr-1 h-3 w-3" />Ver</Button>
+                      </a>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+          {filtered.length === 0 && (
+            <Card className="col-span-full"><CardContent className="py-8 text-center text-muted-foreground">No hay recursos aún</CardContent></Card>
+          )}
+        </div>
+      )}
+
+      {/* List view */}
+      {viewMode === "list" && (
+        <Card>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Categoría</TableHead>
+                  <TableHead>Título</TableHead>
+                  <TableHead className="hidden md:table-cell">Descripción</TableHead>
+                  <TableHead>Enlaces</TableHead>
+                  <TableHead className="w-20">Acciones</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filtered.map((r: any) => {
+                  const CatIcon = CATEGORIES.find(c => c.value === r.category)?.icon || FileText;
+                  return (
+                    <TableRow key={r.id}>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <CatIcon className="h-4 w-4 text-primary" />
+                          <Badge variant="outline" className="text-xs whitespace-nowrap">{CAT_LABELS[r.category] || r.category}</Badge>
+                        </div>
+                      </TableCell>
+                      <TableCell className="font-medium">{r.title}</TableCell>
+                      <TableCell className="hidden md:table-cell text-sm text-muted-foreground max-w-xs truncate">{r.description || "—"}</TableCell>
+                      <TableCell>
+                        <div className="flex gap-1">
+                          {r.file_url && (
+                            <a href={r.file_url} target="_blank" rel="noopener noreferrer">
+                              <Button variant="outline" size="sm" className="h-7 px-2"><Download className="h-3 w-3" /></Button>
+                            </a>
+                          )}
+                          {r.link && (
+                            <a href={r.link} target="_blank" rel="noopener noreferrer">
+                              <Button variant="outline" size="sm" className="h-7 px-2"><ExternalLink className="h-3 w-3" /></Button>
+                            </a>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        {canEditDelete(r) && (
+                          <div className="flex items-center gap-1">
+                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEdit(r)} title="Modificar">
+                              <Pencil className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setDeletingResource(r)} title="Eliminar">
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+                {filtered.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={5} className="text-center text-muted-foreground py-8">No hay recursos aún</TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Edit Dialog */}
       <Dialog open={!!editingResource} onOpenChange={(open) => { if (!open) setEditingResource(null); }}>
