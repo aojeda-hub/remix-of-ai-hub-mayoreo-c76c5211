@@ -19,7 +19,8 @@ export function useRole() {
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id)
-        .maybeSingle();
+        .limit(1)
+        .single();
       setRole((data as any)?.role ?? "colaborador");
       setLoading(false);
     };
