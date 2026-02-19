@@ -263,7 +263,7 @@ export default function ExplorarIniciativas() {
                           <DropdownMenuItem
                             onClick={() => {
                               if (i.email) {
-                                window.location.href = `mailto:${i.email}?subject=Sobre la iniciativa: ${encodeURIComponent(i.project || "Sin nombre")}`;
+                                window.open(`mailto:${i.email}?subject=${encodeURIComponent("Sobre la iniciativa: " + (i.project || "Sin nombre"))}`, "_blank");
                               } else {
                                 toast.error("Esta iniciativa no tiene correo registrado");
                               }
