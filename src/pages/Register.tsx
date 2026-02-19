@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
+
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -9,10 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { Send, CalendarIcon } from "lucide-react";
+
+
+
+import { Send } from "lucide-react";
 import { toast } from "sonner";
 
 const STRATEGIC_OBJECTIVES = [
@@ -65,7 +65,7 @@ export default function Register() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [date, setDate] = useState<Date>(new Date());
+  
 
   const [form, setForm] = useState({
     // Datos del registrante
@@ -145,40 +145,10 @@ export default function Register() {
     <div className="max-w-3xl mx-auto">
       <Card>
         <CardHeader>
-          <div className="flex items-start justify-between">
-            <div>
-              <CardTitle>Registrar Iniciativa</CardTitle>
-              <p className="text-sm text-muted-foreground mt-1">
-                Registra la iniciativa de IA si has podido aplicar una mejora a los procesos de la compañía, haciendo uso de nuevas tecnologías o inteligencia artificial. Todas las ideas suman.
-              </p>
-            </div>
-            <div className="space-y-1 shrink-0 ml-4">
-              <Label className="text-xs">Fecha</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-[160px] justify-start text-left font-normal",
-                      !date && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, "dd/MM/yyyy") : <span>Seleccionar</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="end">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={(d) => d && setDate(d)}
-                    initialFocus
-                    className={cn("p-3 pointer-events-auto")}
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-          </div>
+          <CardTitle>Registrar Iniciativa</CardTitle>
+          <p className="text-sm text-muted-foreground mt-1">
+            Registra la iniciativa de IA si has podido aplicar una mejora a los procesos de la compañía, haciendo uso de nuevas tecnologías o inteligencia artificial. Todas las ideas suman.
+          </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-5">
