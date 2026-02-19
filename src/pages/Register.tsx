@@ -123,8 +123,6 @@ export default function Register() {
       ai_solution: form.ai_solution,
       description: form.description,
       link: form.link,
-      cargo: form.cargo,
-      supervisor: form.supervisor,
       created_by: user?.id,
       source: "manual",
       status: mappedStatus as any,
