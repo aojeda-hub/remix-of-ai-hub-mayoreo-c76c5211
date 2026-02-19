@@ -8,7 +8,7 @@ export function useCommunityPosts() {
         queryFn: async () => {
             const { data, error } = await (supabase as any)
                 .from("community_posts")
-                .select("*, profiles(full_name)")
+                .select("*")
                 .order("created_at", { ascending: false });
             if (error) throw error;
             return data;
@@ -22,7 +22,7 @@ export function usePostComments(postId: string) {
         queryFn: async () => {
             const { data, error } = await (supabase as any)
                 .from("community_comments")
-                .select("*, profiles(full_name)")
+                .select("*")
                 .eq("post_id", postId)
                 .order("created_at", { ascending: true });
             if (error) throw error;

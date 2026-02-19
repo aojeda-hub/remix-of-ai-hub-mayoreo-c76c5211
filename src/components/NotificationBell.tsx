@@ -25,17 +25,27 @@ export function NotificationBell() {
 
   const fetchNotifications = async () => {
     if (!user?.email) return;
-    const { data } = await (supabase as any)
-      .from("notifications")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(20);
-    setNotifications((data as Notification[]) || []);
+    try {
+      const { data, error } = await (supabase as any)
+        .from("notifications")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(20);
+      if (error) {
+        // Table doesn't exist yet, silently ignore
+        setNotifications([]);
+        return;
+      }
+      setNotifications((data as Notification[]) || []);
+    } catch {
+      setNotifications([]);
+    }
   };
 
   useEffect(() => {
+    if (!user?.email) return;
     fetchNotifications();
-    const interval = setInterval(fetchNotifications, 30000);
+    const interval = setInterval(fetchNotifications, 60000);
     return () => clearInterval(interval);
   }, [user?.email]);
 

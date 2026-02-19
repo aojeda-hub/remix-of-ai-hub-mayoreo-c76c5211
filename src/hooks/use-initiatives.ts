@@ -8,7 +8,7 @@ export function useInitiatives() {
         queryFn: async () => {
             const { data, error } = await (supabase as any)
                 .from("initiatives")
-                .select("*, profiles(full_name)")
+                .select("*")
                 .order("created_at", { ascending: false });
             if (error) throw error;
             return data;
@@ -22,7 +22,7 @@ export function useInitiative(id: string) {
         queryFn: async () => {
             const { data, error } = await (supabase as any)
                 .from("initiatives")
-                .select("*, profiles(full_name)")
+                .select("*")
                 .eq("id", id)
                 .maybeSingle();
             if (error) throw error;
