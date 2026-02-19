@@ -312,18 +312,6 @@ export default function Register() {
               </Select>
             </div>
 
-            {/* Tipo de Iniciativa */}
-            <div className="space-y-2">
-              <Label>Estado de la Iniciativa</Label>
-              <Select value={form.initiative_type} onValueChange={(v) => update("initiative_type", v)}>
-                <SelectTrigger><SelectValue placeholder="Seleccionar estado" /></SelectTrigger>
-                <SelectContent className="bg-popover z-50">
-                  {INITIATIVE_TYPES.map((t) => (
-                    <SelectItem key={t} value={t}>{t}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
 
             {/* Row 5: Problema y Solución IA */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
