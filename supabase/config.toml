@@ -1,1 +1,13 @@
 project_id = "hxhxruvzionfflxrrkis"
+
+[functions.create-user]
+verify_jwt = false
+
+[functions.delete-user]
+verify_jwt = false
+
+[functions.notify-help-offer]
+verify_jwt = false
+
+[functions.webhook-initiative]
+verify_jwt = false
