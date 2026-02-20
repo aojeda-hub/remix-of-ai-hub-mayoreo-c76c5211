@@ -17,6 +17,7 @@ import IniciativasEnDesarrollo from "./pages/IniciativasEnDesarrollo";
 import TopIniciativas from "./pages/TopIniciativas";
 import Tendencia from "./pages/Tendencia";
 import AdminPanel from "./pages/AdminPanel";
+import MiPerfil from "./pages/MiPerfil";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/top-iniciativas" element={<ProtectedRoute><TopIniciativas /></ProtectedRoute>} />
             <Route path="/tendencia" element={<ProtectedRoute><Tendencia /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
+            <Route path="/mi-perfil" element={<ProtectedRoute><MiPerfil /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
