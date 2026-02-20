@@ -14,7 +14,7 @@ export function useCompanies() {
   useEffect(() => {
     const fetchCompanies = async () => {
       const { data, error } = await (supabase as any)
-        .from("ai_companies")
+        .from("companies")
         .select("id, name, country")
         .order("name", { ascending: true });
 
