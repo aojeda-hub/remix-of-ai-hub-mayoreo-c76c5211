@@ -27,14 +27,14 @@ export function useProfile() {
     const fetchProfile = async () => {
       const { data } = await (supabase as any)
         .from("profiles")
-        .select("user_id, full_name, email, phone, company, country, company_id, companies(name)")
+        .select("user_id, full_name, email, phone, country, company_id, companies(name)")
         .eq("user_id", user.id)
         .maybeSingle();
 
       if (data) {
         setProfile({
           ...data,
-          company: data.company || data.companies?.name || (user.user_metadata?.company ?? null),
+          company: data.companies?.name || (user.user_metadata?.company ?? null),
           country: data.country || (user.user_metadata?.country ?? null),
           full_name: data.full_name || (user.user_metadata?.full_name ?? null),
           email: data.email || user.email || null,
