@@ -9,6 +9,7 @@ export interface UserProfile {
   phone: string | null;
   company: string | null;
   country: string | null;
+  company_id: string | null;
 }
 
 export function useProfile() {
@@ -26,18 +27,18 @@ export function useProfile() {
     const fetchProfile = async () => {
       const { data } = await (supabase as any)
         .from("profiles")
-        .select("user_id, full_name, email, phone, company, country")
+        .select("user_id, full_name, email, phone, company, country, company_id, companies(name)")
         .eq("user_id", user.id)
         .maybeSingle();
 
       if (data) {
-        // Fallback to user_metadata if columns not yet populated
         setProfile({
           ...data,
-          company: data.company || (user.user_metadata?.company ?? null),
+          company: data.company || data.companies?.name || (user.user_metadata?.company ?? null),
           country: data.country || (user.user_metadata?.country ?? null),
           full_name: data.full_name || (user.user_metadata?.full_name ?? null),
           email: data.email || user.email || null,
+          company_id: data.company_id ?? null,
         });
       } else {
         // No profile row yet, use auth metadata
@@ -48,6 +49,7 @@ export function useProfile() {
           phone: null,
           company: user.user_metadata?.company ?? null,
           country: user.user_metadata?.country ?? null,
+          company_id: null,
         });
       }
       setLoading(false);

@@ -15,10 +15,11 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [company, setCompany] = useState("");
+  const [companyId, setCompanyId] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const derivedCountry = getCountryByCompany(company);
+  const selectedCompany = companies.find((c) => c.id === companyId);
+  const derivedCountry = selectedCompany?.country || "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,17 +29,18 @@ export default function Auth() {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) toast.error(error.message);
     } else {
-      if (!company) {
+      if (!companyId) {
         toast.error("Selecciona tu compañía");
         setLoading(false);
         return;
       }
       const country = derivedCountry;
+      const companyName = selectedCompany?.name || "";
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { full_name: fullName, company, country },
+          data: { full_name: fullName, company: companyName, country },
           emailRedirectTo: window.location.origin,
         },
       });
@@ -50,7 +52,8 @@ export default function Auth() {
             user_id: data.user.id,
             full_name: fullName,
             email,
-            company,
+            company_id: companyId,
+            company: companyName,
             country,
           }, { onConflict: "user_id" });
         }
@@ -90,7 +93,7 @@ export default function Auth() {
                 </div>
                 <div className="space-y-2">
                   <Label>Compañía</Label>
-                  <Select value={company} onValueChange={setCompany}>
+                  <Select value={companyId} onValueChange={setCompanyId}>
                     <SelectTrigger>
                       <SelectValue placeholder="Seleccionar compañía" />
                     </SelectTrigger>
@@ -98,7 +101,7 @@ export default function Auth() {
                       {companiesLoading
                         ? <SelectItem value="_loading" disabled>Cargando...</SelectItem>
                         : companies.map((c) => (
-                          <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                          <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
                         ))}
                     </SelectContent>
                   </Select>

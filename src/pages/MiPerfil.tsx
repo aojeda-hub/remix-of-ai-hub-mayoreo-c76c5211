@@ -18,7 +18,7 @@ export default function MiPerfil() {
   const [loading, setSaving] = useState(false);
   const [form, setForm] = useState({
     full_name: "",
-    company: "",
+    company_id: "",
     cargo: "",
     supervisor: "",
   });
@@ -27,14 +27,16 @@ export default function MiPerfil() {
     if (profile) {
       setForm({
         full_name: profile.full_name || "",
-        company: profile.company || "",
+        company_id: profile.company_id || "",
         cargo: (profile as any).cargo || "",
         supervisor: (profile as any).supervisor || "",
       });
     }
   }, [profile]);
 
-  const derivedCountry = getCountryByCompany(form.company);
+  // Derive country from selected company_id
+  const selectedCompany = companies.find((c) => c.id === form.company_id);
+  const derivedCountry = selectedCompany?.country || "";
 
   const handleSave = async () => {
     if (!user) return;
@@ -44,8 +46,9 @@ export default function MiPerfil() {
         user_id: user.id,
         full_name: form.full_name,
         email: user.email,
-        company: form.company,
-        country: derivedCountry,
+        company_id: form.company_id || null,
+        company: selectedCompany?.name || null,
+        country: derivedCountry || null,
         cargo: form.cargo,
         supervisor: form.supervisor,
       },
@@ -107,8 +110,8 @@ export default function MiPerfil() {
             <div className="space-y-2">
               <Label>Compañía</Label>
               <Select
-                value={form.company}
-                onValueChange={(v) => setForm((f) => ({ ...f, company: v }))}
+                value={form.company_id}
+                onValueChange={(v) => setForm((f) => ({ ...f, company_id: v }))}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Seleccionar compañía" />
@@ -117,7 +120,7 @@ export default function MiPerfil() {
                   {companiesLoading
                     ? <SelectItem value="_loading" disabled>Cargando...</SelectItem>
                     : companies.map((c) => (
-                      <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                      <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
                     ))}
                 </SelectContent>
               </Select>
