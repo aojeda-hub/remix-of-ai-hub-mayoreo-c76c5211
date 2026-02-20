@@ -60,27 +60,38 @@ export default function AdminPanel() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const token = sessionData.session?.access_token;
-      const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/list-users`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          },
-        }
-      );
-      const result = await res.json();
-      if (!res.ok) {
-        console.error("Error fetching users:", result.error);
-        toast.error("Error al cargar usuarios: " + result.error);
+      const { data: profiles, error: profilesError } = await (supabase as any)
+        .from("profiles")
+        .select("id, full_name, email, phone, company, country, created_at");
+
+      if (profilesError) {
+        console.error("Error fetching profiles:", profilesError.message);
+        toast.error("Error al cargar usuarios: " + profilesError.message);
         setUsers([]);
-      } else {
-        setUsers(result.users || []);
+        setLoading(false);
+        return;
       }
+
+      const { data: roles } = await (supabase as any)
+        .from("user_roles")
+        .select("id, user_id, role");
+
+      const merged = (profiles || []).map((p: any) => {
+        const userRole = roles?.find((r: any) => r.user_id === p.id);
+        return {
+          user_id: p.id,
+          full_name: p.full_name || "Sin nombre",
+          email: p.email || "",
+          phone: p.phone || "",
+          company: p.company || "",
+          country: p.country || "",
+          role: userRole?.role ?? "colaborador",
+          role_id: userRole?.id ?? null,
+          created_at: p.created_at,
+        };
+      });
+
+      setUsers(merged);
     } catch (err: any) {
       console.error("Error fetching users:", err.message);
       toast.error("Error al cargar usuarios");
