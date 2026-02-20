@@ -1,4 +1,4 @@
-import { LayoutDashboard, PlusCircle, Search, Users, BookOpen, Trophy, LogOut, Shield, TrendingUp, Rocket } from "lucide-react";
+import { LayoutDashboard, PlusCircle, Search, Users, BookOpen, Trophy, LogOut, Shield, TrendingUp, Rocket, UserCircle } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/lib/auth";
 import { useRole } from "@/hooks/use-role";
@@ -75,7 +75,21 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4">
-        <p className="text-xs text-sidebar-foreground/60 truncate mb-2">{user?.email}</p>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <NavLink
+                to="/mi-perfil"
+                className="hover:bg-sidebar-accent"
+                activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+              >
+                <UserCircle className="mr-2 h-4 w-4" />
+                <span>Mi Perfil</span>
+              </NavLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <p className="text-xs text-sidebar-foreground/60 truncate mt-3 mb-2">{user?.email}</p>
         <Button variant="ghost" size="sm" className="w-full justify-start text-sidebar-foreground/70" onClick={signOut}>
           <LogOut className="mr-2 h-4 w-4" />
           Cerrar Sesión

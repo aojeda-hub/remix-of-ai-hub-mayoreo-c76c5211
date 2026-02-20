@@ -8,11 +8,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { toast } from "sonner";
 import logoMayoreo from "@/assets/Logo_Mayoreo_Isotipo.png";
 
-const COMPANIES = [
-  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO",
-] as const;
-
-const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia"] as const;
+const COMPANIES: Record<string, string> = {
+  "Febeca": "Venezuela",
+  "Sillaca": "Venezuela",
+  "Beval": "Venezuela",
+  "Prisma": "Venezuela",
+  "Cofersa": "Venezuela",
+  "Mundial de partes": "Venezuela",
+  "OLO": "Costa Rica",
+};
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -20,8 +24,9 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [company, setCompany] = useState("");
-  const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const derivedCountry = COMPANIES[company] || "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,11 +36,12 @@ export default function Auth() {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) toast.error(error.message);
     } else {
-      if (!company || !country) {
-        toast.error("Selecciona tu compañía y país");
+      if (!company) {
+        toast.error("Selecciona tu compañía");
         setLoading(false);
         return;
       }
+      const country = derivedCountry;
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -47,7 +53,6 @@ export default function Auth() {
       if (error) {
         toast.error(error.message);
       } else {
-        // Upsert profile with company and country
         if (data.user) {
           await (supabase as any).from("profiles").upsert({
             user_id: data.user.id,
@@ -98,25 +103,20 @@ export default function Auth() {
                       <SelectValue placeholder="Seleccionar compañía" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
-                      {COMPANIES.map((c) => (
+                      {Object.keys(COMPANIES).map((c) => (
                         <SelectItem key={c} value={c}>{c}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label>País</Label>
-                  <Select value={country} onValueChange={setCountry}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Seleccionar país" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      {COUNTRIES.map((c) => (
-                        <SelectItem key={c} value={c}>{c}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                {derivedCountry && (
+                  <div className="space-y-1">
+                    <Label className="text-xs text-muted-foreground">País (automático)</Label>
+                    <p className="text-sm font-medium bg-muted/40 rounded-md px-3 py-2 border border-border/50">
+                      {derivedCountry}
+                    </p>
+                  </div>
+                )}
               </>
             )}
             <div className="space-y-2">
