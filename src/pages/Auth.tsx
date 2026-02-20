@@ -3,15 +3,24 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import logoMayoreo from "@/assets/Logo_Mayoreo_Isotipo.png";
+
+const COMPANIES = [
+  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO",
+] as const;
+
+const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia"] as const;
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [company, setCompany] = useState("");
+  const [country, setCountry] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,17 +31,32 @@ export default function Auth() {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) toast.error(error.message);
     } else {
-      const { error } = await supabase.auth.signUp({
+      if (!company || !country) {
+        toast.error("Selecciona tu compañía y país");
+        setLoading(false);
+        return;
+      }
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { full_name: fullName },
+          data: { full_name: fullName, company, country },
           emailRedirectTo: window.location.origin,
         },
       });
       if (error) {
         toast.error(error.message);
       } else {
+        // Upsert profile with company and country
+        if (data.user) {
+          await (supabase as any).from("profiles").upsert({
+            user_id: data.user.id,
+            full_name: fullName,
+            email,
+            company,
+            country,
+          }, { onConflict: "user_id" });
+        }
         toast.success("Revisa tu correo para confirmar tu cuenta");
         setIsLogin(true);
       }
@@ -55,16 +79,45 @@ export default function Auth() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
-              <div className="space-y-2">
-                <Label htmlFor="name">Nombre completo</Label>
-                <Input
-                  id="name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required={!isLogin}
-                  maxLength={100}
-                />
-              </div>
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="name">Nombre completo</Label>
+                  <Input
+                    id="name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required={!isLogin}
+                    maxLength={100}
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Compañía</Label>
+                  <Select value={company} onValueChange={setCompany}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Seleccionar compañía" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover z-50">
+                      {COMPANIES.map((c) => (
+                        <SelectItem key={c} value={c}>{c}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>País</Label>
+                  <Select value={country} onValueChange={setCountry}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Seleccionar país" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover z-50">
+                      {COUNTRIES.map((c) => (
+                        <SelectItem key={c} value={c}>{c}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </>
             )}
             <div className="space-y-2">
               <Label htmlFor="email">Correo electrónico</Label>
