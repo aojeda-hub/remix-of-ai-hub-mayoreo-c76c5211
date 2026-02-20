@@ -5,6 +5,7 @@ export interface Company {
   id: string;
   name: string;
   country: string;
+  country_id: string;
 }
 
 export function useCompanies() {
@@ -15,11 +16,20 @@ export function useCompanies() {
     const fetchCompanies = async () => {
       const { data, error } = await (supabase as any)
         .from("companies")
-        .select("id, name, country")
+        .select("id, name, country_id, countries(name)")
         .order("name", { ascending: true });
 
       if (!error && data) {
-        setCompanies(data);
+        setCompanies(
+          data.map((c: any) => ({
+            id: c.id,
+            name: c.name,
+            country_id: c.country_id,
+            country: c.countries?.name ?? "",
+          }))
+        );
+      } else if (error) {
+        console.error("Error fetching companies:", error);
       }
       setLoading(false);
     };
@@ -32,5 +42,10 @@ export function useCompanies() {
     return companies.find((c) => c.name === companyName)?.country ?? "";
   };
 
-  return { companies, loading, getCountryByCompany };
+  /** Dado un nombre de compañía, retorna el country_id correspondiente */
+  const getCountryIdByCompany = (companyName: string): string => {
+    return companies.find((c) => c.name === companyName)?.country_id ?? "";
+  };
+
+  return { companies, loading, getCountryByCompany, getCountryIdByCompany };
 }
