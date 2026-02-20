@@ -57,15 +57,25 @@ export default function AdminPanel() {
 
   const fetchUsers = async () => {
     setLoading(true);
-    const { data: profiles } = await (supabase as any)
+    const { data: profiles, error: profilesError } = await (supabase as any)
       .from("profiles")
       .select("id, full_name, email, phone, created_at");
 
-    const { data: roles } = await (supabase as any)
+    if (profilesError) {
+      console.error("Error fetching profiles:", profilesError);
+    }
+
+    const { data: roles, error: rolesError } = await (supabase as any)
       .from("user_roles")
       .select("id, user_id, role");
 
-    if (profiles) {
+    if (rolesError) {
+      console.error("Error fetching roles:", rolesError);
+    }
+
+    console.log("Profiles fetched:", profiles?.length, "Roles fetched:", roles?.length);
+
+    if (profiles && profiles.length > 0) {
       const merged: UserWithRole[] = profiles.map((p: any) => {
         const userRole = roles?.find((r: any) => r.user_id === p.id);
         return {
@@ -79,6 +89,9 @@ export default function AdminPanel() {
         };
       });
       setUsers(merged);
+    } else {
+      console.warn("No profiles returned. Check schema/RLS.");
+      setUsers([]);
     }
     setLoading(false);
   };
