@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
+import { useProfile } from "@/hooks/use-profile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,34 +22,11 @@ const STRATEGIC_OBJECTIVES = [
   "Garantizar talento",
 ] as const;
 
-const COMPANIES = [
-  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO",
-] as const;
-
-const COUNTRIES = [
-  "Venezuela", "Costa Rica", "Colombia",
-] as const;
-
 const DEPARTMENTS = [
-  "Gerencia",
-  "Personal",
-  "Comercial",
-  "Control",
-  "Compras",
-  "Logística",
-  "Servicios",
-  "Operaciones",
-  "Sistemas",
-  "CEDI y Transporte",
-  "Dirección",
-  "Ventas",
-  "Centro de Distribución",
-  "Mercadeo",
-  "Administración Comercial",
-  "Desarrollo Humano",
-  "Inteligencia Comercial",
-  "Reposición",
-  "Procesos",
+  "Gerencia", "Personal", "Comercial", "Control", "Compras", "Logística",
+  "Servicios", "Operaciones", "Sistemas", "CEDI y Transporte", "Dirección",
+  "Ventas", "Centro de Distribución", "Mercadeo", "Administración Comercial",
+  "Desarrollo Humano", "Inteligencia Comercial", "Reposición", "Procesos",
   "Integridad de Datos",
 ] as const;
 
@@ -56,66 +34,48 @@ const SILOS = [
   "Control", "Personal", "Compras", "Ventas", "Mercadeo", "Sistemas", "Logística",
 ] as const;
 
-const INITIATIVE_TYPES = [
-  "En Desarrollo", "En Calidad", "En Productivo",
-] as const;
-
+const INITIAL_FORM = {
+  cargo: "",
+  supervisor: "",
+  project: "",
+  technology: "",
+  responsible: "",
+  strategic_objective: "",
+  department: "",
+  silo: "",
+  impact: "medium" as string,
+  problem: "",
+  ai_solution: "",
+  description: "",
+  link: "",
+};
 
 export default function Register() {
   const { user } = useAuth();
+  const { profile, loading: profileLoading } = useProfile();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
+  const [form, setForm] = useState({ ...INITIAL_FORM });
 
-  const [form, setForm] = useState({
-    // Datos del registrante
-    registrant_name: "",
-    cargo: "",
-    registrant_email: "",
-    supervisor: "",
-    registrant_company: "",
-    registrant_country: "",
-    // Datos de la iniciativa
-    project: "",
-    technology: "",
-    responsible: "",
-    strategic_objective: "",
-    company: "",
-    country: "",
-    department: "",
-    silo: "",
-    impact: "medium" as string,
-    initiative_type: "",
-    problem: "",
-    ai_solution: "",
-    description: "",
-    link: "",
-  });
+  const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.registrant_name || !form.registrant_email || !form.registrant_company || !form.registrant_country || !form.strategic_objective || !form.department || !form.silo) {
+    if (!form.strategic_objective || !form.department || !form.silo) {
       toast.error("Completa todos los campos obligatorios");
       return;
     }
     setLoading(true);
 
-    // Mapear tipo de iniciativa al status de la BD
-    const statusMap: Record<string, string> = {
-      "En Desarrollo": "en_progreso",
-      "En Calidad": "en_revision",
-      "En Productivo": "completado",
-    };
-    const mappedStatus = statusMap[form.initiative_type] || "en_revision";
-
     const { error } = await (supabase as any).from("initiatives").insert({
       project: form.project,
       technology: form.technology,
-      responsible: form.registrant_name || form.responsible,
-      email: form.registrant_email,
+      responsible: profile?.full_name || "",
+      email: profile?.email || user?.email || "",
       strategic_objective: form.strategic_objective,
-      company: form.registrant_company || form.company,
-      country: form.registrant_country || form.country,
+      company: profile?.company || "",
+      country: profile?.country || "",
       department: form.department,
       silo: form.silo.toLowerCase() as any,
       impact: form.impact as any,
@@ -125,7 +85,7 @@ export default function Register() {
       link: form.link,
       created_by: user?.id,
       source: "manual",
-      status: mappedStatus as any,
+      status: "en_revision" as any,
     });
 
     if (error) {
@@ -137,8 +97,6 @@ export default function Register() {
     setLoading(false);
   };
 
-  const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
-
   return (
     <div className="max-w-3xl mx-auto">
       <Card>
@@ -147,7 +105,7 @@ export default function Register() {
             <div>
               <CardTitle>Registrar Iniciativa</CardTitle>
               <p className="text-sm text-muted-foreground mt-1">
-                Registra la iniciativa de IA si has podido aplicar una mejora a los procesos de la compañía, haciendo uso de nuevas tecnologías o inteligencia artificial. Todas las ideas suman.
+                Registra la iniciativa de IA si has podido aplicar una mejora a los procesos de la compañía.
               </p>
             </div>
             <div className="space-y-1 shrink-0 ml-4">
@@ -156,23 +114,14 @@ export default function Register() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className={cn(
-                      "w-[160px] justify-start text-left font-normal",
-                      !date && "text-muted-foreground"
-                    )}
+                    className={cn("w-[160px] justify-start text-left font-normal", !date && "text-muted-foreground")}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {date ? format(date, "dd/MM/yyyy") : <span>Seleccionar</span>}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="end">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={(d) => d && setDate(d)}
-                    initialFocus
-                    className={cn("p-3 pointer-events-auto")}
-                  />
+                  <Calendar mode="single" selected={date} onSelect={(d) => d && setDate(d)} initialFocus className={cn("p-3 pointer-events-auto")} />
                 </PopoverContent>
               </Popover>
             </div>
@@ -180,50 +129,36 @@ export default function Register() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Sección: Datos del registrante */}
+            {/* Sección: Datos del Colaborador (precargados) */}
             <div className="space-y-1 mb-2">
               <h3 className="text-sm font-semibold text-foreground">Datos del Colaborador</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label>Nombre *</Label>
-                <Input value={form.registrant_name} onChange={(e) => update("registrant_name", e.target.value)} maxLength={200} placeholder="Tu nombre completo" />
+
+            {/* Info precargada del perfil */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-3 bg-muted/40 rounded-md border border-border/50">
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground">Nombre</Label>
+                <p className="text-sm font-medium">{profileLoading ? "Cargando..." : profile?.full_name || user?.email || "—"}</p>
               </div>
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground">Correo</Label>
+                <p className="text-sm font-medium">{profileLoading ? "..." : profile?.email || user?.email || "—"}</p>
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground">Compañía</Label>
+                <p className="text-sm font-medium">{profileLoading ? "..." : profile?.company || "—"}</p>
+              </div>
+            </div>
+
+            {/* Cargo y Supervisor (se deben digitar) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Cargo</Label>
                 <Input value={form.cargo} onChange={(e) => update("cargo", e.target.value)} maxLength={200} placeholder="Tu cargo en la empresa" />
               </div>
               <div className="space-y-2">
-                <Label>Correo *</Label>
-                <Input value={form.registrant_email} onChange={(e) => update("registrant_email", e.target.value)} maxLength={200} placeholder="tu@correo.com" type="email" />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
                 <Label>Supervisor Inmediato</Label>
                 <Input value={form.supervisor} onChange={(e) => update("supervisor", e.target.value)} maxLength={200} placeholder="Nombre del supervisor" />
-              </div>
-              <div className="space-y-2">
-                <Label>Compañía *</Label>
-                <Select value={form.registrant_company} onValueChange={(v) => update("registrant_company", v)}>
-                  <SelectTrigger><SelectValue placeholder="Seleccionar compañía" /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COMPANIES.map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>País *</Label>
-                <Select value={form.registrant_country} onValueChange={(v) => update("registrant_country", v)}>
-                  <SelectTrigger><SelectValue placeholder="Seleccionar país" /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COUNTRIES.map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
               </div>
             </div>
 
@@ -231,7 +166,6 @@ export default function Register() {
               <h3 className="text-sm font-semibold text-foreground">Datos de la Iniciativa</h3>
             </div>
 
-            {/* Row 1: Proyecto, Tecnología, Responsable */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label>Proyecto</Label>
@@ -247,7 +181,6 @@ export default function Register() {
               </div>
             </div>
 
-            {/* Row 2: Objetivo Estratégico */}
             <div className="space-y-2">
               <Label>Objetivo Estratégico al que impacta *</Label>
               <Select value={form.strategic_objective} onValueChange={(v) => update("strategic_objective", v)}>
@@ -260,30 +193,7 @@ export default function Register() {
               </Select>
             </div>
 
-            {/* Row 3: Compañía, País, Departamento */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label>Compañía *</Label>
-                <Select value={form.company} onValueChange={(v) => update("company", v)}>
-                  <SelectTrigger><SelectValue placeholder="Seleccionar compañía" /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COMPANIES.map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>País *</Label>
-                <Select value={form.country} onValueChange={(v) => update("country", v)}>
-                  <SelectTrigger><SelectValue placeholder="Seleccionar país" /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COUNTRIES.map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Departamento *</Label>
                 <Select value={form.department} onValueChange={(v) => update("department", v)}>
@@ -295,23 +205,19 @@ export default function Register() {
                   </SelectContent>
                 </Select>
               </div>
+              <div className="space-y-2">
+                <Label>Silo *</Label>
+                <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
+                  <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    {SILOS.map((s) => (
+                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
-            {/* Row 4: Silo */}
-            <div className="space-y-2">
-              <Label>Silo *</Label>
-              <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
-                <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
-                <SelectContent className="bg-popover z-50">
-                  {SILOS.map((s) => (
-                    <SelectItem key={s} value={s}>{s}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-
-            {/* Row 5: Problema y Solución IA */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Problema u oportunidad abordada</Label>
@@ -323,7 +229,6 @@ export default function Register() {
               </div>
             </div>
 
-            {/* Row 6: Descripción y Link */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Descripción breve del proceso</Label>
