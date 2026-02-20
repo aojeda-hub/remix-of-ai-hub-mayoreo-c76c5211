@@ -53,7 +53,6 @@ export default function Auth() {
             full_name: fullName,
             email,
             company_id: companyId,
-            company: companyName,
             country,
           }, { onConflict: "user_id" });
         }

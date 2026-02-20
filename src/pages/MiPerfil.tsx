@@ -47,7 +47,6 @@ export default function MiPerfil() {
         full_name: form.full_name,
         email: user.email,
         company_id: form.company_id || null,
-        company: selectedCompany?.name || null,
         country: derivedCountry || null,
         cargo: form.cargo,
         supervisor: form.supervisor,
