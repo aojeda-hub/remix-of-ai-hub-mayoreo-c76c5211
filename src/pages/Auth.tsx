@@ -7,18 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import logoMayoreo from "@/assets/Logo_Mayoreo_Isotipo.png";
-
-const COMPANIES: Record<string, string> = {
-  "Febeca": "Venezuela",
-  "Sillaca": "Venezuela",
-  "Beval": "Venezuela",
-  "Prisma": "Venezuela",
-  "Cofersa": "Venezuela",
-  "Mundial de partes": "Venezuela",
-  "OLO": "Costa Rica",
-};
+import { useCompanies } from "@/hooks/use-companies";
 
 export default function Auth() {
+  const { companies, loading: companiesLoading, getCountryByCompany } = useCompanies();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +18,7 @@ export default function Auth() {
   const [company, setCompany] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const derivedCountry = COMPANIES[company] || "";
+  const derivedCountry = getCountryByCompany(company);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,9 +95,11 @@ export default function Auth() {
                       <SelectValue placeholder="Seleccionar compañía" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
-                      {Object.keys(COMPANIES).map((c) => (
-                        <SelectItem key={c} value={c}>{c}</SelectItem>
-                      ))}
+                      {companiesLoading
+                        ? <SelectItem value="_loading" disabled>Cargando...</SelectItem>
+                        : companies.map((c) => (
+                          <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
                 </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { useProfile } from "@/hooks/use-profile";
+import { useCompanies } from "@/hooks/use-companies";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,19 +11,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { toast } from "sonner";
 import { Save, User } from "lucide-react";
 
-const COMPANIES: Record<string, string> = {
-  "Febeca": "Venezuela",
-  "Sillaca": "Venezuela",
-  "Beval": "Venezuela",
-  "Prisma": "Venezuela",
-  "Cofersa": "Venezuela",
-  "Mundial de partes": "Venezuela",
-  "OLO": "Costa Rica",
-};
-
 export default function MiPerfil() {
   const { user } = useAuth();
   const { profile, loading: profileLoading } = useProfile();
+  const { companies, loading: companiesLoading, getCountryByCompany } = useCompanies();
   const [loading, setSaving] = useState(false);
   const [form, setForm] = useState({
     full_name: "",
@@ -42,7 +34,7 @@ export default function MiPerfil() {
     }
   }, [profile]);
 
-  const derivedCountry = COMPANIES[form.company] || "";
+  const derivedCountry = getCountryByCompany(form.company);
 
   const handleSave = async () => {
     if (!user) return;
@@ -122,9 +114,11 @@ export default function MiPerfil() {
                   <SelectValue placeholder="Seleccionar compañía" />
                 </SelectTrigger>
                 <SelectContent className="bg-popover z-50">
-                  {Object.keys(COMPANIES).map((c) => (
-                    <SelectItem key={c} value={c}>{c}</SelectItem>
-                  ))}
+                  {companiesLoading
+                    ? <SelectItem value="_loading" disabled>Cargando...</SelectItem>
+                    : companies.map((c) => (
+                      <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
             </div>
