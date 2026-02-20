@@ -25,6 +25,8 @@ interface UserWithRole {
   full_name: string;
   email: string;
   phone: string;
+  company: string;
+  country: string;
   role: string;
   role_id: string | null;
   created_at: string;
@@ -57,40 +59,31 @@ export default function AdminPanel() {
 
   const fetchUsers = async () => {
     setLoading(true);
-    const { data: profiles, error: profilesError } = await (supabase as any)
-      .from("profiles")
-      .select("id, full_name, email, phone, created_at");
-
-    if (profilesError) {
-      console.error("Error fetching profiles:", profilesError);
-    }
-
-    const { data: roles, error: rolesError } = await (supabase as any)
-      .from("user_roles")
-      .select("id, user_id, role");
-
-    if (rolesError) {
-      console.error("Error fetching roles:", rolesError);
-    }
-
-    console.log("Profiles fetched:", profiles?.length, "Roles fetched:", roles?.length);
-
-    if (profiles && profiles.length > 0) {
-      const merged: UserWithRole[] = profiles.map((p: any) => {
-        const userRole = roles?.find((r: any) => r.user_id === p.id);
-        return {
-          user_id: p.id,
-          full_name: p.full_name || "Sin nombre",
-          email: p.email || "",
-          phone: p.phone || "",
-          role: userRole?.role ?? "colaborador",
-          role_id: userRole?.id ?? null,
-          created_at: p.created_at,
-        };
-      });
-      setUsers(merged);
-    } else {
-      console.warn("No profiles returned. Check schema/RLS.");
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/list-users`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          },
+        }
+      );
+      const result = await res.json();
+      if (!res.ok) {
+        console.error("Error fetching users:", result.error);
+        toast.error("Error al cargar usuarios: " + result.error);
+        setUsers([]);
+      } else {
+        setUsers(result.users || []);
+      }
+    } catch (err: any) {
+      console.error("Error fetching users:", err.message);
+      toast.error("Error al cargar usuarios");
       setUsers([]);
     }
     setLoading(false);
@@ -296,7 +289,7 @@ export default function AdminPanel() {
                     <TableRow>
                       <TableHead>Nombre</TableHead>
                       <TableHead>Email</TableHead>
-                      
+                      <TableHead>Compañía</TableHead>
                       <TableHead>Roles</TableHead>
                       <TableHead>Fecha de Creación</TableHead>
                       <TableHead>Acciones</TableHead>
@@ -307,7 +300,7 @@ export default function AdminPanel() {
                       <TableRow key={u.user_id}>
                         <TableCell className="font-medium">{u.full_name}</TableCell>
                         <TableCell>{u.email}</TableCell>
-                        
+                        <TableCell>{u.company || "—"}</TableCell>
                         <TableCell>
                           <Select
                             value={u.role}
