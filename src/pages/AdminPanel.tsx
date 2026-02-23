@@ -62,7 +62,7 @@ export default function AdminPanel() {
     try {
       const { data: profiles, error: profilesError } = await (supabase as any)
         .from("profiles")
-        .select("id, full_name, email, phone, company, country, company_id, companies(name), created_at");
+        .select("id, full_name, email, phone, company_id, companies(name, countries(name)), created_at");
 
       if (profilesError) {
         console.error("Error fetching profiles:", profilesError.message);
@@ -83,8 +83,8 @@ export default function AdminPanel() {
           full_name: p.full_name || "Sin nombre",
           email: p.email || "",
           phone: p.phone || "",
-          company: p.companies?.name || p.company || "",
-          country: p.country || "",
+          company: p.companies?.name || "",
+          country: p.companies?.countries?.name || "",
           role: userRole?.role ?? "colaborador",
           role_id: userRole?.id ?? null,
           created_at: p.created_at,
