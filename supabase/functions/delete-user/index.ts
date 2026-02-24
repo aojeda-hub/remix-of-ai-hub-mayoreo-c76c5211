@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
     }
 
     // Clean up profile and roles
-    await adminClient.from("profiles").delete().eq("user_id", user_id);
+    await adminClient.from("profiles").delete().eq("id", user_id);
     await adminClient.from("user_roles").delete().eq("user_id", user_id);
 
     return new Response(JSON.stringify({ success: true }), {
