@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, HandHelping, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, ArrowRightLeft, PlusCircle, CheckCircle2 } from "lucide-react";
+import { Search, HandHelping, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, ArrowRightLeft, PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
@@ -72,9 +72,6 @@ export default function IniciativasEnDesarrollo() {
   // Delete dialog state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
 
-  // Complete dialog state
-  const [completingInitiative, setCompletingInitiative] = useState<any>(null);
-
   // Change status dialog state
   const [statusInitiative, setStatusInitiative] = useState<any>(null);
   const [newStatus, setNewStatus] = useState("");
@@ -107,28 +104,7 @@ export default function IniciativasEnDesarrollo() {
 
   const isOwner = (initiative: any) => initiative.created_by === user?.id;
   const canEditDelete = (initiative: any) => isAdmin || isOwner(initiative);
-  const canComplete = (initiative: any) => isAdmin || isOwner(initiative);
   const canOfferHelp = (initiative: any) => isAdmin || !isOwner(initiative);
-
-  const handleComplete = async () => {
-    try {
-      const { error } = await (supabase as any)
-        .from("initiatives")
-        .update({
-          status: "completado",
-          source: "manual",
-          completed_at: new Date().toISOString(),
-        })
-        .eq("id", completingInitiative.id);
-      if (error) throw error;
-      toast.success("Iniciativa marcada como completada");
-      queryClient.invalidateQueries({ queryKey: ["initiatives-en-desarrollo"] });
-      queryClient.invalidateQueries({ queryKey: ["initiatives"] });
-      setCompletingInitiative(null);
-    } catch (err: any) {
-      toast.error("Error al completar: " + err.message);
-    }
-  };
 
   const handleOfferHelp = async () => {
     if (!helpText.trim()) {
@@ -346,12 +322,6 @@ export default function IniciativasEnDesarrollo() {
                             </DropdownMenuItem>
                           </>
                         )}
-                        {canComplete(i) && (
-                          <DropdownMenuItem onClick={() => setCompletingInitiative(i)} className="gap-2 text-green-600 focus:text-green-600">
-                            <CheckCircle2 className="h-4 w-4" />
-                            Marcar como completada
-                          </DropdownMenuItem>
-                        )}
                         {canOfferHelp(i) && (
                           <DropdownMenuItem onClick={() => setSelectedInitiative(i)} className="gap-2">
                             <HandHelping className="h-4 w-4" />
@@ -494,24 +464,6 @@ export default function IniciativasEnDesarrollo() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {/* Complete Confirmation */}
-      <AlertDialog open={!!completingInitiative} onOpenChange={(open) => { if (!open) setCompletingInitiative(null); }}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>¿Marcar como completada?</AlertDialogTitle>
-            <AlertDialogDescription>
-              La iniciativa "{completingInitiative?.project}" será marcada como completada y aparecerá en "Explorar Iniciativas". Esta acción no se puede deshacer.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={handleComplete}>
-              Completar
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
 
       {/* Delete Confirmation */}
       <AlertDialog open={!!deletingInitiative} onOpenChange={(open) => { if (!open) setDeletingInitiative(null); }}>

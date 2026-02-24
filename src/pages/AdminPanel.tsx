@@ -25,8 +25,6 @@ interface UserWithRole {
   full_name: string;
   email: string;
   phone: string;
-  company: string;
-  country: string;
   role: string;
   role_id: string | null;
   created_at: string;
@@ -59,43 +57,28 @@ export default function AdminPanel() {
 
   const fetchUsers = async () => {
     setLoading(true);
-    try {
-      const { data: profiles, error: profilesError } = await (supabase as any)
-        .from("profiles")
-        .select("id, full_name, email, phone, company_id, companies(name, countries(name)), created_at");
+    const { data: profiles } = await (supabase as any)
+      .from("profiles")
+      .select("id, full_name, email, phone, created_at");
 
-      if (profilesError) {
-        console.error("Error fetching profiles:", profilesError.message);
-        toast.error("Error al cargar usuarios: " + profilesError.message);
-        setUsers([]);
-        setLoading(false);
-        return;
-      }
+    const { data: roles } = await (supabase as any)
+      .from("user_roles")
+      .select("id, user_id, role");
 
-      const { data: roles } = await (supabase as any)
-        .from("user_roles")
-        .select("id, user_id, role");
-
-      const merged = (profiles || []).map((p: any) => {
+    if (profiles) {
+      const merged: UserWithRole[] = profiles.map((p: any) => {
         const userRole = roles?.find((r: any) => r.user_id === p.id);
         return {
           user_id: p.id,
           full_name: p.full_name || "Sin nombre",
           email: p.email || "",
           phone: p.phone || "",
-          company: p.companies?.name || "",
-          country: p.companies?.countries?.name || "",
           role: userRole?.role ?? "colaborador",
           role_id: userRole?.id ?? null,
           created_at: p.created_at,
         };
       });
-
       setUsers(merged);
-    } catch (err: any) {
-      console.error("Error fetching users:", err.message);
-      toast.error("Error al cargar usuarios");
-      setUsers([]);
     }
     setLoading(false);
   };
@@ -300,7 +283,7 @@ export default function AdminPanel() {
                     <TableRow>
                       <TableHead>Nombre</TableHead>
                       <TableHead>Email</TableHead>
-                      <TableHead>Compañía</TableHead>
+                      
                       <TableHead>Roles</TableHead>
                       <TableHead>Fecha de Creación</TableHead>
                       <TableHead>Acciones</TableHead>
@@ -311,7 +294,7 @@ export default function AdminPanel() {
                       <TableRow key={u.user_id}>
                         <TableCell className="font-medium">{u.full_name}</TableCell>
                         <TableCell>{u.email}</TableCell>
-                        <TableCell>{u.company || "—"}</TableCell>
+                        
                         <TableCell>
                           <Select
                             value={u.role}
