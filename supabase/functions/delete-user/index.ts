@@ -37,13 +37,18 @@ Deno.serve(async (req) => {
     }
 
     // Check admin role in iniciativas schema
-    const { data: roleData } = await adminClient
-      .schema("iniciativas")
+    const schemaClient = createClient(supabaseUrl, serviceRoleKey, {
+      db: { schema: "iniciativas" },
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+    const { data: roleData, error: roleError } = await schemaClient
       .from("user_roles")
       .select("role")
       .eq("user_id", caller.id)
       .eq("role", "admin")
       .maybeSingle();
+
+    console.log("Role check for", caller.id, ":", { roleData, roleError });
 
     if (!roleData) {
       return new Response(JSON.stringify({ error: "Solo administradores pueden eliminar usuarios" }), {
