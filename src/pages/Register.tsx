@@ -73,8 +73,6 @@ export default function Register() {
     cargo: "",
     registrant_email: "",
     supervisor: "",
-    registrant_company: "",
-    registrant_country: "",
     // Datos de la iniciativa
     project: "",
     technology: "",
@@ -94,7 +92,7 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.registrant_name || !form.registrant_email || !form.registrant_company || !form.registrant_country || !form.strategic_objective || !form.department || !form.silo) {
+    if (!form.registrant_name || !form.registrant_email || !form.strategic_objective || !form.department || !form.silo || !form.company || !form.country) {
       toast.error("Completa todos los campos obligatorios");
       return;
     }
@@ -114,8 +112,8 @@ export default function Register() {
       responsible: form.registrant_name || form.responsible,
       email: form.registrant_email,
       strategic_objective: form.strategic_objective,
-      company: form.registrant_company || form.company,
-      country: form.registrant_country || form.country,
+      company: form.company,
+      country: form.country,
       department: form.department,
       silo: form.silo.toLowerCase() as any,
       impact: form.impact as any,
@@ -198,32 +196,10 @@ export default function Register() {
                 <Input value={form.registrant_email} onChange={(e) => update("registrant_email", e.target.value)} maxLength={200} placeholder="tu@correo.com" type="email" />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Supervisor Inmediato</Label>
                 <Input value={form.supervisor} onChange={(e) => update("supervisor", e.target.value)} maxLength={200} placeholder="Nombre del supervisor" />
-              </div>
-              <div className="space-y-2">
-                <Label>Compañía *</Label>
-                <Select value={form.registrant_company} onValueChange={(v) => update("registrant_company", v)}>
-                  <SelectTrigger><SelectValue placeholder="Seleccionar compañía" /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COMPANIES.map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>País *</Label>
-                <Select value={form.registrant_country} onValueChange={(v) => update("registrant_country", v)}>
-                  <SelectTrigger><SelectValue placeholder="Seleccionar país" /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COUNTRIES.map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
               </div>
             </div>
 
