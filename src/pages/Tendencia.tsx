@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useMemo } from "react";
 
-const ALL_COMPANIES = ["Prisma", "Febeca", "Sillaca", "Beval", "Mundial de Partes", "Cofersa", "OLO"];
+const ALL_COMPANIES = ["Prisma", "Febeca", "Sillaca", "Beval", "Mundial de Partes", "Cofersa", "OLO", "Mayoreo"];
 
 const MONTH_NAMES: Record<number, string> = {
   1: "Ene", 2: "Feb", 3: "Mar", 4: "Abr",
