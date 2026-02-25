@@ -22,7 +22,7 @@ const STRATEGIC_OBJECTIVES = [
 ] as const;
 
 const COMPANIES = [
-  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO",
+  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo",
 ] as const;
 
 const COUNTRIES = [
