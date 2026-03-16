@@ -34,7 +34,7 @@ const DEPARTMENTS = [
 const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia"] as const;
 
 const COMPANIES = [
-  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo",
+  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo", "Mayoreo Global",
 ] as const;
 
 export default function IniciativasEnDesarrollo() {
