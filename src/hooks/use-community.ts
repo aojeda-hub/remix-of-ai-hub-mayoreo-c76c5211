@@ -6,12 +6,31 @@ export function useCommunityPosts() {
     return useQuery({
         queryKey: ["community-posts"],
         queryFn: async () => {
-            const { data, error } = await (supabase as any)
+            const { data: posts, error } = await (supabase as any)
                 .from("community_posts")
-                .select("*, profiles:user_id(full_name, email)")
+                .select("*")
                 .order("created_at", { ascending: false });
             if (error) throw error;
-            return data;
+
+            // Fetch profiles for all unique user_ids
+            const userIds = [...new Set(posts.map((p: any) => p.user_id).filter(Boolean))];
+            let profilesMap: Record<string, any> = {};
+            if (userIds.length > 0) {
+                const { data: profiles } = await (supabase as any)
+                    .from("profiles")
+                    .select("id, full_name, email")
+                    .in("id", userIds);
+                if (profiles) {
+                    for (const p of profiles) {
+                        profilesMap[p.id] = p;
+                    }
+                }
+            }
+
+            return posts.map((post: any) => ({
+                ...post,
+                profiles: profilesMap[post.user_id] || null,
+            }));
         },
     });
 }
