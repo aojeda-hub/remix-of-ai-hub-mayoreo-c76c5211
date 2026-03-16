@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
-import { useCommunityPosts, useCreatePost, useAddComment, useToggleReaction } from "@/hooks/use-community";
+import { useRole } from "@/hooks/use-role";
+import { useCommunityPosts, useCreatePost, useAddComment, useToggleReaction, useDeletePost, useUpdatePost } from "@/hooks/use-community";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,8 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { MessageSquare, ThumbsUp, Plus, Send } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { MessageSquare, ThumbsUp, Plus, Send, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -27,18 +29,17 @@ const CAT_LABELS: Record<string, string> = Object.fromEntries(CATEGORIES.map(c =
 
 export default function ComunidadIA() {
   const { user } = useAuth();
+  const { isAdmin } = useRole();
   const queryClient = useQueryClient();
   const [filterCat, setFilterCat] = useState("all");
   const [showNew, setShowNew] = useState(false);
   const [newPost, setNewPost] = useState({ title: "", content: "", category: "preguntas_tecnicas", tags: "" });
   const [commentText, setCommentText] = useState<Record<string, string>>({});
   const [expandedPost, setExpandedPost] = useState<string | null>(null);
+  const [editingPost, setEditingPost] = useState<any | null>(null);
+  const [editForm, setEditForm] = useState({ title: "", content: "", category: "", tags: "" });
 
   const { data: posts = [], isLoading } = useCommunityPosts();
-
-  // Note: We'll still need reactions from a general fetch for the whole list if we want to avoid multiple queries,
-  // but for now let's keep it simple or stick to the previous pattern if more efficient.
-  // Actually, useCommunityPosts now fetches profiles!
 
   const { data: reactions = [] } = useQuery({
     queryKey: ["community_reactions_all"],
@@ -61,6 +62,8 @@ export default function ComunidadIA() {
   const createPostMutation = useCreatePost();
   const addCommentMutation = useAddComment();
   const toggleReactionMutation = useToggleReaction();
+  const deletePostMutation = useDeletePost();
+  const updatePostMutation = useUpdatePost();
 
   const handleCreatePost = () => {
     const tags = newPost.tags.split(",").map(t => t.trim()).filter(Boolean);
@@ -86,7 +89,6 @@ export default function ComunidadIA() {
     }, {
       onSuccess: () => {
         setCommentText(prev => ({ ...prev, [postId]: "" }));
-        // Also invalidate the global comments if we are using it
         queryClient.invalidateQueries({ queryKey: ["community_comments_all"] });
       }
     });
@@ -106,6 +108,33 @@ export default function ComunidadIA() {
     });
   };
 
+  const handleDeletePost = (postId: string) => {
+    deletePostMutation.mutate(postId);
+  };
+
+  const openEditDialog = (post: any) => {
+    setEditingPost(post);
+    setEditForm({
+      title: post.title,
+      content: post.content,
+      category: post.category,
+      tags: (post.tags || []).join(", "),
+    });
+  };
+
+  const handleUpdatePost = () => {
+    if (!editingPost) return;
+    const tags = editForm.tags.split(",").map(t => t.trim()).filter(Boolean);
+    updatePostMutation.mutate({
+      id: editingPost.id,
+      title: editForm.title,
+      content: editForm.content,
+      category: editForm.category,
+      tags,
+    }, {
+      onSuccess: () => setEditingPost(null),
+    });
+  };
 
   const filteredPosts = filterCat === "all" ? posts : posts.filter((p: any) => p.category === filterCat);
 
@@ -120,7 +149,10 @@ export default function ComunidadIA() {
             <Button><Plus className="mr-2 h-4 w-4" />Nueva Publicación</Button>
           </DialogTrigger>
           <DialogContent>
-            <DialogHeader><DialogTitle>Nueva Publicación</DialogTitle></DialogHeader>
+            <DialogHeader>
+              <DialogTitle>Nueva Publicación</DialogTitle>
+              <DialogDescription>Comparte contenido con la comunidad</DialogDescription>
+            </DialogHeader>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label>Categoría</Label>
@@ -177,6 +209,34 @@ export default function ComunidadIA() {
                       {authorName} {post.profiles?.email ? `(${post.profiles.email})` : ""} · {new Date(post.created_at).toLocaleDateString()}
                     </p>
                   </div>
+                  {isAdmin && (
+                    <div className="flex gap-1 ml-2 shrink-0">
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-primary" onClick={() => openEditDialog(post)}>
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>¿Eliminar publicación?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Esta acción no se puede deshacer. Se eliminarán también los comentarios y reacciones asociados.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDeletePost(post.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                              Eliminar
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                  )}
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -222,6 +282,40 @@ export default function ComunidadIA() {
           <Card><CardContent className="py-8 text-center text-muted-foreground">No hay publicaciones aún. ¡Sé el primero!</CardContent></Card>
         )}
       </div>
+
+      {/* Edit Post Dialog */}
+      <Dialog open={!!editingPost} onOpenChange={(open) => !open && setEditingPost(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Editar Publicación</DialogTitle>
+            <DialogDescription>Modifica los campos de la publicación</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label>Categoría</Label>
+              <Select value={editForm.category} onValueChange={(v) => setEditForm(p => ({ ...p, category: v }))}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent className="bg-popover z-50">
+                  {CATEGORIES.map(c => <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label>Título</Label>
+              <Input value={editForm.title} onChange={(e) => setEditForm(p => ({ ...p, title: e.target.value }))} />
+            </div>
+            <div className="space-y-2">
+              <Label>Contenido</Label>
+              <Textarea value={editForm.content} onChange={(e) => setEditForm(p => ({ ...p, content: e.target.value }))} rows={4} />
+            </div>
+            <div className="space-y-2">
+              <Label>Etiquetas (separadas por coma)</Label>
+              <Input value={editForm.tags} onChange={(e) => setEditForm(p => ({ ...p, tags: e.target.value }))} />
+            </div>
+            <Button onClick={handleUpdatePost} disabled={!editForm.title || !editForm.content} className="w-full">Guardar cambios</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
