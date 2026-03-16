@@ -174,7 +174,7 @@ export default function ComunidadIA() {
                     <Badge variant="outline" className="mb-2">{CAT_LABELS[post.category] || post.category}</Badge>
                     <CardTitle className="text-base">{post.title}</CardTitle>
                     <p className="text-xs text-muted-foreground mt-1">
-                      {authorName} · {new Date(post.created_at).toLocaleDateString()}
+                      {authorName} {post.profiles?.email ? `(${post.profiles.email})` : ""} · {new Date(post.created_at).toLocaleDateString()}
                     </p>
                   </div>
                 </div>

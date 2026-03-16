@@ -8,7 +8,7 @@ export function useCommunityPosts() {
         queryFn: async () => {
             const { data, error } = await (supabase as any)
                 .from("community_posts")
-                .select("*")
+                .select("*, profiles:user_id(full_name, email)")
                 .order("created_at", { ascending: false });
             if (error) throw error;
             return data;
