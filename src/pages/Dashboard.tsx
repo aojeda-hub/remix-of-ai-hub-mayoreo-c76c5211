@@ -5,7 +5,7 @@ import { Activity, AlertCircle, MapPin, Lightbulb, Target, Users } from "lucide-
 import { useMemo } from "react";
 
 
-const COMPANIES = ["Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo"];
+const COMPANIES = ["Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo", "Mayoreo Global"];
 
 export default function Dashboard() {
   const { data: initiatives = [], isLoading } = useInitiatives();

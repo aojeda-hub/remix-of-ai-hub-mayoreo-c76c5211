@@ -22,11 +22,11 @@ const STRATEGIC_OBJECTIVES = [
 ] as const;
 
 const COMPANIES = [
-  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo",
+  "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "OLO", "Mayoreo", "Mayoreo Global",
 ] as const;
 
 const COUNTRIES = [
-  "Venezuela", "Costa Rica", "Colombia",
+  "Venezuela", "Costa Rica", "Colombia", "Global",
 ] as const;
 
 const DEPARTMENTS = [
@@ -49,7 +49,7 @@ const DEPARTMENTS = [
   "Inteligencia Comercial",
   "Reposición",
   "Procesos",
-  "Integridad de Datos",
+  "Integridad de Datos", "Todos",
 ] as const;
 
 const SILOS = [
