@@ -49,7 +49,7 @@ const DEPARTMENTS = [
   "Inteligencia Comercial",
   "Reposición",
   "Procesos",
-  "Integridad de Datos",
+  "Integridad de Datos", "Todos",
 ] as const;
 
 const SILOS = [

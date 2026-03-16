@@ -32,7 +32,7 @@ const DEPARTMENTS = [
   "Integridad de Datos", "Todos",
 ] as const;
 
-const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia"] as const;
+const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia", "Global"] as const;
 
 export default function ExplorarIniciativas() {
   const { user } = useAuth();
