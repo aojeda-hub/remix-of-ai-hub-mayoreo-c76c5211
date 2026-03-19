@@ -19,6 +19,7 @@ const STRATEGIC_OBJECTIVES = [
   "Maximizar la eficiencia",
   "Garantizar procesos",
   "Garantizar talento",
+  "Maximizar la gestión comercial",
 ] as const;
 
 const COMPANIES = [
