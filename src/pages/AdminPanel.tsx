@@ -177,7 +177,7 @@ export default function AdminPanel() {
     const { error: profileError } = await (supabase as any)
       .from("profiles")
       .update({ full_name: editName })
-      .eq("user_id", editUser.user_id);
+      .eq("id", editUser.user_id);
     if (profileError) {
       toast.error("Error al actualizar: " + profileError.message);
       return;

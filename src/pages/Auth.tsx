@@ -3,22 +3,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import logoMayoreo from "@/assets/Logo_Mayoreo_Isotipo.png";
-import { useCompanies } from "@/hooks/use-companies";
 
 export default function Auth() {
-  const { companies, loading: companiesLoading, getCountryByCompany } = useCompanies();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [company, setCompany] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const derivedCountry = getCountryByCompany(company);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,32 +22,17 @@ export default function Auth() {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) toast.error(error.message);
     } else {
-      if (!company) {
-        toast.error("Selecciona tu compañía");
-        setLoading(false);
-        return;
-      }
-      const country = derivedCountry;
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { full_name: fullName, company, country },
+          data: { full_name: fullName },
           emailRedirectTo: window.location.origin,
         },
       });
       if (error) {
         toast.error(error.message);
       } else {
-        if (data.user) {
-          await (supabase as any).from("profiles").upsert({
-            user_id: data.user.id,
-            full_name: fullName,
-            email,
-            company,
-            country,
-          }, { onConflict: "user_id" });
-        }
         toast.success("Revisa tu correo para confirmar tu cuenta");
         setIsLogin(true);
       }
@@ -76,42 +55,16 @@ export default function Auth() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
-              <>
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nombre completo</Label>
-                  <Input
-                    id="name"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    required={!isLogin}
-                    maxLength={100}
-                    placeholder="Tu nombre completo"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Compañía</Label>
-                  <Select value={company} onValueChange={setCompany}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Seleccionar compañía" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      {companiesLoading
-                        ? <SelectItem value="_loading" disabled>Cargando...</SelectItem>
-                        : companies.map((c) => (
-                          <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                {derivedCountry && (
-                  <div className="space-y-1">
-                    <Label className="text-xs text-muted-foreground">País (automático)</Label>
-                    <p className="text-sm font-medium bg-muted/40 rounded-md px-3 py-2 border border-border/50">
-                      {derivedCountry}
-                    </p>
-                  </div>
-                )}
-              </>
+              <div className="space-y-2">
+                <Label htmlFor="name">Nombre completo</Label>
+                <Input
+                  id="name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required={!isLogin}
+                  maxLength={100}
+                />
+              </div>
             )}
             <div className="space-y-2">
               <Label htmlFor="email">Correo electrónico</Label>

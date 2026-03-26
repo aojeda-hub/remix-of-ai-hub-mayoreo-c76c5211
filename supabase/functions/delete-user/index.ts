@@ -19,30 +19,36 @@ Deno.serve(async (req) => {
       });
     }
 
+    const token = authHeader.replace("Bearer ", "");
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-    // Verify caller is admin
-    const callerClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY")!, {
-      global: { headers: { Authorization: authHeader } },
+    const adminClient = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { autoRefreshToken: false, persistSession: false },
     });
-    const { data: { user: caller } } = await callerClient.auth.getUser();
-    if (!caller) {
+
+    // Verify caller identity using token
+    const { data: { user: caller }, error: userError } = await adminClient.auth.getUser(token);
+    if (userError || !caller) {
       return new Response(JSON.stringify({ error: "No autorizado" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const adminClient = createClient(supabaseUrl, serviceRoleKey, {
+    // Check admin role in iniciativas schema
+    const schemaClient = createClient(supabaseUrl, serviceRoleKey, {
       db: { schema: "iniciativas" },
+      auth: { autoRefreshToken: false, persistSession: false },
     });
-    const { data: roleData } = await adminClient
+    const { data: roleData, error: roleError } = await schemaClient
       .from("user_roles")
       .select("role")
       .eq("user_id", caller.id)
       .eq("role", "admin")
       .maybeSingle();
+
+    console.log("Role check for", caller.id, ":", { roleData, roleError });
 
     if (!roleData) {
       return new Response(JSON.stringify({ error: "Solo administradores pueden eliminar usuarios" }), {
@@ -66,7 +72,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Delete auth user (cascades to profiles/roles via triggers or we clean up)
+    // Delete auth user
     const { error: deleteError } = await adminClient.auth.admin.deleteUser(user_id);
     if (deleteError) {
       return new Response(JSON.stringify({ error: deleteError.message }), {
@@ -76,8 +82,11 @@ Deno.serve(async (req) => {
     }
 
     // Clean up profile and roles
-    await adminClient.from("profiles").delete().eq("user_id", user_id);
-    await adminClient.from("user_roles").delete().eq("user_id", user_id);
+    const schemaClient = createClient(supabaseUrl, serviceRoleKey, {
+      db: { schema: "iniciativas" },
+    });
+    await schemaClient.from("profiles").delete().eq("id", user_id);
+    await schemaClient.from("user_roles").delete().eq("user_id", user_id);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

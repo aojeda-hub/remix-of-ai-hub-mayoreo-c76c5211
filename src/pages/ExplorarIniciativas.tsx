@@ -29,10 +29,10 @@ const DEPARTMENTS = [
   "Servicios", "Operaciones", "Sistemas", "CEDI y Transporte", "Dirección",
   "Ventas", "Centro de Distribución", "Mercadeo", "Administración Comercial",
   "Desarrollo Humano", "Inteligencia Comercial", "Reposición", "Procesos",
-  "Integridad de Datos",
+  "Integridad de Datos", "Todos",
 ] as const;
 
-const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia"] as const;
+const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia", "Global"] as const;
 
 export default function ExplorarIniciativas() {
   const { user } = useAuth();
