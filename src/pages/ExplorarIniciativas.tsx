@@ -33,6 +33,7 @@ const DEPARTMENTS = [
 ] as const;
 
 const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia", "Global"] as const;
+const COMPANIES = ["Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "Mayoreo"] as const;
 
 export default function ExplorarIniciativas() {
   const { user } = useAuth();
@@ -120,6 +121,7 @@ export default function ExplorarIniciativas() {
     if (search && !i.project?.toLowerCase().includes(search.toLowerCase()) && !i.technology?.toLowerCase().includes(search.toLowerCase())) return false;
     if (filterDept !== "all" && i.department !== filterDept) return false;
     if (filterCountry !== "all" && i.country !== filterCountry) return false;
+    if (filterCompany !== "all" && i.company !== filterCompany) return false;
     if (filterDate) {
       const initDate = new Date(i.created_at);
       if (initDate.toDateString() !== filterDate.toDateString()) return false;
@@ -169,6 +171,13 @@ export default function ExplorarIniciativas() {
           <SelectContent className="bg-popover z-50">
             <SelectItem value="all">Todos los países</SelectItem>
             {COUNTRIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+          </SelectContent>
+        </Select>
+        <Select value={filterCompany} onValueChange={setFilterCompany}>
+          <SelectTrigger className="w-44"><SelectValue placeholder="Compañía" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todas las compañías</SelectItem>
+            {COMPANIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
           </SelectContent>
         </Select>
         <Popover>
