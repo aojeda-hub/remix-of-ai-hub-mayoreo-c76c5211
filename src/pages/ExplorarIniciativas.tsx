@@ -42,6 +42,7 @@ export default function ExplorarIniciativas() {
   const [filterDept, setFilterDept] = useState("all");
   const [filterCountry, setFilterCountry] = useState("all");
   const [onlyMine, setOnlyMine] = useState(false);
+  const [filterCompany, setFilterCompany] = useState("all");
   const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
 
   const { data: initiatives = [], isLoading } = useInitiatives();
