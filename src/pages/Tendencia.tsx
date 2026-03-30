@@ -96,8 +96,15 @@ export default function Tendencia() {
 
   return (
     <div className="flex flex-col items-center space-y-6">
-      <div className="w-full">
+      <div className="w-full flex items-center justify-between">
         <h2 className="text-2xl font-bold">Cuadro de tendencia Iniciativas Mayoreo</h2>
+        <Select value={filterYear} onValueChange={setFilterYear}>
+          <SelectTrigger className="w-32"><SelectValue placeholder="Año" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todos</SelectItem>
+            {YEARS.map((y) => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}
+          </SelectContent>
+        </Select>
       </div>
 
       <Card className="w-full max-w-5xl">

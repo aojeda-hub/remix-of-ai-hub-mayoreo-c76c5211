@@ -185,6 +185,13 @@ export default function ExplorarIniciativas() {
             {COMPANIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
           </SelectContent>
         </Select>
+        <Select value={filterYear} onValueChange={setFilterYear}>
+          <SelectTrigger className="w-28"><SelectValue placeholder="Año" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todos</SelectItem>
+            {YEARS.map((y) => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}
+          </SelectContent>
+        </Select>
         <Popover>
           <PopoverTrigger asChild>
             <Button
