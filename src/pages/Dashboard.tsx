@@ -5,7 +5,7 @@ import { Activity, AlertCircle, MapPin, Lightbulb, Target, Users } from "lucide-
 import { useMemo } from "react";
 
 
-const COMPANIES = ["Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "Mayoreo"];
+const COMPANIES = ["Febeca", "Sillaca", "Beval", "Cofersa", "Mundial de partes", "Mayoreo"];
 
 export default function Dashboard() {
   const { data: initiatives = [], isLoading } = useInitiatives();
@@ -18,18 +18,18 @@ export default function Dashboard() {
 
   // Meta por compañía
   const COMPANY_TARGETS: Record<string, number> = {
-    Prisma: 100,
     Febeca: 50,
     Sillaca: 50,
     Beval: 50,
     Cofersa: 50,
     "Mundial de partes": 50,
-    OLO: 50,
+    Mayoreo: 50,
   };
   const companyMeta = useMemo(() => {
     const counts: Record<string, number> = {};
     countableInitiatives.forEach((i: any) => {
-      const c = i.company || "Sin compañía";
+      let c = i.company || "Sin compañía";
+      if (c === "Prisma") c = "Mayoreo";
       counts[c] = (counts[c] || 0) + 1;
     });
     return COMPANIES.map(c => ({ company: c, count: counts[c] || 0 }));

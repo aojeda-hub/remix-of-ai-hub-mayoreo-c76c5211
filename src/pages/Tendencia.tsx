@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useMemo } from "react";
 
-const ALL_COMPANIES = ["Prisma", "Febeca", "Sillaca", "Beval", "Mundial de partes", "Cofersa", "Mayoreo"];
+const ALL_COMPANIES = ["Febeca", "Sillaca", "Beval", "Mundial de partes", "Cofersa", "Mayoreo"];
 
 const MONTH_NAMES: Record<number, string> = {
   1: "Ene", 2: "Feb", 3: "Mar", 4: "Abr",
@@ -35,7 +35,8 @@ export default function Tendencia() {
     countable.forEach((i: any) => {
       const d = new Date(i.created_at);
       const monthKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-      const company = i.company || "Sin compañía";
+      let company = i.company || "Sin compañía";
+      if (company === "Prisma") company = "Mayoreo";
       if (!companies.has(company)) companies.set(company, new Map());
       const monthMap = companies.get(company)!;
       monthMap.set(monthKey, (monthMap.get(monthKey) || 0) + 1);
