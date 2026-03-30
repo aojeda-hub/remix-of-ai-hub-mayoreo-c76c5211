@@ -18,13 +18,12 @@ export default function Dashboard() {
 
   // Meta por compañía
   const COMPANY_TARGETS: Record<string, number> = {
-    Prisma: 100,
     Febeca: 50,
     Sillaca: 50,
     Beval: 50,
     Cofersa: 50,
     "Mundial de partes": 50,
-    OLO: 50,
+    Mayoreo: 50,
   };
   const companyMeta = useMemo(() => {
     const counts: Record<string, number> = {};
