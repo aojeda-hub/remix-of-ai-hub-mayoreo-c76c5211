@@ -60,6 +60,9 @@ export default function ExplorarIniciativas() {
   // Delete state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
 
+  // Detail view state
+  const [viewingInitiative, setViewingInitiative] = useState<any>(null);
+
   const isOwner = (i: any) => i.created_by === user?.id;
   const canEditDelete = (i: any) => isAdmin || isOwner(i);
 
