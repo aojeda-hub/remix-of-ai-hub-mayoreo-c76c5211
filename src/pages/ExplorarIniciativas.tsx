@@ -263,7 +263,7 @@ export default function ExplorarIniciativas() {
                   <TableCell className="max-w-[200px] truncate">{i.description || "—"}</TableCell>
                   <TableCell className="max-w-[200px] truncate">{i.ai_solution || "—"}</TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
