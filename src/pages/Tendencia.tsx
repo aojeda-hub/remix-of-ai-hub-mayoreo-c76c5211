@@ -31,12 +31,14 @@ export default function Tendencia() {
     },
   });
 
-  const now = new Date();
-  const currentYear = now.getFullYear();
+  const selectedYear = filterYear === "all" ? null : Number(filterYear);
 
   const trendData = useMemo(() => {
     const companies = new Map<string, Map<string, number>>();
-    const countable = initiatives.filter((i: any) => i.source !== "seguimiento");
+    let countable = initiatives.filter((i: any) => i.source !== "seguimiento");
+    if (selectedYear) {
+      countable = countable.filter((i: any) => new Date(i.created_at).getFullYear() === selectedYear);
+    }
 
     countable.forEach((i: any) => {
       const d = new Date(i.created_at);
