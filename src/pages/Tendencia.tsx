@@ -17,6 +17,8 @@ const MONTH_NAMES: Record<number, string> = {
 };
 
 export default function Tendencia() {
+  const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
+
   const { data: initiatives = [], isLoading } = useQuery({
     queryKey: ["initiatives"],
     queryFn: async () => {
