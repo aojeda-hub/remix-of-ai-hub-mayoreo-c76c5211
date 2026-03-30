@@ -26,7 +26,7 @@ const COMPANIES = [
   "Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "Mayoreo",
 ] as const;
 
-const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia", "Mayoreo"] as const;
+const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia"] as const;
 
 const DEPARTMENTS = [
   "Gerencia", "Personal", "Comercial", "Control", "Compras", "Logística",
