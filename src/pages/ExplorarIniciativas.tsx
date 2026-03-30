@@ -126,6 +126,7 @@ export default function ExplorarIniciativas() {
     if (filterDept !== "all" && i.department !== filterDept) return false;
     if (filterCountry !== "all" && i.country !== filterCountry) return false;
     if (filterCompany !== "all" && i.company !== filterCompany) return false;
+    if (filterYear !== "all" && new Date(i.created_at).getFullYear() !== Number(filterYear)) return false;
     if (filterDate) {
       const initDate = new Date(i.created_at);
       if (initDate.toDateString() !== filterDate.toDateString()) return false;
