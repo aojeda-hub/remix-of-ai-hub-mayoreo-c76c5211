@@ -399,7 +399,7 @@ export default function ExplorarIniciativas() {
 
       {/* Detail View Dialog */}
       <Dialog open={!!viewingInitiative} onOpenChange={(open) => { if (!open) setViewingInitiative(null); }}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-8">
           {viewingInitiative && (
             <>
               <DialogHeader>
