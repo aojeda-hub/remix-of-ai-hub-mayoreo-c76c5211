@@ -86,8 +86,8 @@ export default function Tendencia() {
   }, [trendData]);
 
   const formatMonth = (key: string) => {
-    const [, m] = key.split("-").map(Number);
-    return MONTH_NAMES[m];
+    const [y, m] = key.split("-").map(Number);
+    return selectedYear ? MONTH_NAMES[m] : `${MONTH_NAMES[m]} ${y}`;
   };
 
   if (isLoading) {
