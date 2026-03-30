@@ -70,7 +70,7 @@ export default function Tendencia() {
     });
 
     return { companies, months };
-  }, [initiatives]);
+  }, [initiatives, selectedYear]);
 
   const monthTotals = useMemo(() => {
     const totals: Record<string, number> = {};
