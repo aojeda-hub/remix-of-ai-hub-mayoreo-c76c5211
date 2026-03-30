@@ -35,6 +35,9 @@ const DEPARTMENTS = [
 const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia", "Global"] as const;
 const COMPANIES = ["Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "Mayoreo"] as const;
 
+const CURRENT_YEAR = new Date().getFullYear();
+const YEARS = Array.from({ length: CURRENT_YEAR - 2024 + 1 }, (_, i) => 2025 + i);
+
 export default function ExplorarIniciativas() {
   const { user } = useAuth();
   const { isAdmin } = useRole();
@@ -44,6 +47,7 @@ export default function ExplorarIniciativas() {
   const [filterCountry, setFilterCountry] = useState("all");
   const [onlyMine, setOnlyMine] = useState(false);
   const [filterCompany, setFilterCompany] = useState("all");
+  const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
   const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
 
   const { data: initiatives = [], isLoading } = useInitiatives();
@@ -122,6 +126,7 @@ export default function ExplorarIniciativas() {
     if (filterDept !== "all" && i.department !== filterDept) return false;
     if (filterCountry !== "all" && i.country !== filterCountry) return false;
     if (filterCompany !== "all" && i.company !== filterCompany) return false;
+    if (filterYear !== "all" && new Date(i.created_at).getFullYear() !== Number(filterYear)) return false;
     if (filterDate) {
       const initDate = new Date(i.created_at);
       if (initDate.toDateString() !== filterDate.toDateString()) return false;
@@ -178,6 +183,13 @@ export default function ExplorarIniciativas() {
           <SelectContent className="bg-popover z-50">
             <SelectItem value="all">Todas las compañías</SelectItem>
             {COMPANIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+          </SelectContent>
+        </Select>
+        <Select value={filterYear} onValueChange={setFilterYear}>
+          <SelectTrigger className="w-28"><SelectValue placeholder="Año" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todos</SelectItem>
+            {YEARS.map((y) => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}
           </SelectContent>
         </Select>
         <Popover>

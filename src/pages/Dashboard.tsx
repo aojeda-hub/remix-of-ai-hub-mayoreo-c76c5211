@@ -1,17 +1,23 @@
+import { useState, useMemo } from "react";
 import { useInitiatives } from "@/hooks/use-initiatives";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Activity, AlertCircle, MapPin, Lightbulb, Target, Users } from "lucide-react";
-import { useMemo } from "react";
-
 
 const COMPANIES = ["Febeca", "Sillaca", "Beval", "Cofersa", "Mundial de partes", "Mayoreo"];
+const CURRENT_YEAR = new Date().getFullYear();
+const YEARS = Array.from({ length: CURRENT_YEAR - 2024 + 1 }, (_, i) => 2025 + i);
 
 export default function Dashboard() {
   const { data: initiatives = [], isLoading } = useInitiatives();
+  const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
 
-
-  const countableInitiatives = initiatives.filter((i: any) => i.source !== "seguimiento");
+  const countableInitiatives = useMemo(() => {
+    const base = initiatives.filter((i: any) => i.source !== "seguimiento");
+    if (filterYear === "all") return base;
+    return base.filter((i: any) => new Date(i.created_at).getFullYear() === Number(filterYear));
+  }, [initiatives, filterYear]);
   const totalCount = countableInitiatives.length;
 
   const activeCount = countableInitiatives.filter((i: any) => ["en_progreso", "aprobado", "en_desarrollo", "en_pruebas"].includes(i.status)).length;
@@ -76,7 +82,16 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Inicio</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Inicio</h2>
+        <Select value={filterYear} onValueChange={setFilterYear}>
+          <SelectTrigger className="w-32"><SelectValue placeholder="Año" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todos</SelectItem>
+            {YEARS.map((y) => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}
+          </SelectContent>
+        </Select>
+      </div>
 
       {/* KPIs Row 1 */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

@@ -1,8 +1,12 @@
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useMemo } from "react";
+
+const CURRENT_YEAR = new Date().getFullYear();
+const YEARS = Array.from({ length: CURRENT_YEAR - 2024 + 1 }, (_, i) => 2025 + i);
 
 const ALL_COMPANIES = ["Febeca", "Sillaca", "Beval", "Mundial de partes", "Cofersa", "Mayoreo"];
 
@@ -13,6 +17,8 @@ const MONTH_NAMES: Record<number, string> = {
 };
 
 export default function Tendencia() {
+  const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
+
   const { data: initiatives = [], isLoading } = useQuery({
     queryKey: ["initiatives"],
     queryFn: async () => {
@@ -25,12 +31,14 @@ export default function Tendencia() {
     },
   });
 
-  const now = new Date();
-  const currentYear = now.getFullYear();
+  const selectedYear = filterYear === "all" ? null : Number(filterYear);
 
   const trendData = useMemo(() => {
     const companies = new Map<string, Map<string, number>>();
-    const countable = initiatives.filter((i: any) => i.source !== "seguimiento");
+    let countable = initiatives.filter((i: any) => i.source !== "seguimiento");
+    if (selectedYear) {
+      countable = countable.filter((i: any) => new Date(i.created_at).getFullYear() === selectedYear);
+    }
 
     countable.forEach((i: any) => {
       const d = new Date(i.created_at);
@@ -43,8 +51,18 @@ export default function Tendencia() {
     });
 
     const months: string[] = [];
-    for (let m = 1; m <= 12; m++) {
-      months.push(`2026-${String(m).padStart(2, "0")}`);
+    if (selectedYear) {
+      for (let m = 1; m <= 12; m++) {
+        months.push(`${selectedYear}-${String(m).padStart(2, "0")}`);
+      }
+    } else {
+      // Show all months found across all years
+      const allMonths = new Set<string>();
+      countable.forEach((i: any) => {
+        const d = new Date(i.created_at);
+        allMonths.add(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+      });
+      Array.from(allMonths).sort().forEach((m) => months.push(m));
     }
 
     ALL_COMPANIES.forEach((c) => {
@@ -52,7 +70,7 @@ export default function Tendencia() {
     });
 
     return { companies, months };
-  }, [initiatives]);
+  }, [initiatives, selectedYear]);
 
   const monthTotals = useMemo(() => {
     const totals: Record<string, number> = {};
@@ -68,8 +86,8 @@ export default function Tendencia() {
   }, [trendData]);
 
   const formatMonth = (key: string) => {
-    const [, m] = key.split("-").map(Number);
-    return MONTH_NAMES[m];
+    const [y, m] = key.split("-").map(Number);
+    return selectedYear ? MONTH_NAMES[m] : `${MONTH_NAMES[m]} ${y}`;
   };
 
   if (isLoading) {
@@ -78,8 +96,15 @@ export default function Tendencia() {
 
   return (
     <div className="flex flex-col items-center space-y-6">
-      <div className="w-full">
+      <div className="w-full flex items-center justify-between">
         <h2 className="text-2xl font-bold">Cuadro de tendencia Iniciativas Mayoreo</h2>
+        <Select value={filterYear} onValueChange={setFilterYear}>
+          <SelectTrigger className="w-32"><SelectValue placeholder="Año" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todos</SelectItem>
+            {YEARS.map((y) => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}
+          </SelectContent>
+        </Select>
       </div>
 
       <Card className="w-full max-w-5xl">
