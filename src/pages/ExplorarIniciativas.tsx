@@ -35,6 +35,9 @@ const DEPARTMENTS = [
 const COUNTRIES = ["Venezuela", "Costa Rica", "Colombia", "Global"] as const;
 const COMPANIES = ["Febeca", "Sillaca", "Beval", "Prisma", "Cofersa", "Mundial de partes", "Mayoreo"] as const;
 
+const CURRENT_YEAR = new Date().getFullYear();
+const YEARS = Array.from({ length: CURRENT_YEAR - 2024 + 1 }, (_, i) => 2025 + i);
+
 export default function ExplorarIniciativas() {
   const { user } = useAuth();
   const { isAdmin } = useRole();
@@ -44,6 +47,7 @@ export default function ExplorarIniciativas() {
   const [filterCountry, setFilterCountry] = useState("all");
   const [onlyMine, setOnlyMine] = useState(false);
   const [filterCompany, setFilterCompany] = useState("all");
+  const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
   const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
 
   const { data: initiatives = [], isLoading } = useInitiatives();
