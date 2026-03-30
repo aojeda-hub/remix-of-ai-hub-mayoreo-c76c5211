@@ -51,8 +51,18 @@ export default function Tendencia() {
     });
 
     const months: string[] = [];
-    for (let m = 1; m <= 12; m++) {
-      months.push(`2026-${String(m).padStart(2, "0")}`);
+    if (selectedYear) {
+      for (let m = 1; m <= 12; m++) {
+        months.push(`${selectedYear}-${String(m).padStart(2, "0")}`);
+      }
+    } else {
+      // Show all months found across all years
+      const allMonths = new Set<string>();
+      countable.forEach((i: any) => {
+        const d = new Date(i.created_at);
+        allMonths.add(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+      });
+      Array.from(allMonths).sort().forEach((m) => months.push(m));
     }
 
     ALL_COMPANIES.forEach((c) => {
