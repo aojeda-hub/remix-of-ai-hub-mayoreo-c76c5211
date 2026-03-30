@@ -18,10 +18,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink } from "lucide-react";
 
 import * as XLSX from "xlsx";
-import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const DEPARTMENTS = [
@@ -60,6 +59,9 @@ export default function ExplorarIniciativas() {
 
   // Delete state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
+
+  // Detail view state
+  const [viewingInitiative, setViewingInitiative] = useState<any>(null);
 
   const isOwner = (i: any) => i.created_by === user?.id;
   const canEditDelete = (i: any) => isAdmin || isOwner(i);
@@ -253,17 +255,15 @@ export default function ExplorarIniciativas() {
             </TableHeader>
             <TableBody>
               {filtered.map((i: any) => (
-                <TableRow key={i.id}>
-                  <TableCell className="font-medium">
-                    <Link to={`/initiative/${i.id}`} className="text-primary hover:underline">{i.project || "—"}</Link>
-                  </TableCell>
+                <TableRow key={i.id} className="cursor-pointer hover:bg-muted/50" onClick={() => setViewingInitiative(i)}>
+                  <TableCell className="font-medium text-primary">{i.project || "—"}</TableCell>
                   <TableCell>{i.responsible || "—"}</TableCell>
                   <TableCell>{i.department || "—"}</TableCell>
                   <TableCell>{i.country || "—"}</TableCell>
                   <TableCell className="max-w-[200px] truncate">{i.description || "—"}</TableCell>
                   <TableCell className="max-w-[200px] truncate">{i.ai_solution || "—"}</TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
@@ -396,6 +396,92 @@ export default function ExplorarIniciativas() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Detail View Dialog */}
+      <Dialog open={!!viewingInitiative} onOpenChange={(open) => { if (!open) setViewingInitiative(null); }}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          {viewingInitiative && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-xl">{viewingInitiative.project || "Sin nombre"}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <p className="text-muted-foreground text-xs">Tecnología</p>
+                    <p className="font-medium">{viewingInitiative.technology || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs">Responsable</p>
+                    <p className="font-medium">{viewingInitiative.responsible || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs">Departamento</p>
+                    <p className="font-medium">{viewingInitiative.department || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs">Compañía</p>
+                    <p className="font-medium">{viewingInitiative.company || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs">País</p>
+                    <p className="font-medium">{viewingInitiative.country || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs">Objetivo Estratégico</p>
+                    <p className="font-medium">{viewingInitiative.strategic_objective || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground text-xs">Fecha</p>
+                    <p className="font-medium">{viewingInitiative.created_at ? format(new Date(viewingInitiative.created_at), "dd/MM/yyyy") : "—"}</p>
+                  </div>
+                  {viewingInitiative.email && (
+                    <div>
+                      <p className="text-muted-foreground text-xs">Correo</p>
+                      <a href={`mailto:${viewingInitiative.email}`} className="font-medium text-primary hover:underline flex items-center gap-1">
+                        <Mail className="h-3 w-3" />
+                        {viewingInitiative.email}
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                {(viewingInitiative.problem || viewingInitiative.ai_solution || viewingInitiative.description || viewingInitiative.link) && (
+                  <div className="border-t pt-4 space-y-3 text-sm">
+                    {viewingInitiative.problem && (
+                      <div>
+                        <p className="text-muted-foreground text-xs">Problema</p>
+                        <p>{viewingInitiative.problem}</p>
+                      </div>
+                    )}
+                    {viewingInitiative.ai_solution && (
+                      <div>
+                        <p className="text-muted-foreground text-xs">Solución con IA</p>
+                        <p>{viewingInitiative.ai_solution}</p>
+                      </div>
+                    )}
+                    {viewingInitiative.description && (
+                      <div>
+                        <p className="text-muted-foreground text-xs">Descripción</p>
+                        <p>{viewingInitiative.description}</p>
+                      </div>
+                    )}
+                    {viewingInitiative.link && (
+                      <div>
+                        <p className="text-muted-foreground text-xs">Link</p>
+                        <a href={viewingInitiative.link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-3 w-3" />
+                          {viewingInitiative.link}
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
