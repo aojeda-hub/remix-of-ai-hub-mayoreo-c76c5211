@@ -255,10 +255,8 @@ export default function ExplorarIniciativas() {
             </TableHeader>
             <TableBody>
               {filtered.map((i: any) => (
-                <TableRow key={i.id}>
-                  <TableCell className="font-medium">
-                    <Link to={`/initiative/${i.id}`} className="text-primary hover:underline">{i.project || "—"}</Link>
-                  </TableCell>
+                <TableRow key={i.id} className="cursor-pointer hover:bg-muted/50" onClick={() => setViewingInitiative(i)}>
+                  <TableCell className="font-medium text-primary">{i.project || "—"}</TableCell>
                   <TableCell>{i.responsible || "—"}</TableCell>
                   <TableCell>{i.department || "—"}</TableCell>
                   <TableCell>{i.country || "—"}</TableCell>
