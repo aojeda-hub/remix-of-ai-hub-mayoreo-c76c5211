@@ -27,7 +27,7 @@ const COMPANIES = [
 ] as const;
 
 const COUNTRIES = [
-  "Venezuela", "Costa Rica", "Colombia", "Mayoreo",
+  "Venezuela", "Costa Rica", "Colombia",
 ] as const;
 
 const DEPARTMENTS = [
