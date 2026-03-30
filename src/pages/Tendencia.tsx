@@ -35,7 +35,8 @@ export default function Tendencia() {
     countable.forEach((i: any) => {
       const d = new Date(i.created_at);
       const monthKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-      const company = i.company || "Sin compañía";
+      let company = i.company || "Sin compañía";
+      if (company === "Prisma") company = "Mayoreo";
       if (!companies.has(company)) companies.set(company, new Map());
       const monthMap = companies.get(company)!;
       monthMap.set(monthKey, (monthMap.get(monthKey) || 0) + 1);
