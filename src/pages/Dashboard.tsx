@@ -28,7 +28,8 @@ export default function Dashboard() {
   const companyMeta = useMemo(() => {
     const counts: Record<string, number> = {};
     countableInitiatives.forEach((i: any) => {
-      const c = i.company || "Sin compañía";
+      let c = i.company || "Sin compañía";
+      if (c === "Prisma") c = "Mayoreo";
       counts[c] = (counts[c] || 0) + 1;
     });
     return COMPANIES.map(c => ({ company: c, count: counts[c] || 0 }));
