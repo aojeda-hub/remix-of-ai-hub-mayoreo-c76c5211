@@ -18,7 +18,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink } from "lucide-react";
+import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload } from "lucide-react";
+import BulkUploadDialog from "@/components/BulkUploadDialog";
 
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
@@ -62,6 +63,9 @@ export default function ExplorarIniciativas() {
 
   // Detail view state
   const [viewingInitiative, setViewingInitiative] = useState<any>(null);
+
+  // Bulk upload state
+  const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
 
   const isOwner = (i: any) => i.created_by === user?.id;
   const canEditDelete = (i: any) => isAdmin || isOwner(i);
@@ -236,6 +240,12 @@ export default function ExplorarIniciativas() {
           <Download className="h-4 w-4" />
           Exportar Excel
         </Button>
+        {isAdmin && (
+          <Button variant="outline" onClick={() => setBulkUploadOpen(true)} className="gap-2">
+            <Upload className="h-4 w-4" />
+            Carga Masiva
+          </Button>
+        )}
       </div>
 
       {/* Results */}
@@ -482,6 +492,8 @@ export default function ExplorarIniciativas() {
           )}
         </DialogContent>
       </Dialog>
+      {/* Bulk Upload Dialog */}
+      {isAdmin && <BulkUploadDialog open={bulkUploadOpen} onOpenChange={setBulkUploadOpen} />}
     </div>
   );
 }
