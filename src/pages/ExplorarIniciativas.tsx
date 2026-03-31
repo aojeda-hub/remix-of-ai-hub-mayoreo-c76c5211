@@ -492,6 +492,8 @@ export default function ExplorarIniciativas() {
           )}
         </DialogContent>
       </Dialog>
+      {/* Bulk Upload Dialog */}
+      {isAdmin && <BulkUploadDialog open={bulkUploadOpen} onOpenChange={setBulkUploadOpen} />}
     </div>
   );
 }
