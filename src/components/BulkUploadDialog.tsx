@@ -96,6 +96,7 @@ export default function BulkUploadDialog({ open, onOpenChange }: BulkUploadDialo
     mapped.created_by = user?.id;
     mapped.source = "manual";
     mapped.status = "en_revision";
+    mapped.created_at = new Date("2025-06-01T00:00:00Z").toISOString();
     if (mapped.silo) mapped.silo = mapped.silo.toLowerCase();
     if (mapped.impact) mapped.impact = mapped.impact.toLowerCase();
     return mapped;
