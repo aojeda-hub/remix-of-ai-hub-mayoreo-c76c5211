@@ -18,7 +18,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink } from "lucide-react";
+import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload } from "lucide-react";
+import BulkUploadDialog from "@/components/BulkUploadDialog";
 
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
