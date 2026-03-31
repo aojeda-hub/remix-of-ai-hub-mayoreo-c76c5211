@@ -240,6 +240,12 @@ export default function ExplorarIniciativas() {
           <Download className="h-4 w-4" />
           Exportar Excel
         </Button>
+        {isAdmin && (
+          <Button variant="outline" onClick={() => setBulkUploadOpen(true)} className="gap-2">
+            <Upload className="h-4 w-4" />
+            Carga Masiva
+          </Button>
+        )}
       </div>
 
       {/* Results */}
