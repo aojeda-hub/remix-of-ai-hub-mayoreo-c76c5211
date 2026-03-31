@@ -64,6 +64,9 @@ export default function ExplorarIniciativas() {
   // Detail view state
   const [viewingInitiative, setViewingInitiative] = useState<any>(null);
 
+  // Bulk upload state
+  const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
+
   const isOwner = (i: any) => i.created_by === user?.id;
   const canEditDelete = (i: any) => isAdmin || isOwner(i);
 
