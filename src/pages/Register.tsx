@@ -283,17 +283,30 @@ export default function Register() {
               </div>
             </div>
 
-            {/* Row 4: Silo */}
-            <div className="space-y-2">
-              <Label>Silo *</Label>
-              <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
-                <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
-                <SelectContent className="bg-popover z-50">
-                  {SILOS.map((s) => (
-                    <SelectItem key={s} value={s}>{s}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            {/* Row 4: Silo y Clasificación */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Silo *</Label>
+                <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
+                  <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    {SILOS.map((s) => (
+                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Clasificación de la Iniciativa</Label>
+                <Select value={form.classification} onValueChange={(v) => update("classification", v)}>
+                  <SelectTrigger><SelectValue placeholder="Seleccionar clasificación" /></SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    {CLASSIFICATIONS.map((c) => (
+                      <SelectItem key={c} value={c}>{c}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
 
