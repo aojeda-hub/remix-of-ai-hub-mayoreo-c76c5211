@@ -43,6 +43,7 @@ const SILOS = [
 const CLASSIFICATIONS = [
   "Transformación de Proceso",
   "Mejora de Actividad",
+  "Mejora de Tarea",
 ] as const;
 
 interface RegisterInitiativeDialogProps {
