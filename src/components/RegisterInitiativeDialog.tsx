@@ -89,6 +89,10 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
     }
     setLoading(true);
 
+    const descriptionWithClassification = form.classification
+      ? `[Clasificación: ${form.classification}] ${form.description}`.trim()
+      : form.description;
+
     const { error } = await (supabase as any).from("initiatives").insert({
       project: form.project,
       technology: form.technology,
@@ -102,7 +106,7 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
       impact: form.impact as any,
       problem: form.problem,
       ai_solution: form.ai_solution,
-      description: form.description,
+      description: descriptionWithClassification,
       link: form.link,
       created_by: user?.id,
       source: "seguimiento",
