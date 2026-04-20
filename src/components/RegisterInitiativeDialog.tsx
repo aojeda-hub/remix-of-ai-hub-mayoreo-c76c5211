@@ -40,6 +40,11 @@ const SILOS = [
   "Control", "Personal", "Compras", "Ventas", "Mercadeo", "Sistemas", "Logística",
 ] as const;
 
+const CLASSIFICATIONS = [
+  "Transformación de Proceso",
+  "Mejora de Actividad",
+] as const;
+
 interface RegisterInitiativeDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -59,6 +64,7 @@ const INITIAL_FORM = {
   country: "",
   department: "",
   silo: "",
+  classification: "",
   impact: "medium",
   problem: "",
   ai_solution: "",
@@ -83,6 +89,10 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
     }
     setLoading(true);
 
+    const descriptionWithClassification = form.classification
+      ? `[Clasificación: ${form.classification}] ${form.description}`.trim()
+      : form.description;
+
     const { error } = await (supabase as any).from("initiatives").insert({
       project: form.project,
       technology: form.technology,
@@ -96,7 +106,7 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
       impact: form.impact as any,
       problem: form.problem,
       ai_solution: form.ai_solution,
-      description: form.description,
+      description: descriptionWithClassification,
       link: form.link,
       created_by: user?.id,
       source: "seguimiento",
@@ -213,12 +223,21 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
               </Select>
             </div>
           </div>
-          <div className="space-y-1">
-            <Label className="text-xs">Silo *</Label>
-            <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
-              <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
-              <SelectContent className="bg-popover z-50">{SILOS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
-            </Select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <Label className="text-xs">Silo *</Label>
+              <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
+                <SelectContent className="bg-popover z-50">{SILOS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Clasificación de la Iniciativa</Label>
+              <Select value={form.classification} onValueChange={(v) => update("classification", v)}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar clasificación" /></SelectTrigger>
+                <SelectContent className="bg-popover z-50">{CLASSIFICATIONS.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">
