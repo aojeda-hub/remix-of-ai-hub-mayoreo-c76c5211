@@ -95,6 +95,7 @@ export default function Register() {
     ai_solution: "",
     description: "",
     link: "",
+    classification: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
