@@ -223,12 +223,21 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
               </Select>
             </div>
           </div>
-          <div className="space-y-1">
-            <Label className="text-xs">Silo *</Label>
-            <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
-              <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
-              <SelectContent className="bg-popover z-50">{SILOS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
-            </Select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <Label className="text-xs">Silo *</Label>
+              <Select value={form.silo} onValueChange={(v) => update("silo", v)}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar silo" /></SelectTrigger>
+                <SelectContent className="bg-popover z-50">{SILOS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Clasificación de la Iniciativa</Label>
+              <Select value={form.classification} onValueChange={(v) => update("classification", v)}>
+                <SelectTrigger><SelectValue placeholder="Seleccionar clasificación" /></SelectTrigger>
+                <SelectContent className="bg-popover z-50">{CLASSIFICATIONS.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">
