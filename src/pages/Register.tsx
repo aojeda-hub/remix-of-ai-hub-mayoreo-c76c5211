@@ -127,7 +127,9 @@ export default function Register() {
       impact: form.impact as any,
       problem: form.problem,
       ai_solution: form.ai_solution,
-      description: form.description,
+      description: form.classification
+        ? `[Clasificación: ${form.classification}] ${form.description}`.trim()
+        : form.description,
       link: form.link,
       created_by: user?.id,
       source: "manual",
