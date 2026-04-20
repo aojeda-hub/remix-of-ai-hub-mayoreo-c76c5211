@@ -40,6 +40,11 @@ const SILOS = [
   "Control", "Personal", "Compras", "Ventas", "Mercadeo", "Sistemas", "Logística",
 ] as const;
 
+const CLASSIFICATIONS = [
+  "Transformación de Proceso",
+  "Mejora de Actividad",
+] as const;
+
 interface RegisterInitiativeDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
