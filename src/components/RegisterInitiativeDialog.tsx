@@ -64,6 +64,7 @@ const INITIAL_FORM = {
   country: "",
   department: "",
   silo: "",
+  classification: "",
   impact: "medium",
   problem: "",
   ai_solution: "",
