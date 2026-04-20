@@ -61,6 +61,12 @@ const INITIATIVE_TYPES = [
   "En Desarrollo", "En Calidad", "En Productivo",
 ] as const;
 
+const CLASSIFICATIONS = [
+  "Transformación de Proceso",
+  "Mejora de Actividad",
+  "Mejora de Tarea",
+] as const;
+
 
 export default function Register() {
   const { user } = useAuth();
