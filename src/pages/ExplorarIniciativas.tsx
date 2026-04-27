@@ -48,6 +48,7 @@ export default function ExplorarIniciativas() {
   const [onlyMine, setOnlyMine] = useState(false);
   const [filterCompany, setFilterCompany] = useState("all");
   const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
+  const [filterType, setFilterType] = useState<string>("all");
   const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
 
   const { data: initiatives = [], isLoading } = useInitiatives();
@@ -125,6 +126,20 @@ export default function ExplorarIniciativas() {
 
   const updateEditField = (field: string, value: string) => setEditForm((f: any) => ({ ...f, [field]: value }));
 
+  const extractClassification = (description?: string | null): string | null => {
+    if (!description) return null;
+    const m = description.match(/^\[Clasificación:\s*([^\]]+)\]/i);
+    return m ? m[1].trim() : null;
+  };
+  const classificationKey = (cls: string | null): "tareas" | "actividades" | "procesos" | null => {
+    if (!cls) return null;
+    const l = cls.toLowerCase();
+    if (l.includes("tarea")) return "tareas";
+    if (l.includes("actividad")) return "actividades";
+    if (l.includes("proceso")) return "procesos";
+    return null;
+  };
+
   const filtered = initiatives.filter((i: any) => {
     if (i.source !== "manual") return false;
     if (onlyMine && i.created_by !== user?.id) return false;
@@ -133,6 +148,7 @@ export default function ExplorarIniciativas() {
     if (filterCountry !== "all" && i.country !== filterCountry) return false;
     if (filterCompany !== "all" && i.company !== filterCompany) return false;
     if (filterYear !== "all" && new Date(i.created_at).getFullYear() !== Number(filterYear)) return false;
+    if (filterType !== "all" && classificationKey(extractClassification(i.description)) !== filterType) return false;
     if (filterDate) {
       const initDate = new Date(i.created_at);
       if (initDate.toDateString() !== filterDate.toDateString()) return false;
@@ -189,6 +205,15 @@ export default function ExplorarIniciativas() {
           <SelectContent className="bg-popover z-50">
             <SelectItem value="all">Todas las compañías</SelectItem>
             {COMPANIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+          </SelectContent>
+        </Select>
+        <Select value={filterType} onValueChange={setFilterType}>
+          <SelectTrigger className="w-56"><SelectValue placeholder="Tipo" /></SelectTrigger>
+          <SelectContent className="bg-popover z-50">
+            <SelectItem value="all">Todas las iniciativas</SelectItem>
+            <SelectItem value="tareas">Mejoran tareas</SelectItem>
+            <SelectItem value="actividades">Mejoran actividades</SelectItem>
+            <SelectItem value="procesos">Mejoran procesos</SelectItem>
           </SelectContent>
         </Select>
         <Select value={filterYear} onValueChange={setFilterYear}>
