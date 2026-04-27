@@ -255,6 +255,25 @@ export default function Register() {
     if (error) {
       toast.error("Error al registrar: " + error.message);
     } else {
+      // Si el usuario solicitó ayuda al responsable de métodos, crear notificación
+      if (requestHelp) {
+        const responsible = METHODS_RESPONSIBLE[form.silo];
+        if (responsible) {
+          const { error: notifError } = await (supabase as any).from("notifications").insert({
+            user_email: responsible.email,
+            from_user_name: form.registrant_name,
+            initiative_name: form.project || "Iniciativa sin nombre",
+            message: `${form.registrant_name} (${form.registrant_email}) solicita apoyo para clasificar una iniciativa registrada en el silo ${form.silo}.`,
+            type: "classification_help",
+            read: false,
+          });
+          if (notifError) {
+            toast.warning("Iniciativa registrada, pero no se pudo notificar al responsable: " + notifError.message);
+          } else {
+            toast.success(`Se notificó a ${responsible.name} para apoyo de clasificación`);
+          }
+        }
+      }
       toast.success("Iniciativa registrada en revisión");
       navigate("/");
     }
