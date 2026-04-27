@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
 import { useRole } from "@/hooks/use-role";
 import RegisterInitiativeDialog from "@/components/RegisterInitiativeDialog";
+import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 import * as XLSX from "xlsx";
 
 const DEPARTMENTS = [
@@ -67,7 +68,6 @@ export default function IniciativasEnDesarrollo() {
 
   // Edit dialog state
   const [editingInitiative, setEditingInitiative] = useState<any>(null);
-  const [editForm, setEditForm] = useState<any>({});
 
   // Delete dialog state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
@@ -151,34 +151,7 @@ export default function IniciativasEnDesarrollo() {
   };
 
   const openEdit = (initiative: any) => {
-    setEditForm({
-      project: initiative.project || "",
-      technology: initiative.technology || "",
-      responsible: initiative.responsible || "",
-      department: initiative.department || "",
-      country: initiative.country || "",
-      company: initiative.company || "",
-      description: initiative.description || "",
-      problem: initiative.problem || "",
-      ai_solution: initiative.ai_solution || "",
-      link: initiative.link || "",
-    });
     setEditingInitiative(initiative);
-  };
-
-  const handleSaveEdit = async () => {
-    try {
-      const { error } = await (supabase as any)
-        .from("initiatives")
-        .update(editForm)
-        .eq("id", editingInitiative.id);
-      if (error) throw error;
-      toast.success("Iniciativa actualizada correctamente");
-      queryClient.invalidateQueries({ queryKey: ["initiatives-en-desarrollo"] });
-      setEditingInitiative(null);
-    } catch (err: any) {
-      toast.error("Error al actualizar: " + err.message);
-    }
   };
 
   const handleDelete = async () => {
@@ -224,7 +197,7 @@ export default function IniciativasEnDesarrollo() {
     toast.success("Archivo exportado correctamente");
   };
 
-  const updateEditField = (field: string, value: string) => setEditForm((f: any) => ({ ...f, [field]: value }));
+  
 
   if (isLoading) return <div className="flex items-center justify-center h-64 text-muted-foreground">Cargando...</div>;
 
@@ -366,80 +339,11 @@ export default function IniciativasEnDesarrollo() {
       </Dialog>
 
       {/* Edit Dialog */}
-      <Dialog open={!!editingInitiative} onOpenChange={(open) => { if (!open) setEditingInitiative(null); }}>
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Modificar Iniciativa</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Proyecto</Label>
-                <Input value={editForm.project} onChange={(e) => updateEditField("project", e.target.value)} />
-              </div>
-              <div className="space-y-2">
-                <Label>Tecnología</Label>
-                <Input value={editForm.technology} onChange={(e) => updateEditField("technology", e.target.value)} />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Responsable</Label>
-                <Input value={editForm.responsible} onChange={(e) => updateEditField("responsible", e.target.value)} />
-              </div>
-              <div className="space-y-2">
-                <Label>Departamento</Label>
-                <Select value={editForm.department} onValueChange={(v) => updateEditField("department", v)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50 max-h-60">
-                    {DEPARTMENTS.map((d) => <SelectItem key={d} value={d}>{d}</SelectItem>)}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>País</Label>
-                <Select value={editForm.country} onValueChange={(v) => updateEditField("country", v)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COUNTRIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>Compañía</Label>
-                <Select value={editForm.company} onValueChange={(v) => updateEditField("company", v)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    {COMPANIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label>Problema u oportunidad</Label>
-              <Textarea value={editForm.problem} onChange={(e) => updateEditField("problem", e.target.value)} rows={3} />
-            </div>
-            <div className="space-y-2">
-              <Label>Solución con IA</Label>
-              <Textarea value={editForm.ai_solution} onChange={(e) => updateEditField("ai_solution", e.target.value)} rows={3} />
-            </div>
-            <div className="space-y-2">
-              <Label>Descripción</Label>
-              <Textarea value={editForm.description} onChange={(e) => updateEditField("description", e.target.value)} rows={3} />
-            </div>
-            <div className="space-y-2">
-              <Label>Link</Label>
-              <Input value={editForm.link} onChange={(e) => updateEditField("link", e.target.value)} type="url" />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditingInitiative(null)}>Cancelar</Button>
-            <Button onClick={handleSaveEdit}>Guardar Cambios</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <EditInitiativeDialog
+        initiative={editingInitiative}
+        onClose={() => setEditingInitiative(null)}
+        invalidateKeys={[["initiatives-en-desarrollo"]]}
+      />
 
       {/* Change Status Dialog */}
       <Dialog open={!!statusInitiative} onOpenChange={(open) => { if (!open) { setStatusInitiative(null); setNewStatus(""); } }}>
