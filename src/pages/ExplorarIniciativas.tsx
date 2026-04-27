@@ -20,6 +20,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { cn } from "@/lib/utils";
 import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload } from "lucide-react";
 import BulkUploadDialog from "@/components/BulkUploadDialog";
+import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
@@ -57,7 +58,6 @@ export default function ExplorarIniciativas() {
 
   // Edit state
   const [editingInitiative, setEditingInitiative] = useState<any>(null);
-  const [editForm, setEditForm] = useState<any>({});
 
   // Delete state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
@@ -79,34 +79,7 @@ export default function ExplorarIniciativas() {
   };
 
   const openEdit = (initiative: any) => {
-    setEditForm({
-      project: initiative.project || "",
-      technology: initiative.technology || "",
-      responsible: initiative.responsible || "",
-      department: initiative.department || "",
-      country: initiative.country || "",
-      company: initiative.company || "",
-      description: initiative.description || "",
-      problem: initiative.problem || "",
-      ai_solution: initiative.ai_solution || "",
-      link: initiative.link || "",
-    });
     setEditingInitiative(initiative);
-  };
-
-  const handleSaveEdit = async () => {
-    try {
-      const { error } = await (supabase as any)
-        .from("initiatives")
-        .update(editForm)
-        .eq("id", editingInitiative.id);
-      if (error) throw error;
-      toast.success("Iniciativa actualizada correctamente");
-      queryClient.invalidateQueries({ queryKey: ["initiatives"] });
-      setEditingInitiative(null);
-    } catch (err: any) {
-      toast.error("Error al actualizar: " + err.message);
-    }
   };
 
   const handleDelete = async () => {
