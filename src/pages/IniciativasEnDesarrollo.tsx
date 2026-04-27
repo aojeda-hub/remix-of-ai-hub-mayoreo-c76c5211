@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
 import { useRole } from "@/hooks/use-role";
 import RegisterInitiativeDialog from "@/components/RegisterInitiativeDialog";
+import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 import * as XLSX from "xlsx";
 
 const DEPARTMENTS = [
@@ -67,7 +68,6 @@ export default function IniciativasEnDesarrollo() {
 
   // Edit dialog state
   const [editingInitiative, setEditingInitiative] = useState<any>(null);
-  const [editForm, setEditForm] = useState<any>({});
 
   // Delete dialog state
   const [deletingInitiative, setDeletingInitiative] = useState<any>(null);
@@ -151,34 +151,7 @@ export default function IniciativasEnDesarrollo() {
   };
 
   const openEdit = (initiative: any) => {
-    setEditForm({
-      project: initiative.project || "",
-      technology: initiative.technology || "",
-      responsible: initiative.responsible || "",
-      department: initiative.department || "",
-      country: initiative.country || "",
-      company: initiative.company || "",
-      description: initiative.description || "",
-      problem: initiative.problem || "",
-      ai_solution: initiative.ai_solution || "",
-      link: initiative.link || "",
-    });
     setEditingInitiative(initiative);
-  };
-
-  const handleSaveEdit = async () => {
-    try {
-      const { error } = await (supabase as any)
-        .from("initiatives")
-        .update(editForm)
-        .eq("id", editingInitiative.id);
-      if (error) throw error;
-      toast.success("Iniciativa actualizada correctamente");
-      queryClient.invalidateQueries({ queryKey: ["initiatives-en-desarrollo"] });
-      setEditingInitiative(null);
-    } catch (err: any) {
-      toast.error("Error al actualizar: " + err.message);
-    }
   };
 
   const handleDelete = async () => {
