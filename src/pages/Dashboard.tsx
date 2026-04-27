@@ -73,7 +73,7 @@ export default function Dashboard() {
       },
       {
         label: "Mejoran Actividades",
-        value: counts["Mejora de Actividad"],
+        value: counts.actividad,
         icon: Users,
         accent: {
           iconBg: "bg-amber-50",
@@ -84,7 +84,7 @@ export default function Dashboard() {
       },
       {
         label: "Mejoran Tareas",
-        value: counts["Mejora de Tarea"],
+        value: counts.tarea,
         icon: CircleDot,
         accent: {
           iconBg: "bg-blue-50",
