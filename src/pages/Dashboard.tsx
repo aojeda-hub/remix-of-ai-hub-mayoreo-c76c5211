@@ -48,19 +48,21 @@ export default function Dashboard() {
 
   // Sub-tipos por clasificación
   const subTypes = useMemo(() => {
-    const counts: Record<string, number> = {
-      "Transformación de Proceso": 0,
-      "Mejora de Actividad": 0,
-      "Mejora de Tarea": 0,
+    const counts = {
+      proceso: 0,
+      actividad: 0,
+      tarea: 0,
     };
     countableInitiatives.forEach((i: any) => {
-      const cls = extractClassification(i.description);
-      if (cls && cls in counts) counts[cls] += 1;
+      const cls = (extractClassification(i.description) || "").toLowerCase();
+      if (cls.includes("proceso")) counts.proceso += 1;
+      else if (cls.includes("actividad")) counts.actividad += 1;
+      else if (cls.includes("tarea")) counts.tarea += 1;
     });
     return [
       {
         label: "Mejoran Procesos",
-        value: counts["Transformación de Proceso"],
+        value: counts.proceso,
         icon: Award,
         accent: {
           iconBg: "bg-emerald-50",
@@ -71,7 +73,7 @@ export default function Dashboard() {
       },
       {
         label: "Mejoran Actividades",
-        value: counts["Mejora de Actividad"],
+        value: counts.actividad,
         icon: Users,
         accent: {
           iconBg: "bg-amber-50",
@@ -82,7 +84,7 @@ export default function Dashboard() {
       },
       {
         label: "Mejoran Tareas",
-        value: counts["Mejora de Tarea"],
+        value: counts.tarea,
         icon: CircleDot,
         accent: {
           iconBg: "bg-blue-50",
