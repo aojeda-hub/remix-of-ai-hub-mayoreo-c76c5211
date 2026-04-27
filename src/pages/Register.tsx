@@ -190,11 +190,19 @@ export default function Register() {
       !form.bpa_group ||
       !form.bpa_process ||
       !form.activity ||
-      !form.task
+      !form.task ||
+      !form.link
     ) {
       toast.error(
-        "Completa todos los campos obligatorios (incluye Silo, Grupo, Proceso, Actividad y Tarea)",
+        "Completa todos los campos obligatorios (incluye Silo, Grupo, Proceso, Actividad, Tarea y Link)",
       );
+      return;
+    }
+    // Validar formato de URL
+    try {
+      new URL(form.link);
+    } catch {
+      toast.error("El Link debe ser una URL válida (https://...)");
       return;
     }
     setLoading(true);
@@ -648,13 +656,14 @@ export default function Register() {
                 />
               </div>
               <div className="space-y-2">
-                <Label>Link</Label>
+                <Label>Link *</Label>
                 <Input
                   value={form.link}
                   onChange={(e) => update("link", e.target.value)}
                   maxLength={500}
                   placeholder="https://..."
                   type="url"
+                  required
                 />
               </div>
             </div>
