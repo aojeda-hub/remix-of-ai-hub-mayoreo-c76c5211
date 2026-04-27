@@ -635,6 +635,24 @@ export default function Register() {
                   actividades o tareas).
                 </Label>
               </div>
+              <div className="flex items-start gap-2 pt-2">
+                <Checkbox
+                  id="request-help"
+                  checked={requestHelp}
+                  onCheckedChange={(v) => setRequestHelp(v === true)}
+                />
+                <Label
+                  htmlFor="request-help"
+                  className="text-xs font-normal leading-relaxed cursor-pointer"
+                >
+                  ✅ <span className="font-medium">No sé clasificar esta iniciativa</span> – Solicitar apoyo al responsable de métodos del silo
+                  {form.silo && METHODS_RESPONSIBLE[form.silo] && (
+                    <span className="block text-muted-foreground mt-0.5">
+                      Se notificará a {METHODS_RESPONSIBLE[form.silo].name} ({METHODS_RESPONSIBLE[form.silo].email})
+                    </span>
+                  )}
+                </Label>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
