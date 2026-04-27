@@ -267,49 +267,51 @@ export default function Tendencia() {
         </div>
       </div>
 
-      <Card className="w-full max-w-5xl">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-base">Cuadro de tendencia Iniciativas Mayoreo</CardTitle>
-        </CardHeader>
-        <CardContent className="overflow-x-auto p-0">
-          <table className="w-full min-w-[850px] text-xs">
-            <thead>
-              <tr className="border-b">
-                <th className="sticky left-0 z-10 min-w-[150px] border-r bg-background px-3 py-2 text-left font-semibold">
-                  Compañía
-                </th>
-                {MONTHS.map((m) => (
-                  <th key={m} className="min-w-[60px] px-2 py-2 text-center font-semibold">
-                    {m}
+      {filter === "all" && (
+        <Card className="w-full max-w-5xl">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Cuadro de tendencia Iniciativas Mayoreo</CardTitle>
+          </CardHeader>
+          <CardContent className="overflow-x-auto p-0">
+            <table className="w-full min-w-[850px] text-xs">
+              <thead>
+                <tr className="border-b">
+                  <th className="sticky left-0 z-10 min-w-[150px] border-r bg-background px-3 py-2 text-left font-semibold">
+                    Compañía
                   </th>
+                  {MONTHS.map((m) => (
+                    <th key={m} className="min-w-[60px] px-2 py-2 text-center font-semibold">
+                      {m}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {ALL_COMPANIES.map((company) => (
+                  <tr key={company} className="border-b">
+                    <td className="sticky left-0 z-10 border-r bg-background px-3 py-2 font-medium">
+                      {company}
+                    </td>
+                    {companyMatrix[company].map((v, i) => (
+                      <td key={i} className="px-2 py-2 text-center font-semibold">
+                        {v}
+                      </td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
-              {ALL_COMPANIES.map((company) => (
-                <tr key={company} className="border-b">
-                  <td className="sticky left-0 z-10 border-r bg-background px-3 py-2 font-medium">
-                    {company}
-                  </td>
-                  {companyMatrix[company].map((v, i) => (
-                    <td key={i} className="px-2 py-2 text-center font-semibold">
+                <tr className="border-t-2 bg-muted/50">
+                  <td className="sticky left-0 z-10 border-r bg-muted px-3 py-2 font-bold">Total</td>
+                  {monthTotals.map((v, i) => (
+                    <td key={i} className="px-2 py-2 text-center font-bold">
                       {v}
                     </td>
                   ))}
                 </tr>
-              ))}
-              <tr className="border-t-2 bg-muted/50">
-                <td className="sticky left-0 z-10 border-r bg-muted px-3 py-2 font-bold">Total</td>
-                {monthTotals.map((v, i) => (
-                  <td key={i} className="px-2 py-2 text-center font-bold">
-                    {v}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </CardContent>
-      </Card>
+              </tbody>
+            </table>
+          </CardContent>
+        </Card>
+      )}
 
       {filter !== "all" &&
         visibleTypeRows.map((row) => (
