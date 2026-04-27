@@ -106,6 +106,19 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
   const [forceProcess, setForceProcess] = useState(false);
+  const [requestHelp, setRequestHelp] = useState(false);
+
+  // Mapeo fijo de responsable de métodos por silo
+  const METHODS_RESPONSIBLE: Record<string, { name: string; email: string }> = {
+    Logística: { name: "Stephanie Araya", email: "saraya@mayoreo.biz" },
+    Logistica: { name: "Stephanie Araya", email: "saraya@mayoreo.biz" },
+    Personal: { name: "Angely Ojeda", email: "aojeda@mayoreo.biz" },
+    Compras: { name: "Ambar Pulido", email: "apulido@mayoreo.biz" },
+    Ventas: { name: "Mayte Zarraga", email: "mzarraga@mayoreo.biz" },
+    Mercadeo: { name: "Mayte Zarraga", email: "mzarraga@mayoreo.biz" },
+    Control: { name: "Paola Rodriguez", email: "prodriguez@mayoreo.biz" },
+    Sistemas: { name: "Edgar Monagas", email: "emonagas@mayoreo.biz" },
+  };
 
   const [form, setForm] = useState({
     registrant_name: "",
