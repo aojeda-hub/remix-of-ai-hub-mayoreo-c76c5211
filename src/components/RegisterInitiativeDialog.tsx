@@ -84,8 +84,14 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.registrant_name || !form.registrant_email || !form.strategic_objective || !form.department || !form.silo || !form.company || !form.country) {
-      toast.error("Completa todos los campos obligatorios");
+    if (!form.registrant_name || !form.registrant_email || !form.strategic_objective || !form.department || !form.silo || !form.company || !form.country || !form.link) {
+      toast.error("Completa todos los campos obligatorios (incluye Link)");
+      return;
+    }
+    try {
+      new URL(form.link);
+    } catch {
+      toast.error("El Link debe ser una URL válida (https://...)");
       return;
     }
     setLoading(true);
@@ -256,8 +262,8 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
               <Textarea value={form.description} onChange={(e) => update("description", e.target.value)} maxLength={2000} placeholder="Descripción breve" rows={3} />
             </div>
             <div className="space-y-1">
-              <Label className="text-xs">Link</Label>
-              <Input value={form.link} onChange={(e) => update("link", e.target.value)} maxLength={500} placeholder="https://..." type="url" />
+              <Label className="text-xs">Link *</Label>
+              <Input value={form.link} onChange={(e) => update("link", e.target.value)} maxLength={500} placeholder="https://..." type="url" required />
             </div>
           </div>
           <Button type="submit" disabled={loading} className="w-full">
