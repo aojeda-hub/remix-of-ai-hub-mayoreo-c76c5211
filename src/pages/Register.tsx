@@ -106,6 +106,19 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
   const [forceProcess, setForceProcess] = useState(false);
+  const [requestHelp, setRequestHelp] = useState(false);
+
+  // Mapeo fijo de responsable de métodos por silo
+  const METHODS_RESPONSIBLE: Record<string, { name: string; email: string }> = {
+    Logística: { name: "Stephanie Araya", email: "saraya@mayoreo.biz" },
+    Logistica: { name: "Stephanie Araya", email: "saraya@mayoreo.biz" },
+    Personal: { name: "Angely Ojeda", email: "aojeda@mayoreo.biz" },
+    Compras: { name: "Ambar Pulido", email: "apulido@mayoreo.biz" },
+    Ventas: { name: "Mayte Zarraga", email: "mzarraga@mayoreo.biz" },
+    Mercadeo: { name: "Mayte Zarraga", email: "mzarraga@mayoreo.biz" },
+    Control: { name: "Paola Rodriguez", email: "prodriguez@mayoreo.biz" },
+    Sistemas: { name: "Edgar Monagas", email: "emonagas@mayoreo.biz" },
+  };
 
   const [form, setForm] = useState({
     registrant_name: "",
@@ -242,6 +255,25 @@ export default function Register() {
     if (error) {
       toast.error("Error al registrar: " + error.message);
     } else {
+      // Si el usuario solicitó ayuda al responsable de métodos, crear notificación
+      if (requestHelp) {
+        const responsible = METHODS_RESPONSIBLE[form.silo];
+        if (responsible) {
+          const { error: notifError } = await (supabase as any).from("notifications").insert({
+            user_email: responsible.email,
+            from_user_name: form.registrant_name,
+            initiative_name: form.project || "Iniciativa sin nombre",
+            message: `${form.registrant_name} (${form.registrant_email}) solicita apoyo para clasificar una iniciativa registrada en el silo ${form.silo}.`,
+            type: "classification_help",
+            read: false,
+          });
+          if (notifError) {
+            toast.warning("Iniciativa registrada, pero no se pudo notificar al responsable: " + notifError.message);
+          } else {
+            toast.success(`Se notificó a ${responsible.name} para apoyo de clasificación`);
+          }
+        }
+      }
       toast.success("Iniciativa registrada en revisión");
       navigate("/");
     }
@@ -620,6 +652,24 @@ export default function Register() {
                   Marcar como <span className="font-medium">Mejora de Proceso</span>{" "}
                   (sobrescribe la regla automática, úsalo si la iniciativa abarca múltiples
                   actividades o tareas).
+                </Label>
+              </div>
+              <div className="flex items-start gap-2 pt-2">
+                <Checkbox
+                  id="request-help"
+                  checked={requestHelp}
+                  onCheckedChange={(v) => setRequestHelp(v === true)}
+                />
+                <Label
+                  htmlFor="request-help"
+                  className="text-xs font-normal leading-relaxed cursor-pointer"
+                >
+                  ✅ <span className="font-medium">No sé clasificar esta iniciativa</span> – Solicitar apoyo al responsable de métodos del silo
+                  {form.silo && METHODS_RESPONSIBLE[form.silo] && (
+                    <span className="block text-muted-foreground mt-0.5">
+                      Se notificará a {METHODS_RESPONSIBLE[form.silo].name} ({METHODS_RESPONSIBLE[form.silo].email})
+                    </span>
+                  )}
                 </Label>
               </div>
             </div>
