@@ -153,7 +153,7 @@ export default function Dashboard() {
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
-            Dashboard de Indicadores
+            Inicio
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Resumen general de iniciativas IA registradas
