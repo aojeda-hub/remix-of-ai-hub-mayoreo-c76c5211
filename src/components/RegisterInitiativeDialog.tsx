@@ -262,7 +262,7 @@ export default function RegisterInitiativeDialog({ open, onOpenChange, invalidat
               <Textarea value={form.description} onChange={(e) => update("description", e.target.value)} maxLength={2000} placeholder="Descripción breve" rows={3} />
             </div>
             <div className="space-y-1">
-              <Label className="text-xs">Link *</Label>
+              <Label className="text-xs">Link de Iniciativa en funcionamiento *</Label>
               <Input value={form.link} onChange={(e) => update("link", e.target.value)} maxLength={500} placeholder="https://..." type="url" required />
             </div>
           </div>

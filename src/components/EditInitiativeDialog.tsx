@@ -303,7 +303,7 @@ export default function EditInitiativeDialog({ initiative, onClose, invalidateKe
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <Label className="text-xs">Grupo BPA *</Label>
+                <Label className="text-xs">Mapa de procesos *</Label>
                 <Dialog>
                   <DialogTrigger asChild>
                     <button
