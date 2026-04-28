@@ -22,6 +22,7 @@ import { useAuth } from "@/lib/auth";
 import { useRole } from "@/hooks/use-role";
 import RegisterInitiativeDialog from "@/components/RegisterInitiativeDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
+import { isSiloResponsible } from "@/lib/silo-responsibles";
 import * as XLSX from "xlsx";
 
 const DEPARTMENTS = [
