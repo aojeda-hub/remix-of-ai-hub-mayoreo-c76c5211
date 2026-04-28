@@ -282,7 +282,7 @@ export default function ExplorarIniciativas() {
                   <TableCell>{i.responsible || "—"}</TableCell>
                   <TableCell>{i.department || "—"}</TableCell>
                   <TableCell>{i.country || "—"}</TableCell>
-                  <TableCell className="max-w-[200px] truncate">{i.description || "—"}</TableCell>
+                  <TableCell className="max-w-[200px] truncate">{cleanDescription(i.description) || "—"}</TableCell>
                   <TableCell className="max-w-[200px] truncate">{i.ai_solution || "—"}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
