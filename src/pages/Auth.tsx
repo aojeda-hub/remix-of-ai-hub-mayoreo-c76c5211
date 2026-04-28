@@ -7,8 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { toast } from "sonner";
 import logoMayoreo from "@/assets/Logo_Mayoreo_Isotipo.png";
 
+type Mode = "login" | "signup" | "forgot";
+
 export default function Auth() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [mode, setMode] = useState<Mode>("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -18,10 +20,10 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
 
-    if (isLogin) {
+    if (mode === "login") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) toast.error(error.message);
-    } else {
+    } else if (mode === "signup") {
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -34,11 +36,26 @@ export default function Auth() {
         toast.error(error.message);
       } else {
         toast.success("Revisa tu correo para confirmar tu cuenta");
-        setIsLogin(true);
+        setMode("login");
+      }
+    } else if (mode === "forgot") {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("Te enviamos un enlace para restablecer tu contraseña. Revisa tu correo.");
+        setMode("login");
       }
     }
     setLoading(false);
   };
+
+  const title =
+    mode === "login" ? "Inicia sesión para continuar" :
+    mode === "signup" ? "Crea tu cuenta" :
+    "Recupera tu contraseña";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
@@ -48,20 +65,18 @@ export default function Auth() {
             <img src={logoMayoreo} alt="Logo Mayoreo" className="h-20 w-auto object-contain mx-auto" />
           </div>
           <CardTitle className="text-2xl">Iniciativas IA</CardTitle>
-          <CardDescription>
-            {isLogin ? "Inicia sesión para continuar" : "Crea tu cuenta"}
-          </CardDescription>
+          <CardDescription>{title}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
+            {mode === "signup" && (
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre completo</Label>
                 <Input
                   id="name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  required={!isLogin}
+                  required
                   maxLength={100}
                 />
               </div>
@@ -77,29 +92,58 @@ export default function Auth() {
                 maxLength={255}
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Contraseña</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-              />
-            </div>
+            {mode !== "forgot" && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Contraseña</Label>
+                  {mode === "login" && (
+                    <button
+                      type="button"
+                      className="text-xs text-primary underline-offset-4 hover:underline"
+                      onClick={() => setMode("forgot")}
+                    >
+                      ¿Olvidó su contraseña?
+                    </button>
+                  )}
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={6}
+                />
+              </div>
+            )}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Cargando..." : isLogin ? "Iniciar Sesión" : "Registrarse"}
+              {loading
+                ? "Cargando..."
+                : mode === "login"
+                ? "Iniciar Sesión"
+                : mode === "signup"
+                ? "Registrarse"
+                : "Enviar enlace de recuperación"}
             </Button>
           </form>
-          <div className="mt-4 text-center text-sm">
-            <button
-              type="button"
-              className="text-primary underline-offset-4 hover:underline"
-              onClick={() => setIsLogin(!isLogin)}
-            >
-              {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
-            </button>
+          <div className="mt-4 text-center text-sm space-y-2">
+            {mode === "forgot" ? (
+              <button
+                type="button"
+                className="text-primary underline-offset-4 hover:underline"
+                onClick={() => setMode("login")}
+              >
+                Volver a iniciar sesión
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="text-primary underline-offset-4 hover:underline"
+                onClick={() => setMode(mode === "login" ? "signup" : "login")}
+              >
+                {mode === "login" ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
+              </button>
+            )}
           </div>
         </CardContent>
       </Card>
