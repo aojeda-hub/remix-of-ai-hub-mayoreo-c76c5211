@@ -70,7 +70,8 @@ export default function ExplorarIniciativas() {
   const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
 
   const isOwner = (i: any) => i.created_by === user?.id;
-  const canEditDelete = (i: any) => isAdmin || isOwner(i);
+  const isSiloResp = (i: any) => isSiloResponsible(i.silo, user?.email);
+  const canEditDelete = (i: any) => isAdmin || isOwner(i) || isSiloResp(i);
 
   const handleToggleFav = (initId: string) => {
     toggleFavMutation.mutate({
