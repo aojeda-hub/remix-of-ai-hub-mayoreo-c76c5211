@@ -278,8 +278,8 @@ export default function ExplorarIniciativas() {
                             <MoreHorizontal className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="bg-popover z-50">
-                          {canEditDelete(i) && (
+                        <DropdownMenuContent align="end" className="bg-popover z-50 min-w-[160px]">
+                          {canEditDelete(i) ? (
                             <>
                               <DropdownMenuItem onClick={() => openEdit(i)} className="gap-2">
                                 <Pencil className="h-4 w-4" />
@@ -290,6 +290,10 @@ export default function ExplorarIniciativas() {
                                 Eliminar
                               </DropdownMenuItem>
                             </>
+                          ) : (
+                            <DropdownMenuItem disabled className="text-muted-foreground text-xs">
+                              Sin acciones disponibles
+                            </DropdownMenuItem>
                           )}
                         </DropdownMenuContent>
                       </DropdownMenu>
