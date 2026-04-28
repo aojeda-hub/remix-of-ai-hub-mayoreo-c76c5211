@@ -426,10 +426,10 @@ export default function ExplorarIniciativas() {
                         <p>{viewingInitiative.ai_solution}</p>
                       </div>
                     )}
-                    {viewingInitiative.description && (
+                    {viewingInitiative.description && cleanDescription(viewingInitiative.description) && (
                       <div>
                         <p className="text-muted-foreground text-xs">Descripción</p>
-                        <p>{viewingInitiative.description}</p>
+                        <p>{cleanDescription(viewingInitiative.description)}</p>
                       </div>
                     )}
                     {viewingInitiative.link && (
