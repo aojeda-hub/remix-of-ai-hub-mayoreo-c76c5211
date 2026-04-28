@@ -37,9 +37,13 @@ export function getSiloResponsibles(silo?: string | null): SiloResponsible[] {
   return SILO_RESPONSIBLES_MULTI[silo.toLowerCase().trim()] ?? [];
 }
 
+// Compara solo la parte local del email (antes de @) para que funcione
+// con cualquier dominio corporativo (mayoreo.biz, beval.biz, febeca.biz, etc.)
+const localPart = (email: string) => email.toLowerCase().split("@")[0].trim();
+
 export function isSiloResponsible(silo?: string | null, email?: string | null): boolean {
   if (!silo || !email) return false;
   const list = getSiloResponsibles(silo);
-  const normalized = email.toLowerCase();
-  return list.some((r) => r.email.toLowerCase() === normalized);
+  const userLocal = localPart(email);
+  return list.some((r) => localPart(r.email) === userLocal);
 }
