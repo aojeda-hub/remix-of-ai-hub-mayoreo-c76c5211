@@ -114,6 +114,18 @@ export default function ExplorarIniciativas() {
     if (l.includes("proceso")) return "procesos";
     return null;
   };
+  const classificationLabel = (description?: string | null): string | null => {
+    const key = classificationKey(extractClassification(description));
+    if (key === "tareas") return "Mejora de Tarea";
+    if (key === "actividades") return "Mejora de Actividad";
+    if (key === "procesos") return "Mejora de Proceso";
+    return null;
+  };
+  const cleanDescription = (description?: string | null): string => {
+    if (!description) return "";
+    // Remove leading [Key: value] tags (Clasificación, Grupo BPA, Proceso, Actividad, Tarea, etc.)
+    return description.replace(/^(?:\s*\[[^\]]+\]\s*)+/g, "").trim();
+  };
 
   const filtered = initiatives.filter((i: any) => {
     if (i.source !== "manual") return false;
