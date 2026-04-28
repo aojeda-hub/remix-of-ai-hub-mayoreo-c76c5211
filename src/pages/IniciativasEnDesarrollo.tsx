@@ -104,7 +104,8 @@ export default function IniciativasEnDesarrollo() {
   };
 
   const isOwner = (initiative: any) => initiative.created_by === user?.id;
-  const canEditDelete = (initiative: any) => isAdmin || isOwner(initiative);
+  const isSiloResp = (i: any) => isSiloResponsible(i.silo, user?.email);
+  const canEditDelete = (initiative: any) => isAdmin || isOwner(initiative) || isSiloResp(initiative);
   const canOfferHelp = (initiative: any) => isAdmin || !isOwner(initiative);
 
   const handleOfferHelp = async () => {
