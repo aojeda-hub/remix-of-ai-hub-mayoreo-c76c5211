@@ -490,7 +490,7 @@ export default function Register() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <Label>Grupo BPA *</Label>
+                  <Label>Mapa de procesos *</Label>
                   <Dialog>
                     <DialogTrigger asChild>
                       <button
@@ -664,7 +664,7 @@ export default function Register() {
                   htmlFor="request-help"
                   className="text-xs font-normal leading-relaxed cursor-pointer"
                 >
-                  ✅ <span className="font-medium">No sé clasificar esta iniciativa</span> – Solicitar apoyo al responsable de métodos del silo
+                  ✅ <span className="font-medium">Solicitar apoyo al responsable de métodos del silo para clasificar la iniciativa.</span>
                   {form.silo && METHODS_RESPONSIBLE[form.silo] && (
                     <span className="block text-muted-foreground mt-0.5">
                       Se notificará a {METHODS_RESPONSIBLE[form.silo].name} ({METHODS_RESPONSIBLE[form.silo].email})
@@ -706,7 +706,7 @@ export default function Register() {
                 />
               </div>
               <div className="space-y-2">
-                <Label>Link *</Label>
+                <Label>Link de Iniciativa en funcionamiento *</Label>
                 <Input
                   value={form.link}
                   onChange={(e) => update("link", e.target.value)}
