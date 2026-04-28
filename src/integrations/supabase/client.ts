@@ -16,22 +16,20 @@ const baseClient = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY
   }
 });
 
-// Tablas que viven en el schema `iniciativas` (no en `public`).
-// Las llamadas a `supabase.from('<tabla>')` se redirigen automáticamente
-// usando `.schema('iniciativas').from(...)`.
+// Tablas cuyas consultas deben enrutarse al schema `iniciativas`.
+// `user_roles`, `profiles`, `companies`, `countries` existen en AMBOS schemas;
+// se mantienen apuntando a `public` (comportamiento por defecto) porque el
+// resto de la app ya funciona con esas.
 const INICIATIVAS_TABLES = new Set<string>([
   'initiatives',
   'favorites',
   'notifications',
-  'help_offers',
   'community_posts',
   'community_comments',
-  'community_post_likes',
-  'library_files',
-  'companies',
-  'profiles',
-  'user_roles',
-  'strategy_initiatives',
+  'community_reactions',
+  'library_resources',
+  'accompaniment_requests',
+  'module_permissions',
 ]);
 
 // Proxy para enrutar `from()` al schema correcto sin tocar el resto del API.
