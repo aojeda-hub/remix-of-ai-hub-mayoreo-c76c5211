@@ -22,6 +22,7 @@ import { useAuth } from "@/lib/auth";
 import { useRole } from "@/hooks/use-role";
 import RegisterInitiativeDialog from "@/components/RegisterInitiativeDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
+import { isSiloResponsible } from "@/lib/silo-responsibles";
 import * as XLSX from "xlsx";
 
 const DEPARTMENTS = [
@@ -103,7 +104,8 @@ export default function IniciativasEnDesarrollo() {
   };
 
   const isOwner = (initiative: any) => initiative.created_by === user?.id;
-  const canEditDelete = (initiative: any) => isAdmin || isOwner(initiative);
+  const isSiloResp = (i: any) => isSiloResponsible(i.silo, user?.email);
+  const canEditDelete = (initiative: any) => isAdmin || isOwner(initiative) || isSiloResp(initiative);
   const canOfferHelp = (initiative: any) => isAdmin || !isOwner(initiative);
 
   const handleOfferHelp = async () => {
