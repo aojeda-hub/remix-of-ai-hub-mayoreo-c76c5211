@@ -406,6 +406,10 @@ export default function ExplorarIniciativas() {
                       </a>
                     </div>
                   )}
+                  <div>
+                    <p className="text-muted-foreground text-xs">Clasificación</p>
+                    <p className="font-medium">{classificationLabel(viewingInitiative.description) || "—"}</p>
+                  </div>
                 </div>
 
                 {(viewingInitiative.problem || viewingInitiative.ai_solution || viewingInitiative.description || viewingInitiative.link) && (
