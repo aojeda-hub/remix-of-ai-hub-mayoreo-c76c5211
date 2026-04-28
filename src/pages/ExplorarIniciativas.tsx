@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload } from "lucide-react";
 import BulkUploadDialog from "@/components/BulkUploadDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
+import { isSiloResponsible } from "@/lib/silo-responsibles";
 
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
