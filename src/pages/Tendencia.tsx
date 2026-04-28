@@ -43,41 +43,18 @@ type Accent = {
   cellText: string;
 };
 
-const accents: Record<"tareas" | "actividades" | "procesos", Accent> = {
-  tareas: {
-    cardBorder: "border-blue-200/70",
-    cardBg: "bg-gradient-to-br from-blue-50/60 to-transparent",
-    headerBg: "bg-blue-50",
-    headerText: "text-blue-700",
-    totalRowBg: "bg-blue-100/60",
-    totalText: "text-blue-800",
-    cellText: "text-blue-700",
-  },
-  actividades: {
-    cardBorder: "border-amber-200/70",
-    cardBg: "bg-gradient-to-br from-amber-50/60 to-transparent",
-    headerBg: "bg-amber-50",
-    headerText: "text-amber-700",
-    totalRowBg: "bg-amber-100/60",
-    totalText: "text-amber-800",
-    cellText: "text-amber-700",
-  },
-  procesos: {
-    cardBorder: "border-emerald-200/70",
-    cardBg: "bg-gradient-to-br from-emerald-50/60 to-transparent",
-    headerBg: "bg-emerald-50",
-    headerText: "text-emerald-700",
-    totalRowBg: "bg-emerald-100/60",
-    totalText: "text-emerald-800",
-    cellText: "text-emerald-700",
-  },
+const neutralAccent: Accent = {
+  cardBorder: "",
+  cardBg: "",
+  headerBg: "bg-background",
+  headerText: "text-foreground",
+  totalRowBg: "bg-muted/50",
+  totalText: "text-foreground",
+  cellText: "text-foreground",
 };
 
-function getAccent(type: string): Accent {
-  const lower = type.toLowerCase();
-  if (lower.includes("tarea")) return accents.tareas;
-  if (lower.includes("actividad")) return accents.actividades;
-  return accents.procesos;
+function getAccent(_type: string): Accent {
+  return neutralAccent;
 }
 
 function extractClassification(description?: string | null): string | null {
