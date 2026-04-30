@@ -1633,6 +1633,81 @@ export type Database = {
         }
         Relationships: []
       }
+      empleado_acciones_desarrollo: {
+        Row: {
+          accion: string
+          created_at: string
+          descripcion: string | null
+          empleado: string
+          fecha_seleccion: string
+          id: string
+          notas: string | null
+          seleccionado: boolean
+          updated_at: string
+        }
+        Insert: {
+          accion: string
+          created_at?: string
+          descripcion?: string | null
+          empleado: string
+          fecha_seleccion?: string
+          id?: string
+          notas?: string | null
+          seleccionado?: boolean
+          updated_at?: string
+        }
+        Update: {
+          accion?: string
+          created_at?: string
+          descripcion?: string | null
+          empleado?: string
+          fecha_seleccion?: string
+          id?: string
+          notas?: string | null
+          seleccionado?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      empleado_calibracion_desempeno: {
+        Row: {
+          created_at: string
+          criterio: string
+          empleado: string
+          evaluacion: string | null
+          id: string
+          orden: number
+          periodo: string | null
+          peso: number
+          resultado: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          criterio: string
+          empleado: string
+          evaluacion?: string | null
+          id?: string
+          orden?: number
+          periodo?: string | null
+          peso?: number
+          resultado?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          criterio?: string
+          empleado?: string
+          evaluacion?: string | null
+          id?: string
+          orden?: number
+          periodo?: string | null
+          peso?: number
+          resultado?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       empleado_extras: {
         Row: {
           created_at: string
@@ -1662,6 +1737,81 @@ export type Database = {
           nine_box?: string | null
           pruebas_psicotecnicas?: number | null
           tipo_competencia?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      empleado_nine_box_historial: {
+        Row: {
+          anio: number
+          created_at: string
+          cuadrante_codigo: string
+          cuadrante_nombre: string | null
+          empleado: string
+          id: string
+          observaciones: string | null
+          trimestre: string
+          updated_at: string
+        }
+        Insert: {
+          anio: number
+          created_at?: string
+          cuadrante_codigo: string
+          cuadrante_nombre?: string | null
+          empleado: string
+          id?: string
+          observaciones?: string | null
+          trimestre: string
+          updated_at?: string
+        }
+        Update: {
+          anio?: number
+          created_at?: string
+          cuadrante_codigo?: string
+          cuadrante_nombre?: string | null
+          empleado?: string
+          id?: string
+          observaciones?: string | null
+          trimestre?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      empleado_pruebas_talentskey: {
+        Row: {
+          categoria: string
+          created_at: string
+          empleado: string
+          id: string
+          nivel: string | null
+          orden: number
+          pentil: string | null
+          prueba: string
+          score: string | null
+          updated_at: string
+        }
+        Insert: {
+          categoria: string
+          created_at?: string
+          empleado: string
+          id?: string
+          nivel?: string | null
+          orden?: number
+          pentil?: string | null
+          prueba: string
+          score?: string | null
+          updated_at?: string
+        }
+        Update: {
+          categoria?: string
+          created_at?: string
+          empleado?: string
+          id?: string
+          nivel?: string | null
+          orden?: number
+          pentil?: string | null
+          prueba?: string
+          score?: string | null
           updated_at?: string
         }
         Relationships: []
