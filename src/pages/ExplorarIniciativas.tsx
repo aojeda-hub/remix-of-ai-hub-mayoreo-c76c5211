@@ -51,7 +51,8 @@ export default function ExplorarIniciativas() {
   const [filterCompany, setFilterCompany] = useState("all");
   const [filterYear, setFilterYear] = useState<string>(String(CURRENT_YEAR));
   const [filterType, setFilterType] = useState<string>("all");
-  const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
+  const [filterDateFrom, setFilterDateFrom] = useState<Date | undefined>(undefined);
+  const [filterDateTo, setFilterDateTo] = useState<Date | undefined>(undefined);
 
   const { data: initiatives = [], isLoading } = useInitiatives();
   const { data: favorites = [] } = useFavorites(user?.id);
@@ -136,9 +137,18 @@ export default function ExplorarIniciativas() {
     if (filterCompany !== "all" && i.company !== filterCompany) return false;
     if (filterYear !== "all" && new Date(i.created_at).getFullYear() !== Number(filterYear)) return false;
     if (filterType !== "all" && classificationKey(extractClassification(i.description)) !== filterType) return false;
-    if (filterDate) {
+    if (filterDateFrom || filterDateTo) {
       const initDate = new Date(i.created_at);
-      if (initDate.toDateString() !== filterDate.toDateString()) return false;
+      if (filterDateFrom) {
+        const from = new Date(filterDateFrom);
+        from.setHours(0, 0, 0, 0);
+        if (initDate < from) return false;
+      }
+      if (filterDateTo) {
+        const to = new Date(filterDateTo);
+        to.setHours(23, 59, 59, 999);
+        if (initDate > to) return false;
+      }
     }
     return true;
   });
@@ -215,27 +225,50 @@ export default function ExplorarIniciativas() {
             <Button
               variant="outline"
               className={cn(
-                "w-[160px] justify-start text-left font-normal",
-                !filterDate && "text-muted-foreground"
+                "w-[170px] justify-start text-left font-normal",
+                !filterDateFrom && "text-muted-foreground"
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {filterDate ? format(filterDate, "dd/MM/yyyy") : <span>Fecha</span>}
+              {filterDateFrom ? format(filterDateFrom, "dd/MM/yyyy") : <span>Desde</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              selected={filterDate}
-              onSelect={(d) => setFilterDate(d)}
+              selected={filterDateFrom}
+              onSelect={(d) => setFilterDateFrom(d)}
               initialFocus
               className={cn("p-3 pointer-events-auto")}
             />
           </PopoverContent>
         </Popover>
-        {filterDate && (
-          <Button variant="ghost" size="sm" onClick={() => setFilterDate(undefined)}>
-            Limpiar fecha
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className={cn(
+                "w-[170px] justify-start text-left font-normal",
+                !filterDateTo && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {filterDateTo ? format(filterDateTo, "dd/MM/yyyy") : <span>Hasta</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={filterDateTo}
+              onSelect={(d) => setFilterDateTo(d)}
+              initialFocus
+              className={cn("p-3 pointer-events-auto")}
+            />
+          </PopoverContent>
+        </Popover>
+        {(filterDateFrom || filterDateTo) && (
+          <Button variant="ghost" size="sm" onClick={() => { setFilterDateFrom(undefined); setFilterDateTo(undefined); }}>
+            Limpiar fechas
           </Button>
         )}
         {user && (
