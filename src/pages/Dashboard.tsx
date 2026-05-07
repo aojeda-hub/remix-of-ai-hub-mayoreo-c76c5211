@@ -394,12 +394,18 @@ export default function Dashboard() {
                         {item.rank}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <Link
-                          to={`/initiative/${item.id}`}
-                          className="block truncate text-sm font-semibold text-foreground hover:text-blue-600"
-                        >
-                          {item.title}
-                        </Link>
+                        {item.hasLink ? (
+                          <Link
+                            to={`/initiative/${item.id}`}
+                            className="block truncate text-sm font-semibold text-foreground hover:text-blue-600"
+                          >
+                            {item.title}
+                          </Link>
+                        ) : (
+                          <span className="block truncate text-sm font-semibold text-foreground">
+                            {item.title}
+                          </span>
+                        )}
                         <p className="truncate text-xs text-muted-foreground">
                           {item.company}
                         </p>
