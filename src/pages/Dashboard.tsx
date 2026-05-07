@@ -129,14 +129,25 @@ export default function Dashboard() {
     return sorted[0] ? { name: sorted[0][0], count: sorted[0][1] } : null;
   }, [countableInitiatives]);
 
-  // Top 3 iniciativas
+  // Top 3 iniciativas (curado)
   const top3 = useMemo(() => {
-    return countableInitiatives.slice(0, 3).map((i: any, idx: number) => ({
-      rank: idx + 1,
-      id: i.id,
-      title: i.project || "Sin nombre",
-      company: i.company || "—",
-    }));
+    const curated = [
+      "App de Negociaciones Especiales",
+      "Inteligencia Comercial",
+      "Arquitecto de Procesos Inteligentes",
+    ];
+    return curated.map((title, idx) => {
+      const found = countableInitiatives.find(
+        (i: any) => (i.project || "").trim().toLowerCase() === title.toLowerCase()
+      );
+      return {
+        rank: idx + 1,
+        id: found?.id ?? `curated-${idx}`,
+        title,
+        company: found?.company || "—",
+        hasLink: !!found,
+      };
+    });
   }, [countableInitiatives]);
 
   if (isLoading) {
