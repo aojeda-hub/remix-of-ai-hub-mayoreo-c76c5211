@@ -18,7 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload } from "lucide-react";
+import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload, Copy } from "lucide-react";
 import BulkUploadDialog from "@/components/BulkUploadDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 import { isSiloResponsible } from "@/lib/silo-responsibles";
@@ -69,6 +69,55 @@ export default function ExplorarIniciativas() {
 
   // Bulk upload state
   const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
+
+  // Replicate dialog state
+  const [replicateInitiative, setReplicateInitiative] = useState<any>(null);
+  const [replicateMessage, setReplicateMessage] = useState("");
+  const [sendingReplicate, setSendingReplicate] = useState(false);
+
+  const handleReplicateRequest = async () => {
+    if (!replicateMessage.trim()) {
+      toast.error("Por favor escribe un mensaje descriptivo.");
+      return;
+    }
+    setSendingReplicate(true);
+    try {
+      const { data: profile } = await (supabase as any)
+        .from("profiles")
+        .select("full_name")
+        .eq("user_id", user?.id ?? "")
+        .maybeSingle();
+      const fromName = (profile as any)?.full_name || user?.email || "Un colaborador";
+
+      await (supabase as any).from("notifications").insert({
+        user_email: replicateInitiative?.email || "",
+        initiative_id: replicateInitiative?.id,
+        initiative_name: replicateInitiative?.project || "",
+        from_user_id: user?.id,
+        from_user_name: fromName,
+        message: replicateMessage,
+        type: "replicate_request",
+      });
+
+      supabase.functions.invoke("notify-help-offer", {
+        body: {
+          initiative_id: replicateInitiative?.id,
+          initiative_name: replicateInitiative?.project,
+          responsible_email: replicateInitiative?.email,
+          from_user_name: fromName,
+          message: `[Solicitud de réplica] ${replicateMessage}`,
+        },
+      });
+
+      toast.success(`Tu solicitud para replicar "${replicateInitiative?.project}" ha sido enviada.`);
+      setReplicateInitiative(null);
+      setReplicateMessage("");
+    } catch (err: any) {
+      toast.error("Error al enviar la solicitud: " + err.message);
+    } finally {
+      setSendingReplicate(false);
+    }
+  };
 
   const isOwner = (i: any) => i.created_by === user?.id;
   const isSiloResp = (i: any) => isSiloResponsible(i.silo, user?.email);
@@ -336,10 +385,15 @@ export default function ExplorarIniciativas() {
                                 <Trash2 className="h-4 w-4" />
                                 Eliminar
                               </DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => setReplicateInitiative(i)} className="gap-2">
+                                <Copy className="h-4 w-4" />
+                                Contactar para replicar iniciativa
+                              </DropdownMenuItem>
                             </>
                           ) : (
-                            <DropdownMenuItem disabled className="text-muted-foreground text-xs">
-                              Sin acciones disponibles
+                            <DropdownMenuItem onClick={() => setReplicateInitiative(i)} className="gap-2">
+                              <Copy className="h-4 w-4" />
+                              Contactar para replicar iniciativa
                             </DropdownMenuItem>
                           )}
                         </DropdownMenuContent>
@@ -483,6 +537,31 @@ export default function ExplorarIniciativas() {
       </Dialog>
       {/* Bulk Upload Dialog */}
       {isAdmin && <BulkUploadDialog open={bulkUploadOpen} onOpenChange={setBulkUploadOpen} />}
+
+      {/* Replicate Initiative Dialog */}
+      <Dialog open={!!replicateInitiative} onOpenChange={(open) => { if (!open) { setReplicateInitiative(null); setReplicateMessage(""); } }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Contactar para replicar — {replicateInitiative?.project}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Label>Mensaje descriptivo</Label>
+            <Textarea
+              placeholder="Cuéntale al dueño por qué te interesa replicar esta iniciativa, en qué contexto y cómo te puede orientar..."
+              value={replicateMessage}
+              onChange={(e) => setReplicateMessage(e.target.value)}
+              rows={5}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setReplicateInitiative(null); setReplicateMessage(""); }}>Cancelar</Button>
+            <Button onClick={handleReplicateRequest} disabled={sendingReplicate} className="gap-1">
+              <Copy className="h-4 w-4" />
+              {sendingReplicate ? "Enviando..." : "Enviar"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
