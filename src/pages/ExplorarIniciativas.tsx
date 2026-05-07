@@ -385,10 +385,15 @@ export default function ExplorarIniciativas() {
                                 <Trash2 className="h-4 w-4" />
                                 Eliminar
                               </DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => setReplicateInitiative(i)} className="gap-2">
+                                <Copy className="h-4 w-4" />
+                                Contactar para replicar iniciativa
+                              </DropdownMenuItem>
                             </>
                           ) : (
-                            <DropdownMenuItem disabled className="text-muted-foreground text-xs">
-                              Sin acciones disponibles
+                            <DropdownMenuItem onClick={() => setReplicateInitiative(i)} className="gap-2">
+                              <Copy className="h-4 w-4" />
+                              Contactar para replicar iniciativa
                             </DropdownMenuItem>
                           )}
                         </DropdownMenuContent>
