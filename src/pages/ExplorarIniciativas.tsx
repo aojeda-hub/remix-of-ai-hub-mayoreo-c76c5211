@@ -537,6 +537,31 @@ export default function ExplorarIniciativas() {
       </Dialog>
       {/* Bulk Upload Dialog */}
       {isAdmin && <BulkUploadDialog open={bulkUploadOpen} onOpenChange={setBulkUploadOpen} />}
+
+      {/* Replicate Initiative Dialog */}
+      <Dialog open={!!replicateInitiative} onOpenChange={(open) => { if (!open) { setReplicateInitiative(null); setReplicateMessage(""); } }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Contactar para replicar — {replicateInitiative?.project}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Label>Mensaje descriptivo</Label>
+            <Textarea
+              placeholder="Cuéntale al dueño por qué te interesa replicar esta iniciativa, en qué contexto y cómo te puede orientar..."
+              value={replicateMessage}
+              onChange={(e) => setReplicateMessage(e.target.value)}
+              rows={5}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setReplicateInitiative(null); setReplicateMessage(""); }}>Cancelar</Button>
+            <Button onClick={handleReplicateRequest} disabled={sendingReplicate} className="gap-1">
+              <Copy className="h-4 w-4" />
+              {sendingReplicate ? "Enviando..." : "Enviar"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
