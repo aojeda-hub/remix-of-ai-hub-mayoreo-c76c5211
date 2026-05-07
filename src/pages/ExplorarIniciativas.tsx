@@ -70,6 +70,55 @@ export default function ExplorarIniciativas() {
   // Bulk upload state
   const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
 
+  // Replicate dialog state
+  const [replicateInitiative, setReplicateInitiative] = useState<any>(null);
+  const [replicateMessage, setReplicateMessage] = useState("");
+  const [sendingReplicate, setSendingReplicate] = useState(false);
+
+  const handleReplicateRequest = async () => {
+    if (!replicateMessage.trim()) {
+      toast.error("Por favor escribe un mensaje descriptivo.");
+      return;
+    }
+    setSendingReplicate(true);
+    try {
+      const { data: profile } = await (supabase as any)
+        .from("profiles")
+        .select("full_name")
+        .eq("user_id", user?.id ?? "")
+        .maybeSingle();
+      const fromName = (profile as any)?.full_name || user?.email || "Un colaborador";
+
+      await (supabase as any).from("notifications").insert({
+        user_email: replicateInitiative?.email || "",
+        initiative_id: replicateInitiative?.id,
+        initiative_name: replicateInitiative?.project || "",
+        from_user_id: user?.id,
+        from_user_name: fromName,
+        message: replicateMessage,
+        type: "replicate_request",
+      });
+
+      supabase.functions.invoke("notify-help-offer", {
+        body: {
+          initiative_id: replicateInitiative?.id,
+          initiative_name: replicateInitiative?.project,
+          responsible_email: replicateInitiative?.email,
+          from_user_name: fromName,
+          message: `[Solicitud de réplica] ${replicateMessage}`,
+        },
+      });
+
+      toast.success(`Tu solicitud para replicar "${replicateInitiative?.project}" ha sido enviada.`);
+      setReplicateInitiative(null);
+      setReplicateMessage("");
+    } catch (err: any) {
+      toast.error("Error al enviar la solicitud: " + err.message);
+    } finally {
+      setSendingReplicate(false);
+    }
+  };
+
   const isOwner = (i: any) => i.created_by === user?.id;
   const isSiloResp = (i: any) => isSiloResponsible(i.silo, user?.email);
   const canEditDelete = (i: any) => isAdmin || isOwner(i) || isSiloResp(i);
