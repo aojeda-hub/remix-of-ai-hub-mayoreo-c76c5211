@@ -40,7 +40,7 @@ export default function Auth() {
       }
     } else if (mode === "forgot") {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
+        redirectTo: "https://iniciativas-mayoreo.vercel.app/reset-password",
       });
       if (error) {
         toast.error(error.message);
