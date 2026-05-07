@@ -17,7 +17,7 @@ export const SILO_TO_GROUPS: Record<string, { value: string; label: string }[]> 
   Compras: [{ value: "CV", label: "CV — Cadena de Valor" }],
   Ventas: [{ value: "CV", label: "CV — Cadena de Valor" }],
   Mercadeo: [{ value: "CV", label: "CV — Cadena de Valor" }, { value: "SOP", label: "SOP — Soporte" }],
-  Control: [{ value: "SOP", label: "SOP — Soporte" }, { value: "PL", label: "PL — Planificación" }],
+  Control: [{ value: "SOP", label: "SOP — Soporte" }, { value: "PL", label: "PL — Planificación" }, { value: "CV", label: "CV — Cadena de Valor" }],
   Sistemas: [{ value: "SOP", label: "SOP — Soporte" }],
 };
 
