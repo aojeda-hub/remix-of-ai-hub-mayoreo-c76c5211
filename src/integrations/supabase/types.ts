@@ -5306,6 +5306,51 @@ export type Database = {
         }
         Relationships: []
       }
+      prompt_templates: {
+        Row: {
+          category: string
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_active: boolean
+          is_builtin: boolean
+          key: string
+          label: string
+          sort_order: number
+          template: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_builtin?: boolean
+          key: string
+          label: string
+          sort_order?: number
+          template: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_builtin?: boolean
+          key?: string
+          label?: string
+          sort_order?: number
+          template?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       proyectos_cards: {
         Row: {
           company_logo: string
@@ -6379,6 +6424,33 @@ export type Database = {
           name?: string
           principal_id?: number
           version?: number | null
+        }
+        Relationships: []
+      }
+      system_prompts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          kind: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          kind: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          updated_at?: string
+          updated_by?: string | null
         }
         Relationships: []
       }

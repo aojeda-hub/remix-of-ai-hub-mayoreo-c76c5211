@@ -52,6 +52,16 @@ export default function Auth() {
     setLoading(false);
   };
 
+  const handleGoogleSignIn = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/`,
+      },
+    });
+    if (error) toast.error(error.message);
+  };
+
   const title =
     mode === "login" ? "Inicia sesión para continuar" :
     mode === "signup" ? "Crea tu cuenta" :
