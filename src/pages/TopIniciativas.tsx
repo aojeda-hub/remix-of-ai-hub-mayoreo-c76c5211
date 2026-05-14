@@ -61,6 +61,11 @@ export default function TopIniciativas() {
 
   // Most replicated (placeholder - using high impact as proxy)
   const topReplicated = useMemo(() => {
+    const specificApp = countableInitiatives.find((i: any) => 
+      (i.project || "").trim().toLowerCase() === "app de negociaciones especiales"
+    );
+    if (specificApp) return specificApp;
+
     return countableInitiatives.find((i: any) => i.impact === "high");
   }, [countableInitiatives]);
 
