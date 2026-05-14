@@ -27,20 +27,29 @@ export default function TopIniciativas() {
 
   // Most replicated → destacada (placeholder - using high impact as proxy)
 
+  const countableInitiatives = useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    return initiatives.filter((i: any) => {
+      if (i.source === "seguimiento") return false;
+      const initiativeYear = new Date(i.created_at).getFullYear();
+      return initiativeYear === currentYear;
+    });
+  }, [initiatives]);
+
   // Best commercial (department contains "Comercial" or "Ventas")
   const topCommercial = useMemo(() => {
-    return initiatives.find((i: any) => i.department?.toLowerCase().includes("comercial") || i.department?.toLowerCase().includes("ventas"));
-  }, [initiatives]);
+    return countableInitiatives.find((i: any) => i.department?.toLowerCase().includes("comercial") || i.department?.toLowerCase().includes("ventas"));
+  }, [countableInitiatives]);
 
   // Best operational (department contains "Operaciones" or "Logística" or "Procesos")
   const topOperational = useMemo(() => {
-    return initiatives.find((i: any) => i.department?.toLowerCase().includes("operacion") || i.department?.toLowerCase().includes("logística") || i.department?.toLowerCase().includes("procesos"));
-  }, [initiatives]);
+    return countableInitiatives.find((i: any) => i.department?.toLowerCase().includes("operacion") || i.department?.toLowerCase().includes("logística") || i.department?.toLowerCase().includes("procesos"));
+  }, [countableInitiatives]);
 
   // Most collaborative user
   const topCollaborator = useMemo(() => {
     const counts: Record<string, number> = {};
-    initiatives.forEach((i: any) => {
+    countableInitiatives.forEach((i: any) => {
       if (i.created_by) counts[i.created_by] = (counts[i.created_by] || 0) + 1;
     });
     const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
@@ -48,17 +57,17 @@ export default function TopIniciativas() {
     const [userId, count] = sorted[0];
     const profile = profiles.find((p: any) => p.user_id === userId);
     return { name: profile?.full_name || "Usuario", count };
-  }, [initiatives, profiles]);
+  }, [countableInitiatives, profiles]);
 
   // Most replicated (placeholder - using high impact as proxy)
   const topReplicated = useMemo(() => {
-    return initiatives.find((i: any) => i.impact === "high");
-  }, [initiatives]);
+    return countableInitiatives.find((i: any) => i.impact === "high");
+  }, [countableInitiatives]);
 
   // Top initiative per country
   const topByCountry = useMemo(() => {
     const countryMap: Record<string, any[]> = {};
-    initiatives.forEach((i: any) => {
+    countableInitiatives.forEach((i: any) => {
       const c = i.country || "Sin país";
       if (!countryMap[c]) countryMap[c] = [];
       countryMap[c].push(i);
@@ -68,18 +77,18 @@ export default function TopIniciativas() {
       initiative: items[0],
       count: items.length,
     }));
-  }, [initiatives]);
+  }, [countableInitiatives]);
 
   // Department with most initiatives
   const topDepartment = useMemo(() => {
     const counts: Record<string, number> = {};
-    initiatives.forEach((i: any) => {
+    countableInitiatives.forEach((i: any) => {
       const d = i.department || "Sin departamento";
       counts[d] = (counts[d] || 0) + 1;
     });
     const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
     return sorted[0] ? { department: sorted[0][0], count: sorted[0][1] } : null;
-  }, [initiatives]);
+  }, [countableInitiatives]);
 
   if (isLoading) return <div className="flex items-center justify-center h-64 text-muted-foreground">Cargando...</div>;
 
