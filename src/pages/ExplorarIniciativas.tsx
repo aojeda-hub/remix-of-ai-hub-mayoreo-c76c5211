@@ -214,7 +214,12 @@ export default function ExplorarIniciativas() {
   });
 
   const exportToExcel = () => {
-    const rows = filtered.map((i: any) => ({
+    const source = selectedIds.size > 0 ? filtered.filter((i: any) => selectedIds.has(i.id)) : filtered;
+    if (source.length === 0) {
+      toast.error("No hay iniciativas para exportar");
+      return;
+    }
+    const rows = source.map((i: any) => ({
       Iniciativa: i.project || "",
       Responsable: i.responsible || "",
       Departamento: i.department || "",
@@ -228,7 +233,7 @@ export default function ExplorarIniciativas() {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Iniciativas");
     XLSX.writeFile(wb, "iniciativas.xlsx");
-    toast.success("Archivo exportado correctamente");
+    toast.success(`Exportadas ${rows.length} iniciativa(s)`);
   };
 
   if (isLoading) return <div className="flex items-center justify-center h-64 text-muted-foreground">Cargando...</div>;
