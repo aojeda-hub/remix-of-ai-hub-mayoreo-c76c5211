@@ -348,8 +348,13 @@ export default function ExplorarIniciativas() {
         )}
         <Button variant="outline" onClick={exportToExcel} className="gap-2">
           <Download className="h-4 w-4" />
-          Exportar Excel
+          {selectedIds.size > 0 ? `Exportar Excel (${selectedIds.size})` : "Exportar Excel"}
         </Button>
+        {selectedIds.size > 0 && (
+          <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
+            Limpiar selección
+          </Button>
+        )}
         {isAdmin && (
           <Button variant="outline" onClick={() => setBulkUploadOpen(true)} className="gap-2">
             <Upload className="h-4 w-4" />
