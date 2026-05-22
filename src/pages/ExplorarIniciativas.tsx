@@ -330,10 +330,12 @@ export default function ExplorarIniciativas() {
             Mis Iniciativas
           </Button>
         )}
-        <Button variant="outline" onClick={exportToExcel} className="gap-2">
-          <Download className="h-4 w-4" />
-          Exportar Excel
-        </Button>
+        {isAdmin && (
+          <Button variant="outline" onClick={exportToExcel} className="gap-2">
+            <Download className="h-4 w-4" />
+            Exportar Excel
+          </Button>
+        )}
         {isAdmin && (
           <Button variant="outline" onClick={() => setBulkUploadOpen(true)} className="gap-2">
             <Upload className="h-4 w-4" />
