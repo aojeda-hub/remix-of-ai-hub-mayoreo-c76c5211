@@ -369,6 +369,16 @@ export default function ExplorarIniciativas() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-10">
+                  <Checkbox
+                    checked={filtered.length > 0 && filtered.every((i: any) => selectedIds.has(i.id))}
+                    onCheckedChange={(checked) => {
+                      if (checked) setSelectedIds(new Set(filtered.map((i: any) => i.id)));
+                      else setSelectedIds(new Set());
+                    }}
+                    aria-label="Seleccionar todas"
+                  />
+                </TableHead>
                 <TableHead>Iniciativa</TableHead>
                 <TableHead>Responsable</TableHead>
                 <TableHead>Departamento</TableHead>
@@ -381,6 +391,13 @@ export default function ExplorarIniciativas() {
             <TableBody>
               {filtered.map((i: any) => (
                 <TableRow key={i.id} className="cursor-pointer hover:bg-muted/50" onClick={() => setViewingInitiative(i)}>
+                  <TableCell onClick={(e) => e.stopPropagation()}>
+                    <Checkbox
+                      checked={selectedIds.has(i.id)}
+                      onCheckedChange={() => toggleSelected(i.id)}
+                      aria-label="Seleccionar iniciativa"
+                    />
+                  </TableCell>
                   <TableCell className="font-medium text-primary">{i.project || "—"}</TableCell>
                   <TableCell>{i.responsible || "—"}</TableCell>
                   <TableCell>{i.department || "—"}</TableCell>
