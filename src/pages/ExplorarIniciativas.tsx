@@ -24,8 +24,9 @@ import BulkUploadDialog from "@/components/BulkUploadDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 import { isSiloResponsible } from "@/lib/silo-responsibles";
 
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import { toast } from "sonner";
+import logoUrl from "@/assets/mayoreo-logo.png";
 
 const DEPARTMENTS = [
   "Gerencia", "Personal", "Comercial", "Control", "Compras", "Logística",
@@ -213,27 +214,113 @@ export default function ExplorarIniciativas() {
     return true;
   });
 
-  const exportToExcel = () => {
+  const exportToExcel = async () => {
     const source = selectedIds.size > 0 ? filtered.filter((i: any) => selectedIds.has(i.id)) : filtered;
     if (source.length === 0) {
       toast.error("No hay iniciativas para exportar");
       return;
     }
-    const rows = source.map((i: any) => ({
-      Iniciativa: i.project || "",
-      Responsable: i.responsible || "",
-      Departamento: i.department || "",
-      País: i.country || "",
-      Descripción: i.description || "",
-      Utilidad: i.ai_solution || "",
-      Tecnología: i.technology || "",
-      Fecha: i.created_at ? format(new Date(i.created_at), "dd/MM/yyyy") : "",
-    }));
-    const ws = XLSX.utils.json_to_sheet(rows);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Iniciativas");
-    XLSX.writeFile(wb, "iniciativas.xlsx");
-    toast.success(`Exportadas ${rows.length} iniciativa(s)`);
+
+    const wb = new ExcelJS.Workbook();
+    wb.creator = "Mayoreo - Iniciativas IA";
+    wb.created = new Date();
+    const ws = wb.addWorksheet("Iniciativas");
+
+    // Logo
+    try {
+      const logoBuf = await fetch(logoUrl).then((r) => r.arrayBuffer());
+      const imgId = wb.addImage({ buffer: logoBuf as any, extension: "png" });
+      ws.addImage(imgId, { tl: { col: 0, row: 0 }, ext: { width: 140, height: 70 } });
+    } catch (e) {
+      console.warn("No se pudo cargar el logo", e);
+    }
+
+    // Title
+    ws.mergeCells("B1:N3");
+    const titleCell = ws.getCell("B1");
+    titleCell.value = "Iniciativas IA - Mayoreo";
+    titleCell.font = { name: "Calibri", size: 16, bold: true, color: { argb: "FF0B2545" } };
+    titleCell.alignment = { vertical: "middle", horizontal: "left" };
+
+    ws.getRow(1).height = 22;
+    ws.getRow(2).height = 22;
+    ws.getRow(3).height = 22;
+
+    // Header row
+    const headers = [
+      "N", "Iniciativa", "Tecnología", "Responsable", "Departamento",
+      "Compañía", "País", "Objetivo Estratégico", "Fecha", "Correo",
+      "Clasificación", "Problema", "Solución con IA", "Descripción", "Link",
+    ];
+    const headerRowIdx = 5;
+    const headerRow = ws.getRow(headerRowIdx);
+    headers.forEach((h, idx) => {
+      const cell = headerRow.getCell(idx + 1);
+      cell.value = h;
+      cell.font = { bold: true, color: { argb: "FFFFFFFF" } };
+      cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0B2545" } };
+      cell.alignment = { vertical: "middle", horizontal: "center", wrapText: true };
+      cell.border = {
+        top: { style: "thin" }, bottom: { style: "thin" },
+        left: { style: "thin" }, right: { style: "thin" },
+      };
+    });
+    headerRow.height = 28;
+
+    // Data rows
+    source.forEach((i: any, idx: number) => {
+      const row = ws.getRow(headerRowIdx + 1 + idx);
+      const values = [
+        idx + 1,
+        i.project || "",
+        i.technology || "",
+        i.responsible || "",
+        i.department || "",
+        i.company || "",
+        i.country || "",
+        i.strategic_objective || "",
+        i.created_at ? format(new Date(i.created_at), "dd/MM/yyyy") : "",
+        i.email || "",
+        classificationLabel(i.description) || "",
+        i.problem || "",
+        i.ai_solution || "",
+        cleanDescription(i.description),
+        i.link || "",
+      ];
+      values.forEach((v, c) => {
+        const cell = row.getCell(c + 1);
+        cell.value = v as any;
+        cell.alignment = { vertical: "top", wrapText: true };
+        cell.border = {
+          top: { style: "hair", color: { argb: "FFCCCCCC" } },
+          bottom: { style: "hair", color: { argb: "FFCCCCCC" } },
+          left: { style: "hair", color: { argb: "FFCCCCCC" } },
+          right: { style: "hair", color: { argb: "FFCCCCCC" } },
+        };
+      });
+      if (i.link) {
+        const linkCell = row.getCell(15);
+        linkCell.value = { text: i.link, hyperlink: i.link } as any;
+        linkCell.font = { color: { argb: "FF1F6FEB" }, underline: true };
+      }
+    });
+
+    // Column widths
+    const widths = [4, 32, 22, 22, 18, 14, 14, 24, 12, 28, 18, 50, 50, 50, 40];
+    widths.forEach((w, idx) => { ws.getColumn(idx + 1).width = w; });
+
+    // Freeze header
+    ws.views = [{ state: "frozen", ySplit: headerRowIdx }];
+
+    const buf = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buf], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `iniciativas_${format(new Date(), "yyyyMMdd_HHmm")}.xlsx`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success(`Exportadas ${source.length} iniciativa(s)`);
   };
 
   if (isLoading) return <div className="flex items-center justify-center h-64 text-muted-foreground">Cargando...</div>;
