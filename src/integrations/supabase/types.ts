@@ -359,52 +359,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: number | null
+          etiqueta: string | null
           fecha_evaluacion: string | null
-          pred_LGB: number | null
-          pred_LR: number | null
-          pred_RF: number | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
           prioridad: string | null
-          prob_ensemble: number | null
-          prob_LGB: number | null
-          prob_LR: number | null
-          prob_RF: number | null
-          score_seccion_1: number | null
-          votos: number | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          score_seccion_1: string | null
+          votos: string | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Relationships: []
@@ -833,52 +833,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: number | null
+          etiqueta: string | null
           fecha_evaluacion: string | null
-          pred_LGB: number | null
-          pred_LR: number | null
-          pred_RF: number | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
           prioridad: string | null
-          prob_ensemble: number | null
-          prob_LGB: number | null
-          prob_LR: number | null
-          prob_RF: number | null
-          score_seccion_1: number | null
-          votos: number | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          score_seccion_1: string | null
+          votos: string | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Relationships: []
@@ -2921,52 +2921,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: number | null
+          etiqueta: string | null
           fecha_evaluacion: string | null
-          pred_LGB: number | null
-          pred_LR: number | null
-          pred_RF: number | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
           prioridad: string | null
-          prob_ensemble: number | null
-          prob_LGB: number | null
-          prob_LR: number | null
-          prob_RF: number | null
-          score_seccion_1: number | null
-          votos: number | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          score_seccion_1: string | null
+          votos: string | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Relationships: []
@@ -2990,8 +2990,6 @@ export type Database = {
           etiqueta: string | null
           etiqueta_mayoria: string | null
           exp_C1: string | null
-          exp_C10: string | null
-          exp_C11: string | null
           exp_C2: string | null
           exp_C3: string | null
           exp_C4: string | null
@@ -3084,8 +3082,6 @@ export type Database = {
           etiqueta?: string | null
           etiqueta_mayoria?: string | null
           exp_C1?: string | null
-          exp_C10?: string | null
-          exp_C11?: string | null
           exp_C2?: string | null
           exp_C3?: string | null
           exp_C4?: string | null
@@ -3178,8 +3174,6 @@ export type Database = {
           etiqueta?: string | null
           etiqueta_mayoria?: string | null
           exp_C1?: string | null
-          exp_C10?: string | null
-          exp_C11?: string | null
           exp_C2?: string | null
           exp_C3?: string | null
           exp_C4?: string | null
@@ -3680,52 +3674,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: number | null
+          etiqueta: string | null
           fecha_evaluacion: string | null
-          pred_LGB: number | null
-          pred_LR: number | null
-          pred_RF: number | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
           prioridad: string | null
-          prob_ensemble: number | null
-          prob_LGB: number | null
-          prob_LR: number | null
-          prob_RF: number | null
-          score_seccion_1: number | null
-          votos: number | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          score_seccion_1: string | null
+          votos: string | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Relationships: []
@@ -3749,8 +3743,6 @@ export type Database = {
           etiqueta: string | null
           etiqueta_unanimidad: string | null
           exp_C1: string | null
-          exp_C10: string | null
-          exp_C11: string | null
           exp_C2: string | null
           exp_C3: string | null
           exp_C4: string | null
@@ -3843,8 +3835,6 @@ export type Database = {
           etiqueta?: string | null
           etiqueta_unanimidad?: string | null
           exp_C1?: string | null
-          exp_C10?: string | null
-          exp_C11?: string | null
           exp_C2?: string | null
           exp_C3?: string | null
           exp_C4?: string | null
@@ -3937,8 +3927,6 @@ export type Database = {
           etiqueta?: string | null
           etiqueta_unanimidad?: string | null
           exp_C1?: string | null
-          exp_C10?: string | null
-          exp_C11?: string | null
           exp_C2?: string | null
           exp_C3?: string | null
           exp_C4?: string | null
@@ -7271,52 +7259,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: number | null
+          etiqueta: string | null
           fecha_evaluacion: string | null
-          pred_LGB: number | null
-          pred_LR: number | null
-          pred_RF: number | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
           prioridad: string | null
-          prob_ensemble: number | null
-          prob_LGB: number | null
-          prob_LR: number | null
-          prob_RF: number | null
-          score_seccion_1: number | null
-          votos: number | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          score_seccion_1: string | null
+          votos: string | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Relationships: []
@@ -7745,52 +7733,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: number | null
+          etiqueta: string | null
           fecha_evaluacion: string | null
-          pred_LGB: number | null
-          pred_LR: number | null
-          pred_RF: number | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
           prioridad: string | null
-          prob_ensemble: number | null
-          prob_LGB: number | null
-          prob_LR: number | null
-          prob_RF: number | null
-          score_seccion_1: number | null
-          votos: number | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          score_seccion_1: string | null
+          votos: string | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: number | null
+          etiqueta?: string | null
           fecha_evaluacion?: string | null
-          pred_LGB?: number | null
-          pred_LR?: number | null
-          pred_RF?: number | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
           prioridad?: string | null
-          prob_ensemble?: number | null
-          prob_LGB?: number | null
-          prob_LR?: number | null
-          prob_RF?: number | null
-          score_seccion_1?: number | null
-          votos?: number | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          score_seccion_1?: string | null
+          votos?: string | null
           ZONA?: string | null
         }
         Relationships: []
