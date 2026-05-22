@@ -19,6 +19,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload, Copy } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import BulkUploadDialog from "@/components/BulkUploadDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 import { isSiloResponsible } from "@/lib/silo-responsibles";
@@ -74,6 +75,16 @@ export default function ExplorarIniciativas() {
   const [replicateInitiative, setReplicateInitiative] = useState<any>(null);
   const [replicateMessage, setReplicateMessage] = useState("");
   const [sendingReplicate, setSendingReplicate] = useState(false);
+
+  // Selection for Excel export
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const toggleSelected = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
 
   const handleReplicateRequest = async () => {
     if (!replicateMessage.trim()) {
@@ -203,7 +214,12 @@ export default function ExplorarIniciativas() {
   });
 
   const exportToExcel = () => {
-    const rows = filtered.map((i: any) => ({
+    const source = selectedIds.size > 0 ? filtered.filter((i: any) => selectedIds.has(i.id)) : filtered;
+    if (source.length === 0) {
+      toast.error("No hay iniciativas para exportar");
+      return;
+    }
+    const rows = source.map((i: any) => ({
       Iniciativa: i.project || "",
       Responsable: i.responsible || "",
       Departamento: i.department || "",
@@ -217,7 +233,7 @@ export default function ExplorarIniciativas() {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Iniciativas");
     XLSX.writeFile(wb, "iniciativas.xlsx");
-    toast.success("Archivo exportado correctamente");
+    toast.success(`Exportadas ${rows.length} iniciativa(s)`);
   };
 
   if (isLoading) return <div className="flex items-center justify-center h-64 text-muted-foreground">Cargando...</div>;
@@ -332,8 +348,13 @@ export default function ExplorarIniciativas() {
         )}
         <Button variant="outline" onClick={exportToExcel} className="gap-2">
           <Download className="h-4 w-4" />
-          Exportar Excel
+          {selectedIds.size > 0 ? `Exportar Excel (${selectedIds.size})` : "Exportar Excel"}
         </Button>
+        {selectedIds.size > 0 && (
+          <Button variant="ghost" size="sm" onClick={() => setSelectedIds(new Set())}>
+            Limpiar selección
+          </Button>
+        )}
         {isAdmin && (
           <Button variant="outline" onClick={() => setBulkUploadOpen(true)} className="gap-2">
             <Upload className="h-4 w-4" />
@@ -348,6 +369,16 @@ export default function ExplorarIniciativas() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-10">
+                  <Checkbox
+                    checked={filtered.length > 0 && filtered.every((i: any) => selectedIds.has(i.id))}
+                    onCheckedChange={(checked) => {
+                      if (checked) setSelectedIds(new Set(filtered.map((i: any) => i.id)));
+                      else setSelectedIds(new Set());
+                    }}
+                    aria-label="Seleccionar todas"
+                  />
+                </TableHead>
                 <TableHead>Iniciativa</TableHead>
                 <TableHead>Responsable</TableHead>
                 <TableHead>Departamento</TableHead>
@@ -360,6 +391,13 @@ export default function ExplorarIniciativas() {
             <TableBody>
               {filtered.map((i: any) => (
                 <TableRow key={i.id} className="cursor-pointer hover:bg-muted/50" onClick={() => setViewingInitiative(i)}>
+                  <TableCell onClick={(e) => e.stopPropagation()}>
+                    <Checkbox
+                      checked={selectedIds.has(i.id)}
+                      onCheckedChange={() => toggleSelected(i.id)}
+                      aria-label="Seleccionar iniciativa"
+                    />
+                  </TableCell>
                   <TableCell className="font-medium text-primary">{i.project || "—"}</TableCell>
                   <TableCell>{i.responsible || "—"}</TableCell>
                   <TableCell>{i.department || "—"}</TableCell>

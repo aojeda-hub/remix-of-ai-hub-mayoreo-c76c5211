@@ -355,6 +355,534 @@ export type Database = {
         }
         Relationships: []
       }
+      beval_mayoria: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      beval_score_anomalia_detalle: {
+        Row: {
+          anomaly_score_global: number | null
+          anomaly_score_recomendado: number | null
+          cartera_total: number | null
+          cartera_vencida: number | null
+          clientes_afectados: number | null
+          clientes_anomalos: number | null
+          cluster_id: number | null
+          contribuyentes_distintos: number | null
+          desc_general_maximo: number | null
+          desc_general_promedio: number | null
+          desc_linea_maximo: number | null
+          desc_linea_ponderado: number | null
+          desc_linea_promedio_simple: number | null
+          desc_maximo_zona: number | null
+          dist_estructural: number | null
+          es_outlier_estructural: number | null
+          exp_C1: number | null
+          exp_C10: number | null
+          exp_C11: number | null
+          exp_C2: number | null
+          exp_C3: number | null
+          exp_C4: number | null
+          exp_C5: number | null
+          exp_C6: number | null
+          exp_C7: number | null
+          exp_C8: number | null
+          exp_C9: number | null
+          facturas_anuladas: number | null
+          facturas_con_desc_general: number | null
+          facturas_con_devolucion: number | null
+          facturas_sobre_umbral_monto: number | null
+          fecha_evaluacion: string | null
+          is_anomaly_global: number | null
+          is_anomaly_recomendado: number | null
+          lineas_con_descuento: number | null
+          lineas_desc_critico: number | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_depositados: number | null
+          max_dias_pendientes: number | null
+          max_monto_pago: number | null
+          monto_descuento_general_total: number | null
+          monto_pendiente: number | null
+          monto_peor_factura: number | null
+          monto_total_devuelto: number | null
+          monto_total_facturado: number | null
+          num_detecciones: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pagos_tercero: number | null
+          pagos_vendedor_diferente: number | null
+          pagos_vendedor_propio: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          peor_factura: string | null
+          prioridad: string | null
+          prioridad_auditoria: string | null
+          recibos_pendientes: number | null
+          saldo_previo_promedio: number | null
+          score_atraso_depositos: number | null
+          score_cartera_vencida: number | null
+          score_comportamiento_clientes: number | null
+          score_descuento_politica: number | null
+          score_devolucion_cantidad: number | null
+          score_devolucion_monto: number | null
+          score_distribucion_cliente: number | null
+          score_distribucion_monto: number | null
+          score_documentos_anulados: number | null
+          score_facturacion_saldo: number | null
+          score_if_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          score_pagos_zona: number | null
+          score_pedidos_cancelados: number | null
+          score_seccion_1: number | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_cliente_enc: number | null
+          tipo_alerta_monto: string | null
+          tipo_alerta_monto_enc: number | null
+          tipo_contribuyente_resumen: string | null
+          total_clientes_evaluados: number | null
+          total_facturas: number | null
+          total_facturas_zona: number | null
+          total_lineas: number | null
+          total_monto_pagos_zona: number | null
+          total_pedidos: number | null
+          version: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          anomaly_score_global?: number | null
+          anomaly_score_recomendado?: number | null
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          cluster_id?: number | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          dist_estructural?: number | null
+          es_outlier_estructural?: number | null
+          exp_C1?: number | null
+          exp_C10?: number | null
+          exp_C11?: number | null
+          exp_C2?: number | null
+          exp_C3?: number | null
+          exp_C4?: number | null
+          exp_C5?: number | null
+          exp_C6?: number | null
+          exp_C7?: number | null
+          exp_C8?: number | null
+          exp_C9?: number | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          is_anomaly_global?: number | null
+          is_anomaly_recomendado?: number | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          peor_factura?: string | null
+          prioridad?: string | null
+          prioridad_auditoria?: string | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_cliente_enc?: number | null
+          tipo_alerta_monto?: string | null
+          tipo_alerta_monto_enc?: number | null
+          tipo_contribuyente_resumen?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          anomaly_score_global?: number | null
+          anomaly_score_recomendado?: number | null
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          cluster_id?: number | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          dist_estructural?: number | null
+          es_outlier_estructural?: number | null
+          exp_C1?: number | null
+          exp_C10?: number | null
+          exp_C11?: number | null
+          exp_C2?: number | null
+          exp_C3?: number | null
+          exp_C4?: number | null
+          exp_C5?: number | null
+          exp_C6?: number | null
+          exp_C7?: number | null
+          exp_C8?: number | null
+          exp_C9?: number | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          is_anomaly_global?: number | null
+          is_anomaly_recomendado?: number | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          peor_factura?: string | null
+          prioridad?: string | null
+          prioridad_auditoria?: string | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_cliente_enc?: number | null
+          tipo_alerta_monto?: string | null
+          tipo_alerta_monto_enc?: number | null
+          tipo_contribuyente_resumen?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      beval_score_anomalia_totales: {
+        Row: {
+          cartera_total: number | null
+          cluster_id: number | null
+          desc_maximo_zona: number | null
+          es_anomalia_global: number | null
+          es_anomalia_recomendado: number | null
+          fecha_evaluacion: string | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_pendientes: number | null
+          monto_total_facturado: number | null
+          num_detecciones: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          prioridad: string | null
+          score_if_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          total_clientes_evaluados: number | null
+          version: string | null
+          zona: string | null
+        }
+        Insert: {
+          cartera_total?: number | null
+          cluster_id?: number | null
+          desc_maximo_zona?: number | null
+          es_anomalia_global?: number | null
+          es_anomalia_recomendado?: number | null
+          fecha_evaluacion?: string | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_pendientes?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          prioridad?: string | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          total_clientes_evaluados?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Update: {
+          cartera_total?: number | null
+          cluster_id?: number | null
+          desc_maximo_zona?: number | null
+          es_anomalia_global?: number | null
+          es_anomalia_recomendado?: number | null
+          fecha_evaluacion?: string | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_pendientes?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          prioridad?: string | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          total_clientes_evaluados?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
+      beval_scores_final: {
+        Row: {
+          fecha_evaluacion: string | null
+          prioridad_final: string | null
+          prioridad_seccion_1: string | null
+          prioridad_seccion_2: string | null
+          ranking_final: number | null
+          score_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          score_seccion_1: number | null
+          score_seccion_2: number | null
+          version: string | null
+          zona: string | null
+        }
+        Insert: {
+          fecha_evaluacion?: string | null
+          prioridad_final?: string | null
+          prioridad_seccion_1?: string | null
+          prioridad_seccion_2?: string | null
+          ranking_final?: number | null
+          score_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_seccion_1?: number | null
+          score_seccion_2?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Update: {
+          fecha_evaluacion?: string | null
+          prioridad_final?: string | null
+          prioridad_seccion_1?: string | null
+          prioridad_seccion_2?: string | null
+          ranking_final?: number | null
+          score_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_seccion_1?: number | null
+          score_seccion_2?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
+      beval_unanimidad: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
       brand_managers: {
         Row: {
           brands: string[]
@@ -2389,6 +2917,1104 @@ export type Database = {
         }
         Relationships: []
       }
+      febeca_mayoria: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_mayoria_detalle: {
+        Row: {
+          cartera_total: string | null
+          cartera_vencida: string | null
+          clientes_afectados: string | null
+          clientes_anomalos: string | null
+          consenso: string | null
+          contribuyentes_distintos: string | null
+          desc_general_maximo: string | null
+          desc_general_promedio: string | null
+          desc_linea_maximo: string | null
+          desc_linea_ponderado: string | null
+          desc_linea_promedio_simple: string | null
+          desc_maximo_zona: string | null
+          empresa: string | null
+          empresa_mayoria: string | null
+          etiqueta: string | null
+          etiqueta_mayoria: string | null
+          exp_C1: string | null
+          exp_C10: string | null
+          exp_C11: string | null
+          exp_C2: string | null
+          exp_C3: string | null
+          exp_C4: string | null
+          exp_C5: string | null
+          exp_C6: string | null
+          exp_C7: string | null
+          exp_C8: string | null
+          exp_C9: string | null
+          facturas_anuladas: string | null
+          facturas_con_desc_general: string | null
+          facturas_con_devolucion: string | null
+          facturas_sobre_umbral_monto: string | null
+          fecha_evaluacion: string | null
+          lineas_con_descuento: string | null
+          lineas_desc_critico: string | null
+          max_concentracion_cliente: string | null
+          max_concentracion_monto: string | null
+          max_dias_depositados: string | null
+          max_dias_pendientes: string | null
+          max_monto_pago: string | null
+          monto_descuento_general_total: string | null
+          monto_pendiente: string | null
+          monto_peor_factura: string | null
+          monto_total_devuelto: string | null
+          monto_total_facturado: string | null
+          num_pagos_contribuyente_diferente: string | null
+          pagos_tercero: string | null
+          pagos_vendedor_diferente: string | null
+          pagos_vendedor_propio: string | null
+          pct_cartera_vencida: string | null
+          pct_clientes_anomalos: string | null
+          pct_facturas_anuladas: string | null
+          pct_facturas_con_devolucion: string | null
+          pct_facturas_con_saldo_previo: string | null
+          pct_pedidos_cancelados: string | null
+          pedidos_cancelados: string | null
+          peor_caso_pct_devolucion: string | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
+          prioridad: string | null
+          prioridad_mayoria: string | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          recibos_pendientes: string | null
+          saldo_previo_promedio: string | null
+          score_atraso_depositos: string | null
+          score_cartera_vencida: string | null
+          score_comportamiento_clientes: string | null
+          score_descuento_politica: string | null
+          score_devolucion_cantidad: string | null
+          score_devolucion_monto: string | null
+          score_distribucion_cliente: string | null
+          score_distribucion_monto: string | null
+          score_documentos_anulados: string | null
+          score_facturacion_saldo: string | null
+          score_pagos_zona: string | null
+          score_pedidos_cancelados: string | null
+          score_seccion_1: string | null
+          score_seccion_1_mayoria: string | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_monto: string | null
+          total_clientes_evaluados: string | null
+          total_facturas: string | null
+          total_facturas_zona: string | null
+          total_lineas: string | null
+          total_monto_pagos_zona: string | null
+          total_pedidos: string | null
+          version: string | null
+          votos: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          cartera_total?: string | null
+          cartera_vencida?: string | null
+          clientes_afectados?: string | null
+          clientes_anomalos?: string | null
+          consenso?: string | null
+          contribuyentes_distintos?: string | null
+          desc_general_maximo?: string | null
+          desc_general_promedio?: string | null
+          desc_linea_maximo?: string | null
+          desc_linea_ponderado?: string | null
+          desc_linea_promedio_simple?: string | null
+          desc_maximo_zona?: string | null
+          empresa?: string | null
+          empresa_mayoria?: string | null
+          etiqueta?: string | null
+          etiqueta_mayoria?: string | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: string | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: string | null
+          facturas_con_desc_general?: string | null
+          facturas_con_devolucion?: string | null
+          facturas_sobre_umbral_monto?: string | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: string | null
+          lineas_desc_critico?: string | null
+          max_concentracion_cliente?: string | null
+          max_concentracion_monto?: string | null
+          max_dias_depositados?: string | null
+          max_dias_pendientes?: string | null
+          max_monto_pago?: string | null
+          monto_descuento_general_total?: string | null
+          monto_pendiente?: string | null
+          monto_peor_factura?: string | null
+          monto_total_devuelto?: string | null
+          monto_total_facturado?: string | null
+          num_pagos_contribuyente_diferente?: string | null
+          pagos_tercero?: string | null
+          pagos_vendedor_diferente?: string | null
+          pagos_vendedor_propio?: string | null
+          pct_cartera_vencida?: string | null
+          pct_clientes_anomalos?: string | null
+          pct_facturas_anuladas?: string | null
+          pct_facturas_con_devolucion?: string | null
+          pct_facturas_con_saldo_previo?: string | null
+          pct_pedidos_cancelados?: string | null
+          pedidos_cancelados?: string | null
+          peor_caso_pct_devolucion?: string | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
+          prioridad?: string | null
+          prioridad_mayoria?: string | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          recibos_pendientes?: string | null
+          saldo_previo_promedio?: string | null
+          score_atraso_depositos?: string | null
+          score_cartera_vencida?: string | null
+          score_comportamiento_clientes?: string | null
+          score_descuento_politica?: string | null
+          score_devolucion_cantidad?: string | null
+          score_devolucion_monto?: string | null
+          score_distribucion_cliente?: string | null
+          score_distribucion_monto?: string | null
+          score_documentos_anulados?: string | null
+          score_facturacion_saldo?: string | null
+          score_pagos_zona?: string | null
+          score_pedidos_cancelados?: string | null
+          score_seccion_1?: string | null
+          score_seccion_1_mayoria?: string | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: string | null
+          total_facturas?: string | null
+          total_facturas_zona?: string | null
+          total_lineas?: string | null
+          total_monto_pagos_zona?: string | null
+          total_pedidos?: string | null
+          version?: string | null
+          votos?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          cartera_total?: string | null
+          cartera_vencida?: string | null
+          clientes_afectados?: string | null
+          clientes_anomalos?: string | null
+          consenso?: string | null
+          contribuyentes_distintos?: string | null
+          desc_general_maximo?: string | null
+          desc_general_promedio?: string | null
+          desc_linea_maximo?: string | null
+          desc_linea_ponderado?: string | null
+          desc_linea_promedio_simple?: string | null
+          desc_maximo_zona?: string | null
+          empresa?: string | null
+          empresa_mayoria?: string | null
+          etiqueta?: string | null
+          etiqueta_mayoria?: string | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: string | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: string | null
+          facturas_con_desc_general?: string | null
+          facturas_con_devolucion?: string | null
+          facturas_sobre_umbral_monto?: string | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: string | null
+          lineas_desc_critico?: string | null
+          max_concentracion_cliente?: string | null
+          max_concentracion_monto?: string | null
+          max_dias_depositados?: string | null
+          max_dias_pendientes?: string | null
+          max_monto_pago?: string | null
+          monto_descuento_general_total?: string | null
+          monto_pendiente?: string | null
+          monto_peor_factura?: string | null
+          monto_total_devuelto?: string | null
+          monto_total_facturado?: string | null
+          num_pagos_contribuyente_diferente?: string | null
+          pagos_tercero?: string | null
+          pagos_vendedor_diferente?: string | null
+          pagos_vendedor_propio?: string | null
+          pct_cartera_vencida?: string | null
+          pct_clientes_anomalos?: string | null
+          pct_facturas_anuladas?: string | null
+          pct_facturas_con_devolucion?: string | null
+          pct_facturas_con_saldo_previo?: string | null
+          pct_pedidos_cancelados?: string | null
+          pedidos_cancelados?: string | null
+          peor_caso_pct_devolucion?: string | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
+          prioridad?: string | null
+          prioridad_mayoria?: string | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          recibos_pendientes?: string | null
+          saldo_previo_promedio?: string | null
+          score_atraso_depositos?: string | null
+          score_cartera_vencida?: string | null
+          score_comportamiento_clientes?: string | null
+          score_descuento_politica?: string | null
+          score_devolucion_cantidad?: string | null
+          score_devolucion_monto?: string | null
+          score_distribucion_cliente?: string | null
+          score_distribucion_monto?: string | null
+          score_documentos_anulados?: string | null
+          score_facturacion_saldo?: string | null
+          score_pagos_zona?: string | null
+          score_pedidos_cancelados?: string | null
+          score_seccion_1?: string | null
+          score_seccion_1_mayoria?: string | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: string | null
+          total_facturas?: string | null
+          total_facturas_zona?: string | null
+          total_lineas?: string | null
+          total_monto_pagos_zona?: string | null
+          total_pedidos?: string | null
+          version?: string | null
+          votos?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_score_anomalia_detalle: {
+        Row: {
+          anomaly_score_global: number | null
+          anomaly_score_recomendado: number | null
+          cartera_total: number | null
+          cartera_vencida: number | null
+          clientes_afectados: number | null
+          clientes_anomalos: number | null
+          cluster_id: number | null
+          contribuyentes_distintos: number | null
+          desc_general_maximo: number | null
+          desc_general_promedio: number | null
+          desc_linea_maximo: number | null
+          desc_linea_ponderado: number | null
+          desc_linea_promedio_simple: number | null
+          desc_maximo_zona: number | null
+          dist_estructural: number | null
+          es_outlier_estructural: number | null
+          exp_C1: number | null
+          exp_C10: number | null
+          exp_C11: number | null
+          exp_C2: number | null
+          exp_C3: number | null
+          exp_C4: number | null
+          exp_C5: number | null
+          exp_C6: number | null
+          exp_C7: number | null
+          exp_C8: number | null
+          exp_C9: number | null
+          facturas_anuladas: number | null
+          facturas_con_desc_general: number | null
+          facturas_con_devolucion: number | null
+          facturas_sobre_umbral_monto: number | null
+          fecha_evaluacion: string | null
+          is_anomaly_global: number | null
+          is_anomaly_recomendado: number | null
+          lineas_con_descuento: number | null
+          lineas_desc_critico: number | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_depositados: number | null
+          max_dias_pendientes: number | null
+          max_monto_pago: number | null
+          monto_descuento_general_total: number | null
+          monto_pendiente: number | null
+          monto_peor_factura: number | null
+          monto_total_devuelto: number | null
+          monto_total_facturado: number | null
+          num_detecciones: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pagos_tercero: number | null
+          pagos_vendedor_diferente: number | null
+          pagos_vendedor_propio: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          peor_factura: string | null
+          prioridad: string | null
+          prioridad_auditoria: string | null
+          recibos_pendientes: number | null
+          saldo_previo_promedio: number | null
+          score_atraso_depositos: number | null
+          score_cartera_vencida: number | null
+          score_comportamiento_clientes: number | null
+          score_descuento_politica: number | null
+          score_devolucion_cantidad: number | null
+          score_devolucion_monto: number | null
+          score_distribucion_cliente: number | null
+          score_distribucion_monto: number | null
+          score_documentos_anulados: number | null
+          score_facturacion_saldo: number | null
+          score_if_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          score_pagos_zona: number | null
+          score_pedidos_cancelados: number | null
+          score_seccion_1: number | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_cliente_enc: number | null
+          tipo_alerta_monto: string | null
+          tipo_alerta_monto_enc: number | null
+          tipo_contribuyente_resumen: string | null
+          total_clientes_evaluados: number | null
+          total_facturas: number | null
+          total_facturas_zona: number | null
+          total_lineas: number | null
+          total_monto_pagos_zona: number | null
+          total_pedidos: number | null
+          version: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          anomaly_score_global?: number | null
+          anomaly_score_recomendado?: number | null
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          cluster_id?: number | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          dist_estructural?: number | null
+          es_outlier_estructural?: number | null
+          exp_C1?: number | null
+          exp_C10?: number | null
+          exp_C11?: number | null
+          exp_C2?: number | null
+          exp_C3?: number | null
+          exp_C4?: number | null
+          exp_C5?: number | null
+          exp_C6?: number | null
+          exp_C7?: number | null
+          exp_C8?: number | null
+          exp_C9?: number | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          is_anomaly_global?: number | null
+          is_anomaly_recomendado?: number | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          peor_factura?: string | null
+          prioridad?: string | null
+          prioridad_auditoria?: string | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_cliente_enc?: number | null
+          tipo_alerta_monto?: string | null
+          tipo_alerta_monto_enc?: number | null
+          tipo_contribuyente_resumen?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          anomaly_score_global?: number | null
+          anomaly_score_recomendado?: number | null
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          cluster_id?: number | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          dist_estructural?: number | null
+          es_outlier_estructural?: number | null
+          exp_C1?: number | null
+          exp_C10?: number | null
+          exp_C11?: number | null
+          exp_C2?: number | null
+          exp_C3?: number | null
+          exp_C4?: number | null
+          exp_C5?: number | null
+          exp_C6?: number | null
+          exp_C7?: number | null
+          exp_C8?: number | null
+          exp_C9?: number | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          is_anomaly_global?: number | null
+          is_anomaly_recomendado?: number | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          peor_factura?: string | null
+          prioridad?: string | null
+          prioridad_auditoria?: string | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_cliente_enc?: number | null
+          tipo_alerta_monto?: string | null
+          tipo_alerta_monto_enc?: number | null
+          tipo_contribuyente_resumen?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_score_anomalia_totales: {
+        Row: {
+          cartera_total: number | null
+          cluster_id: number | null
+          desc_maximo_zona: number | null
+          es_anomalia_global: number | null
+          es_anomalia_recomendado: number | null
+          fecha_evaluacion: string | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_pendientes: number | null
+          monto_total_facturado: number | null
+          num_detecciones: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          prioridad: string | null
+          score_if_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          total_clientes_evaluados: number | null
+          version: string | null
+          zona: string | null
+        }
+        Insert: {
+          cartera_total?: number | null
+          cluster_id?: number | null
+          desc_maximo_zona?: number | null
+          es_anomalia_global?: number | null
+          es_anomalia_recomendado?: number | null
+          fecha_evaluacion?: string | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_pendientes?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          prioridad?: string | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          total_clientes_evaluados?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Update: {
+          cartera_total?: number | null
+          cluster_id?: number | null
+          desc_maximo_zona?: number | null
+          es_anomalia_global?: number | null
+          es_anomalia_recomendado?: number | null
+          fecha_evaluacion?: string | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_pendientes?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          prioridad?: string | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          total_clientes_evaluados?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
+      febeca_scores_final: {
+        Row: {
+          fecha_evaluacion: string | null
+          prioridad_final: string | null
+          prioridad_seccion_1: string | null
+          prioridad_seccion_2: string | null
+          ranking_final: number | null
+          score_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          score_seccion_1: number | null
+          score_seccion_2: number | null
+          version: string | null
+          zona: string | null
+        }
+        Insert: {
+          fecha_evaluacion?: string | null
+          prioridad_final?: string | null
+          prioridad_seccion_1?: string | null
+          prioridad_seccion_2?: string | null
+          ranking_final?: number | null
+          score_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_seccion_1?: number | null
+          score_seccion_2?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Update: {
+          fecha_evaluacion?: string | null
+          prioridad_final?: string | null
+          prioridad_seccion_1?: string | null
+          prioridad_seccion_2?: string | null
+          ranking_final?: number | null
+          score_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_seccion_1?: number | null
+          score_seccion_2?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
+      febeca_unanimidad: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_unanimidad_detalle: {
+        Row: {
+          cartera_total: string | null
+          cartera_vencida: string | null
+          clientes_afectados: string | null
+          clientes_anomalos: string | null
+          consenso: string | null
+          contribuyentes_distintos: string | null
+          desc_general_maximo: string | null
+          desc_general_promedio: string | null
+          desc_linea_maximo: string | null
+          desc_linea_ponderado: string | null
+          desc_linea_promedio_simple: string | null
+          desc_maximo_zona: string | null
+          empresa: string | null
+          empresa_unanimidad: string | null
+          etiqueta: string | null
+          etiqueta_unanimidad: string | null
+          exp_C1: string | null
+          exp_C10: string | null
+          exp_C11: string | null
+          exp_C2: string | null
+          exp_C3: string | null
+          exp_C4: string | null
+          exp_C5: string | null
+          exp_C6: string | null
+          exp_C7: string | null
+          exp_C8: string | null
+          exp_C9: string | null
+          facturas_anuladas: string | null
+          facturas_con_desc_general: string | null
+          facturas_con_devolucion: string | null
+          facturas_sobre_umbral_monto: string | null
+          fecha_evaluacion: string | null
+          lineas_con_descuento: string | null
+          lineas_desc_critico: string | null
+          max_concentracion_cliente: string | null
+          max_concentracion_monto: string | null
+          max_dias_depositados: string | null
+          max_dias_pendientes: string | null
+          max_monto_pago: string | null
+          monto_descuento_general_total: string | null
+          monto_pendiente: string | null
+          monto_peor_factura: string | null
+          monto_total_devuelto: string | null
+          monto_total_facturado: string | null
+          num_pagos_contribuyente_diferente: string | null
+          pagos_tercero: string | null
+          pagos_vendedor_diferente: string | null
+          pagos_vendedor_propio: string | null
+          pct_cartera_vencida: string | null
+          pct_clientes_anomalos: string | null
+          pct_facturas_anuladas: string | null
+          pct_facturas_con_devolucion: string | null
+          pct_facturas_con_saldo_previo: string | null
+          pct_pedidos_cancelados: string | null
+          pedidos_cancelados: string | null
+          peor_caso_pct_devolucion: string | null
+          pred_LGB: string | null
+          pred_LR: string | null
+          pred_RF: string | null
+          prioridad: string | null
+          prioridad_unanimidad: string | null
+          prob_ensemble: string | null
+          prob_LGB: string | null
+          prob_LR: string | null
+          prob_RF: string | null
+          recibos_pendientes: string | null
+          saldo_previo_promedio: string | null
+          score_atraso_depositos: string | null
+          score_cartera_vencida: string | null
+          score_comportamiento_clientes: string | null
+          score_descuento_politica: string | null
+          score_devolucion_cantidad: string | null
+          score_devolucion_monto: string | null
+          score_distribucion_cliente: string | null
+          score_distribucion_monto: string | null
+          score_documentos_anulados: string | null
+          score_facturacion_saldo: string | null
+          score_pagos_zona: string | null
+          score_pedidos_cancelados: string | null
+          score_seccion_1: string | null
+          score_seccion_1_unanimidad: string | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_monto: string | null
+          total_clientes_evaluados: string | null
+          total_facturas: string | null
+          total_facturas_zona: string | null
+          total_lineas: string | null
+          total_monto_pagos_zona: string | null
+          total_pedidos: string | null
+          version: string | null
+          votos: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          cartera_total?: string | null
+          cartera_vencida?: string | null
+          clientes_afectados?: string | null
+          clientes_anomalos?: string | null
+          consenso?: string | null
+          contribuyentes_distintos?: string | null
+          desc_general_maximo?: string | null
+          desc_general_promedio?: string | null
+          desc_linea_maximo?: string | null
+          desc_linea_ponderado?: string | null
+          desc_linea_promedio_simple?: string | null
+          desc_maximo_zona?: string | null
+          empresa?: string | null
+          empresa_unanimidad?: string | null
+          etiqueta?: string | null
+          etiqueta_unanimidad?: string | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: string | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: string | null
+          facturas_con_desc_general?: string | null
+          facturas_con_devolucion?: string | null
+          facturas_sobre_umbral_monto?: string | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: string | null
+          lineas_desc_critico?: string | null
+          max_concentracion_cliente?: string | null
+          max_concentracion_monto?: string | null
+          max_dias_depositados?: string | null
+          max_dias_pendientes?: string | null
+          max_monto_pago?: string | null
+          monto_descuento_general_total?: string | null
+          monto_pendiente?: string | null
+          monto_peor_factura?: string | null
+          monto_total_devuelto?: string | null
+          monto_total_facturado?: string | null
+          num_pagos_contribuyente_diferente?: string | null
+          pagos_tercero?: string | null
+          pagos_vendedor_diferente?: string | null
+          pagos_vendedor_propio?: string | null
+          pct_cartera_vencida?: string | null
+          pct_clientes_anomalos?: string | null
+          pct_facturas_anuladas?: string | null
+          pct_facturas_con_devolucion?: string | null
+          pct_facturas_con_saldo_previo?: string | null
+          pct_pedidos_cancelados?: string | null
+          pedidos_cancelados?: string | null
+          peor_caso_pct_devolucion?: string | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
+          prioridad?: string | null
+          prioridad_unanimidad?: string | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          recibos_pendientes?: string | null
+          saldo_previo_promedio?: string | null
+          score_atraso_depositos?: string | null
+          score_cartera_vencida?: string | null
+          score_comportamiento_clientes?: string | null
+          score_descuento_politica?: string | null
+          score_devolucion_cantidad?: string | null
+          score_devolucion_monto?: string | null
+          score_distribucion_cliente?: string | null
+          score_distribucion_monto?: string | null
+          score_documentos_anulados?: string | null
+          score_facturacion_saldo?: string | null
+          score_pagos_zona?: string | null
+          score_pedidos_cancelados?: string | null
+          score_seccion_1?: string | null
+          score_seccion_1_unanimidad?: string | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: string | null
+          total_facturas?: string | null
+          total_facturas_zona?: string | null
+          total_lineas?: string | null
+          total_monto_pagos_zona?: string | null
+          total_pedidos?: string | null
+          version?: string | null
+          votos?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          cartera_total?: string | null
+          cartera_vencida?: string | null
+          clientes_afectados?: string | null
+          clientes_anomalos?: string | null
+          consenso?: string | null
+          contribuyentes_distintos?: string | null
+          desc_general_maximo?: string | null
+          desc_general_promedio?: string | null
+          desc_linea_maximo?: string | null
+          desc_linea_ponderado?: string | null
+          desc_linea_promedio_simple?: string | null
+          desc_maximo_zona?: string | null
+          empresa?: string | null
+          empresa_unanimidad?: string | null
+          etiqueta?: string | null
+          etiqueta_unanimidad?: string | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: string | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: string | null
+          facturas_con_desc_general?: string | null
+          facturas_con_devolucion?: string | null
+          facturas_sobre_umbral_monto?: string | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: string | null
+          lineas_desc_critico?: string | null
+          max_concentracion_cliente?: string | null
+          max_concentracion_monto?: string | null
+          max_dias_depositados?: string | null
+          max_dias_pendientes?: string | null
+          max_monto_pago?: string | null
+          monto_descuento_general_total?: string | null
+          monto_pendiente?: string | null
+          monto_peor_factura?: string | null
+          monto_total_devuelto?: string | null
+          monto_total_facturado?: string | null
+          num_pagos_contribuyente_diferente?: string | null
+          pagos_tercero?: string | null
+          pagos_vendedor_diferente?: string | null
+          pagos_vendedor_propio?: string | null
+          pct_cartera_vencida?: string | null
+          pct_clientes_anomalos?: string | null
+          pct_facturas_anuladas?: string | null
+          pct_facturas_con_devolucion?: string | null
+          pct_facturas_con_saldo_previo?: string | null
+          pct_pedidos_cancelados?: string | null
+          pedidos_cancelados?: string | null
+          peor_caso_pct_devolucion?: string | null
+          pred_LGB?: string | null
+          pred_LR?: string | null
+          pred_RF?: string | null
+          prioridad?: string | null
+          prioridad_unanimidad?: string | null
+          prob_ensemble?: string | null
+          prob_LGB?: string | null
+          prob_LR?: string | null
+          prob_RF?: string | null
+          recibos_pendientes?: string | null
+          saldo_previo_promedio?: string | null
+          score_atraso_depositos?: string | null
+          score_cartera_vencida?: string | null
+          score_comportamiento_clientes?: string | null
+          score_descuento_politica?: string | null
+          score_devolucion_cantidad?: string | null
+          score_devolucion_monto?: string | null
+          score_distribucion_cliente?: string | null
+          score_distribucion_monto?: string | null
+          score_documentos_anulados?: string | null
+          score_facturacion_saldo?: string | null
+          score_pagos_zona?: string | null
+          score_pedidos_cancelados?: string | null
+          score_seccion_1?: string | null
+          score_seccion_1_unanimidad?: string | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: string | null
+          total_facturas?: string | null
+          total_facturas_zona?: string | null
+          total_lineas?: string | null
+          total_monto_pagos_zona?: string | null
+          total_pedidos?: string | null
+          version?: string | null
+          votos?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
       fichas: {
         Row: {
           content: string | null
@@ -2523,37 +4149,58 @@ export type Database = {
           aspect_ratio: string | null
           brand_color: string | null
           brand_name: string
+          cost: number | null
           created_at: string
           id: string
           idea_title: string | null
           image_urls: string[]
           model_used: string | null
           platform: string | null
+          processing_time_ms: number | null
           prompt_json: Json | null
+          tokens_input: number | null
+          tokens_output: number | null
+          type: string | null
+          user_id: string | null
+          video_url: string | null
         }
         Insert: {
           aspect_ratio?: string | null
           brand_color?: string | null
           brand_name: string
+          cost?: number | null
           created_at?: string
           id?: string
           idea_title?: string | null
           image_urls?: string[]
           model_used?: string | null
           platform?: string | null
+          processing_time_ms?: number | null
           prompt_json?: Json | null
+          tokens_input?: number | null
+          tokens_output?: number | null
+          type?: string | null
+          user_id?: string | null
+          video_url?: string | null
         }
         Update: {
           aspect_ratio?: string | null
           brand_color?: string | null
           brand_name?: string
+          cost?: number | null
           created_at?: string
           id?: string
           idea_title?: string | null
           image_urls?: string[]
           model_used?: string | null
           platform?: string | null
+          processing_time_ms?: number | null
           prompt_json?: Json | null
+          tokens_input?: number | null
+          tokens_output?: number | null
+          type?: string | null
+          user_id?: string | null
+          video_url?: string | null
         }
         Relationships: []
       }
@@ -4408,6 +6055,39 @@ export type Database = {
         }
         Relationships: []
       }
+      pi_notificaciones: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          destinatario_email: string | null
+          destinatario_nombre: string | null
+          id: string
+          leida: boolean
+          mensaje: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          destinatario_email?: string | null
+          destinatario_nombre?: string | null
+          id?: string
+          leida?: boolean
+          mensaje: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          destinatario_email?: string | null
+          destinatario_nombre?: string | null
+          id?: string
+          leida?: boolean
+          mensaje?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       pi_plan_activities: {
         Row: {
           actividad_id: number | null
@@ -4418,7 +6098,9 @@ export type Database = {
           created_at: string
           departamento: string | null
           estado: string
+          fecha_agendada: string | null
           fecha_sugerida: string | null
+          hora_agendada: string | null
           id: string
           plan_id: string
           responsable: string | null
@@ -4432,7 +6114,9 @@ export type Database = {
           created_at?: string
           departamento?: string | null
           estado?: string
+          fecha_agendada?: string | null
           fecha_sugerida?: string | null
+          hora_agendada?: string | null
           id?: string
           plan_id: string
           responsable?: string | null
@@ -4446,7 +6130,9 @@ export type Database = {
           created_at?: string
           departamento?: string | null
           estado?: string
+          fecha_agendada?: string | null
           fecha_sugerida?: string | null
+          hora_agendada?: string | null
           id?: string
           plan_id?: string
           responsable?: string | null
@@ -4464,6 +6150,7 @@ export type Database = {
       pi_plans: {
         Row: {
           cargo: string
+          colaborador_email: string | null
           created_at: string
           created_by: string | null
           departamento: string | null
@@ -4477,6 +6164,7 @@ export type Database = {
         }
         Insert: {
           cargo: string
+          colaborador_email?: string | null
           created_at?: string
           created_by?: string | null
           departamento?: string | null
@@ -4490,6 +6178,7 @@ export type Database = {
         }
         Update: {
           cargo?: string
+          colaborador_email?: string | null
           created_at?: string
           created_by?: string | null
           departamento?: string | null
@@ -5575,6 +7264,534 @@ export type Database = {
           DESCRIPCION?: string | null
           FECHA_CREACION?: string | null
           RUTA?: string
+        }
+        Relationships: []
+      }
+      sillaca_mayoria: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      sillaca_score_anomalia_detalle: {
+        Row: {
+          anomaly_score_global: number | null
+          anomaly_score_recomendado: number | null
+          cartera_total: number | null
+          cartera_vencida: number | null
+          clientes_afectados: number | null
+          clientes_anomalos: number | null
+          cluster_id: number | null
+          contribuyentes_distintos: number | null
+          desc_general_maximo: number | null
+          desc_general_promedio: number | null
+          desc_linea_maximo: number | null
+          desc_linea_ponderado: number | null
+          desc_linea_promedio_simple: number | null
+          desc_maximo_zona: number | null
+          dist_estructural: number | null
+          es_outlier_estructural: number | null
+          exp_C1: number | null
+          exp_C10: number | null
+          exp_C11: number | null
+          exp_C2: number | null
+          exp_C3: number | null
+          exp_C4: number | null
+          exp_C5: number | null
+          exp_C6: number | null
+          exp_C7: number | null
+          exp_C8: number | null
+          exp_C9: number | null
+          facturas_anuladas: number | null
+          facturas_con_desc_general: number | null
+          facturas_con_devolucion: number | null
+          facturas_sobre_umbral_monto: number | null
+          fecha_evaluacion: string | null
+          is_anomaly_global: number | null
+          is_anomaly_recomendado: number | null
+          lineas_con_descuento: number | null
+          lineas_desc_critico: number | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_depositados: number | null
+          max_dias_pendientes: number | null
+          max_monto_pago: number | null
+          monto_descuento_general_total: number | null
+          monto_pendiente: number | null
+          monto_peor_factura: number | null
+          monto_total_devuelto: number | null
+          monto_total_facturado: number | null
+          num_detecciones: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pagos_tercero: number | null
+          pagos_vendedor_diferente: number | null
+          pagos_vendedor_propio: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          peor_factura: string | null
+          prioridad: string | null
+          prioridad_auditoria: string | null
+          recibos_pendientes: number | null
+          saldo_previo_promedio: number | null
+          score_atraso_depositos: number | null
+          score_cartera_vencida: number | null
+          score_comportamiento_clientes: number | null
+          score_descuento_politica: number | null
+          score_devolucion_cantidad: number | null
+          score_devolucion_monto: number | null
+          score_distribucion_cliente: number | null
+          score_distribucion_monto: number | null
+          score_documentos_anulados: number | null
+          score_facturacion_saldo: number | null
+          score_if_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          score_pagos_zona: number | null
+          score_pedidos_cancelados: number | null
+          score_seccion_1: number | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_cliente_enc: number | null
+          tipo_alerta_monto: string | null
+          tipo_alerta_monto_enc: number | null
+          tipo_contribuyente_resumen: string | null
+          total_clientes_evaluados: number | null
+          total_facturas: number | null
+          total_facturas_zona: number | null
+          total_lineas: number | null
+          total_monto_pagos_zona: number | null
+          total_pedidos: number | null
+          version: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          anomaly_score_global?: number | null
+          anomaly_score_recomendado?: number | null
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          cluster_id?: number | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          dist_estructural?: number | null
+          es_outlier_estructural?: number | null
+          exp_C1?: number | null
+          exp_C10?: number | null
+          exp_C11?: number | null
+          exp_C2?: number | null
+          exp_C3?: number | null
+          exp_C4?: number | null
+          exp_C5?: number | null
+          exp_C6?: number | null
+          exp_C7?: number | null
+          exp_C8?: number | null
+          exp_C9?: number | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          is_anomaly_global?: number | null
+          is_anomaly_recomendado?: number | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          peor_factura?: string | null
+          prioridad?: string | null
+          prioridad_auditoria?: string | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_cliente_enc?: number | null
+          tipo_alerta_monto?: string | null
+          tipo_alerta_monto_enc?: number | null
+          tipo_contribuyente_resumen?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          anomaly_score_global?: number | null
+          anomaly_score_recomendado?: number | null
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          cluster_id?: number | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          dist_estructural?: number | null
+          es_outlier_estructural?: number | null
+          exp_C1?: number | null
+          exp_C10?: number | null
+          exp_C11?: number | null
+          exp_C2?: number | null
+          exp_C3?: number | null
+          exp_C4?: number | null
+          exp_C5?: number | null
+          exp_C6?: number | null
+          exp_C7?: number | null
+          exp_C8?: number | null
+          exp_C9?: number | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          is_anomaly_global?: number | null
+          is_anomaly_recomendado?: number | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          peor_factura?: string | null
+          prioridad?: string | null
+          prioridad_auditoria?: string | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_cliente_enc?: number | null
+          tipo_alerta_monto?: string | null
+          tipo_alerta_monto_enc?: number | null
+          tipo_contribuyente_resumen?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      sillaca_score_anomalia_totales: {
+        Row: {
+          cartera_total: number | null
+          cluster_id: number | null
+          desc_maximo_zona: number | null
+          es_anomalia_global: number | null
+          es_anomalia_recomendado: number | null
+          fecha_evaluacion: string | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_pendientes: number | null
+          monto_total_facturado: number | null
+          num_detecciones: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          prioridad: string | null
+          score_if_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          total_clientes_evaluados: number | null
+          version: string | null
+          zona: string | null
+        }
+        Insert: {
+          cartera_total?: number | null
+          cluster_id?: number | null
+          desc_maximo_zona?: number | null
+          es_anomalia_global?: number | null
+          es_anomalia_recomendado?: number | null
+          fecha_evaluacion?: string | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_pendientes?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          prioridad?: string | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          total_clientes_evaluados?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Update: {
+          cartera_total?: number | null
+          cluster_id?: number | null
+          desc_maximo_zona?: number | null
+          es_anomalia_global?: number | null
+          es_anomalia_recomendado?: number | null
+          fecha_evaluacion?: string | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_pendientes?: number | null
+          monto_total_facturado?: number | null
+          num_detecciones?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          prioridad?: string | null
+          score_if_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          total_clientes_evaluados?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
+      sillaca_scores_final: {
+        Row: {
+          fecha_evaluacion: string | null
+          prioridad_final: string | null
+          prioridad_seccion_1: string | null
+          prioridad_seccion_2: string | null
+          ranking_final: number | null
+          score_final: number | null
+          score_if_global: number | null
+          score_if_recomendado: number | null
+          score_seccion_1: number | null
+          score_seccion_2: number | null
+          version: string | null
+          zona: string | null
+        }
+        Insert: {
+          fecha_evaluacion?: string | null
+          prioridad_final?: string | null
+          prioridad_seccion_1?: string | null
+          prioridad_seccion_2?: string | null
+          ranking_final?: number | null
+          score_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_seccion_1?: number | null
+          score_seccion_2?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Update: {
+          fecha_evaluacion?: string | null
+          prioridad_final?: string | null
+          prioridad_seccion_1?: string | null
+          prioridad_seccion_2?: string | null
+          ranking_final?: number | null
+          score_final?: number | null
+          score_if_global?: number | null
+          score_if_recomendado?: number | null
+          score_seccion_1?: number | null
+          score_seccion_2?: number | null
+          version?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
+      sillaca_unanimidad: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
         }
         Relationships: []
       }
