@@ -226,21 +226,22 @@ export default function ExplorarIniciativas() {
     wb.created = new Date();
     const ws = wb.addWorksheet("Iniciativas");
 
-    // Logo
+    // Logo en columna A
+    ws.getColumn(1).width = 14;
     try {
       const logoBuf = await fetch(logoUrl).then((r) => r.arrayBuffer());
       const imgId = wb.addImage({ buffer: logoBuf as any, extension: "png" });
-      ws.addImage(imgId, { tl: { col: 0, row: 0 }, ext: { width: 140, height: 70 } });
+      ws.addImage(imgId, { tl: { col: 0, row: 0 }, ext: { width: 90, height: 60 } });
     } catch (e) {
       console.warn("No se pudo cargar el logo", e);
     }
 
-    // Title
-    ws.mergeCells("B1:N3");
+    // Título a la derecha del logo
+    ws.mergeCells("B1:O3");
     const titleCell = ws.getCell("B1");
     titleCell.value = "Iniciativas IA - Mayoreo";
-    titleCell.font = { name: "Calibri", size: 16, bold: true, color: { argb: "FF0B2545" } };
-    titleCell.alignment = { vertical: "middle", horizontal: "left" };
+    titleCell.font = { name: "Calibri", size: 18, bold: true, color: { argb: "FF0B2545" } };
+    titleCell.alignment = { vertical: "middle", horizontal: "left", indent: 1 };
 
     ws.getRow(1).height = 22;
     ws.getRow(2).height = 22;
