@@ -307,7 +307,7 @@ export default function ExplorarIniciativas() {
     });
 
     // Column widths
-    const widths = [4, 32, 22, 22, 18, 14, 14, 24, 12, 28, 18, 50, 50, 50, 40];
+    const widths = [14, 32, 22, 22, 18, 14, 14, 24, 12, 28, 18, 50, 50, 50, 40];
     widths.forEach((w, idx) => { ws.getColumn(idx + 1).width = w; });
 
     // Freeze header
