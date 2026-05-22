@@ -76,6 +76,16 @@ export default function ExplorarIniciativas() {
   const [replicateMessage, setReplicateMessage] = useState("");
   const [sendingReplicate, setSendingReplicate] = useState(false);
 
+  // Selection for Excel export
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const toggleSelected = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
   const handleReplicateRequest = async () => {
     if (!replicateMessage.trim()) {
       toast.error("Por favor escribe un mensaje descriptivo.");
