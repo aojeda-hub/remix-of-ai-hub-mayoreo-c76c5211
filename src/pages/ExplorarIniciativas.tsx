@@ -19,6 +19,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Search, Heart, User, CalendarIcon, Download, MoreHorizontal, Pencil, Trash2, Mail, ExternalLink, Upload, Copy } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import BulkUploadDialog from "@/components/BulkUploadDialog";
 import EditInitiativeDialog from "@/components/EditInitiativeDialog";
 import { isSiloResponsible } from "@/lib/silo-responsibles";
