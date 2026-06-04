@@ -128,6 +128,72 @@ export type Database = {
         }
         Relationships: []
       }
+      anomalos_c3: {
+        Row: {
+          anomalia_compra: number | null
+          anomalia_pago: number | null
+          CLIENTE: string | null
+          desviacion_compra: number | null
+          desviacion_pago: number | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          num_facturas_pagadas: number | null
+          promedio_compra_hist: string | null
+          promedio_compra_reciente: string | null
+          promedio_dias_primer_pago_hist: number | null
+          promedio_dias_primer_pago_reciente: number | null
+          promedio_dias_ultimo_pago_hist: number | null
+          promedio_dias_ultimo_pago_reciente: number | null
+          promedio_pagos_por_factura: number | null
+          std_compra_hist: number | null
+          std_dias_primer_pago_hist: number | null
+          std_dias_ultimo_pago_hist: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          anomalia_compra?: number | null
+          anomalia_pago?: number | null
+          CLIENTE?: string | null
+          desviacion_compra?: number | null
+          desviacion_pago?: number | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          num_facturas_pagadas?: number | null
+          promedio_compra_hist?: string | null
+          promedio_compra_reciente?: string | null
+          promedio_dias_primer_pago_hist?: number | null
+          promedio_dias_primer_pago_reciente?: number | null
+          promedio_dias_ultimo_pago_hist?: number | null
+          promedio_dias_ultimo_pago_reciente?: number | null
+          promedio_pagos_por_factura?: number | null
+          std_compra_hist?: number | null
+          std_dias_primer_pago_hist?: number | null
+          std_dias_ultimo_pago_hist?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          anomalia_compra?: number | null
+          anomalia_pago?: number | null
+          CLIENTE?: string | null
+          desviacion_compra?: number | null
+          desviacion_pago?: number | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          num_facturas_pagadas?: number | null
+          promedio_compra_hist?: string | null
+          promedio_compra_reciente?: string | null
+          promedio_dias_primer_pago_hist?: number | null
+          promedio_dias_primer_pago_reciente?: number | null
+          promedio_dias_ultimo_pago_hist?: number | null
+          promedio_dias_ultimo_pago_reciente?: number | null
+          promedio_pagos_por_factura?: number | null
+          std_compra_hist?: number | null
+          std_dias_primer_pago_hist?: number | null
+          std_dias_ultimo_pago_hist?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
       api_configurations: {
         Row: {
           config_type: string
@@ -359,52 +425,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: string | null
+          etiqueta: number | null
           fecha_evaluacion: string | null
-          pred_LGB: string | null
-          pred_LR: string | null
-          pred_RF: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
           prioridad: string | null
-          prob_ensemble: string | null
-          prob_LGB: string | null
-          prob_LR: string | null
-          prob_RF: string | null
-          score_seccion_1: string | null
-          votos: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Relationships: []
@@ -833,52 +899,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: string | null
+          etiqueta: number | null
           fecha_evaluacion: string | null
-          pred_LGB: string | null
-          pred_LR: string | null
-          pred_RF: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
           prioridad: string | null
-          prob_ensemble: string | null
-          prob_LGB: string | null
-          prob_LR: string | null
-          prob_RF: string | null
-          score_seccion_1: string | null
-          votos: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Relationships: []
@@ -929,10 +995,10 @@ export type Database = {
           font_family: string
           id: string
           is_active: boolean
+          isotype_url: string | null
           key: string
           logo_description: string | null
           logo_url: string | null
-          logo_url2: string | null
           mood: string | null
           name: string
           primary_color: string
@@ -946,10 +1012,10 @@ export type Database = {
           font_family?: string
           id?: string
           is_active?: boolean
+          isotype_url?: string | null
           key: string
           logo_description?: string | null
           logo_url?: string | null
-          logo_url2?: string | null
           mood?: string | null
           name: string
           primary_color?: string
@@ -963,10 +1029,10 @@ export type Database = {
           font_family?: string
           id?: string
           is_active?: boolean
+          isotype_url?: string | null
           key?: string
           logo_description?: string | null
           logo_url?: string | null
-          logo_url2?: string | null
           mood?: string | null
           name?: string
           primary_color?: string
@@ -1003,6 +1069,57 @@ export type Database = {
           target_audience?: string | null
           tone_of_voice?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      cabecera_c8: {
+        Row: {
+          CLIENTE: string | null
+          desc_general_combinado: number | null
+          etiqueta: number | null
+          FACTURA: string | null
+          FECHA: string | null
+          fecha_evaluacion: string | null
+          monto_descuento_total: number | null
+          MONTO_DESCUENTO1: number | null
+          MONTO_DESCUENTO2: number | null
+          nivel_alerta: string | null
+          PORC_DESC1_DECIMAL: string | null
+          PORC_DESC2_DECIMAL: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          CLIENTE?: string | null
+          desc_general_combinado?: number | null
+          etiqueta?: number | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          monto_descuento_total?: number | null
+          MONTO_DESCUENTO1?: number | null
+          MONTO_DESCUENTO2?: number | null
+          nivel_alerta?: string | null
+          PORC_DESC1_DECIMAL?: string | null
+          PORC_DESC2_DECIMAL?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          CLIENTE?: string | null
+          desc_general_combinado?: number | null
+          etiqueta?: number | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          monto_descuento_total?: number | null
+          MONTO_DESCUENTO1?: number | null
+          MONTO_DESCUENTO2?: number | null
+          nivel_alerta?: string | null
+          PORC_DESC1_DECIMAL?: string | null
+          PORC_DESC2_DECIMAL?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
         }
         Relationships: []
       }
@@ -1097,6 +1214,60 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      cartera_c2: {
+        Row: {
+          alerta_facturas: string | null
+          alerta_monto: string | null
+          CLIENTE: string | null
+          dias_vencido_max: number | null
+          etiqueta: number | null
+          facturas_vencidas: number | null
+          fecha_evaluacion: string | null
+          fecha_vence_mas_antigua: string | null
+          fecha_vence_mas_reciente: string | null
+          pct_facturas: number | null
+          pct_monto: number | null
+          saldo_vencido: number | null
+          umbral_gestion: number | null
+          umbral_negociacion: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          alerta_facturas?: string | null
+          alerta_monto?: string | null
+          CLIENTE?: string | null
+          dias_vencido_max?: number | null
+          etiqueta?: number | null
+          facturas_vencidas?: number | null
+          fecha_evaluacion?: string | null
+          fecha_vence_mas_antigua?: string | null
+          fecha_vence_mas_reciente?: string | null
+          pct_facturas?: number | null
+          pct_monto?: number | null
+          saldo_vencido?: number | null
+          umbral_gestion?: number | null
+          umbral_negociacion?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          alerta_facturas?: string | null
+          alerta_monto?: string | null
+          CLIENTE?: string | null
+          dias_vencido_max?: number | null
+          etiqueta?: number | null
+          facturas_vencidas?: number | null
+          fecha_evaluacion?: string | null
+          fecha_vence_mas_antigua?: string | null
+          fecha_vence_mas_reciente?: string | null
+          pct_facturas?: number | null
+          pct_monto?: number | null
+          saldo_vencido?: number | null
+          umbral_gestion?: number | null
+          umbral_negociacion?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
       }
       change_requests: {
         Row: {
@@ -1954,6 +2125,195 @@ export type Database = {
           },
         ]
       }
+      depositos_c5: {
+        Row: {
+          cantidad_fechas_deposito: number | null
+          CLIENTE: string | null
+          dias_pendiente: number | null
+          dias_sin_depositar: number | null
+          estado: string | null
+          fecha_deposito: string | null
+          fecha_deposito_raw: string | null
+          FECHA_DOCUMENTO: string | null
+          fecha_evaluacion: string | null
+          monto_recibo: string | null
+          pendiente: number | null
+          recibo: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          cantidad_fechas_deposito?: number | null
+          CLIENTE?: string | null
+          dias_pendiente?: number | null
+          dias_sin_depositar?: number | null
+          estado?: string | null
+          fecha_deposito?: string | null
+          fecha_deposito_raw?: string | null
+          FECHA_DOCUMENTO?: string | null
+          fecha_evaluacion?: string | null
+          monto_recibo?: string | null
+          pendiente?: number | null
+          recibo?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          cantidad_fechas_deposito?: number | null
+          CLIENTE?: string | null
+          dias_pendiente?: number | null
+          dias_sin_depositar?: number | null
+          estado?: string | null
+          fecha_deposito?: string | null
+          fecha_deposito_raw?: string | null
+          FECHA_DOCUMENTO?: string | null
+          fecha_evaluacion?: string | null
+          monto_recibo?: string | null
+          pendiente?: number | null
+          recibo?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      detalle: {
+        Row: {
+          exp_C1: string | null
+          exp_C10: string | null
+          exp_C11: string | null
+          exp_C2: string | null
+          exp_C3: string | null
+          exp_C4: string | null
+          exp_C5: string | null
+          exp_C6: string | null
+          exp_C7: string | null
+          exp_C8: string | null
+          exp_C9: string | null
+          fecha_evaluacion: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: string | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          fecha_evaluacion?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: string | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          fecha_evaluacion?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      dev_facturas_c7: {
+        Row: {
+          etiqueta: number | null
+          FACTURA: string | null
+          fecha_evaluacion: string | null
+          fecha_primera_devolucion: string | null
+          fecha_ultima_devolucion: string | null
+          monto_devuelto: number | null
+          monto_factura: string | null
+          notas_devolucion: string | null
+          num_notas_devolucion: number | null
+          pct_devolucion: number | null
+          supera_umbral_3pct: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          etiqueta?: number | null
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion?: number | null
+          supera_umbral_3pct?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          etiqueta?: number | null
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion?: number | null
+          supera_umbral_3pct?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      devolucion_c6: {
+        Row: {
+          FACTURA: string | null
+          fecha_evaluacion: string | null
+          fecha_primera_devolucion: string | null
+          fecha_ultima_devolucion: string | null
+          monto_devuelto: number | null
+          monto_factura: string | null
+          notas_devolucion: string | null
+          num_notas_devolucion: number | null
+          pct_devolucion_monto: number | null
+          supera_umbral_monto: number | null
+          tiene_devolucion: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion_monto?: number | null
+          supera_umbral_monto?: number | null
+          tiene_devolucion?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion_monto?: number | null
+          supera_umbral_monto?: number | null
+          tiene_devolucion?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
       document_access: {
         Row: {
           created_at: string
@@ -2764,6 +3124,69 @@ export type Database = {
           },
         ]
       }
+      fac_c1: {
+        Row: {
+          CLIENTE: string | null
+          dias_entre_emision_y_ultimo_pago: number | null
+          etiqueta: number | null
+          factura_anterior: string | null
+          factura_evaluada: string | null
+          fecha_emision: string | null
+          fecha_evaluacion: string | null
+          fecha_factura_anterior: string | null
+          fecha_ultimo_pago: string | null
+          fecha_vence_anterior: string | null
+          monto_factura_anterior: string | null
+          monto_factura_nueva: string | null
+          pagado_antes_emision: number | null
+          pct_saldo_pendiente: number | null
+          saldo_actual_anterior: number | null
+          saldo_al_momento_emision: number | null
+          total_pagado_historico: string | null
+          zona: string | null
+        }
+        Insert: {
+          CLIENTE?: string | null
+          dias_entre_emision_y_ultimo_pago?: number | null
+          etiqueta?: number | null
+          factura_anterior?: string | null
+          factura_evaluada?: string | null
+          fecha_emision?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura_anterior?: string | null
+          fecha_ultimo_pago?: string | null
+          fecha_vence_anterior?: string | null
+          monto_factura_anterior?: string | null
+          monto_factura_nueva?: string | null
+          pagado_antes_emision?: number | null
+          pct_saldo_pendiente?: number | null
+          saldo_actual_anterior?: number | null
+          saldo_al_momento_emision?: number | null
+          total_pagado_historico?: string | null
+          zona?: string | null
+        }
+        Update: {
+          CLIENTE?: string | null
+          dias_entre_emision_y_ultimo_pago?: number | null
+          etiqueta?: number | null
+          factura_anterior?: string | null
+          factura_evaluada?: string | null
+          fecha_emision?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura_anterior?: string | null
+          fecha_ultimo_pago?: string | null
+          fecha_vence_anterior?: string | null
+          monto_factura_anterior?: string | null
+          monto_factura_nueva?: string | null
+          pagado_antes_emision?: number | null
+          pct_saldo_pendiente?: number | null
+          saldo_actual_anterior?: number | null
+          saldo_al_momento_emision?: number | null
+          total_pagado_historico?: string | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
       factor_price_list_relations: {
         Row: {
           created_at: string
@@ -2917,56 +3340,293 @@ export type Database = {
         }
         Relationships: []
       }
+      febeca_anomalos_c3: {
+        Row: {
+          anomalia_compra: string | null
+          anomalia_pago: string | null
+          CLIENTE: string | null
+          desviacion_compra: string | null
+          desviacion_pago: string | null
+          etiqueta: string | null
+          fecha_evaluacion: string | null
+          num_facturas_pagadas: string | null
+          promedio_compra_hist: string | null
+          promedio_compra_reciente: string | null
+          promedio_dias_primer_pago_hist: string | null
+          promedio_dias_primer_pago_reciente: string | null
+          promedio_dias_ultimo_pago_hist: string | null
+          promedio_dias_ultimo_pago_reciente: string | null
+          promedio_pagos_por_factura: string | null
+          std_compra_hist: string | null
+          std_dias_primer_pago_hist: string | null
+          std_dias_ultimo_pago_hist: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          anomalia_compra?: string | null
+          anomalia_pago?: string | null
+          CLIENTE?: string | null
+          desviacion_compra?: string | null
+          desviacion_pago?: string | null
+          etiqueta?: string | null
+          fecha_evaluacion?: string | null
+          num_facturas_pagadas?: string | null
+          promedio_compra_hist?: string | null
+          promedio_compra_reciente?: string | null
+          promedio_dias_primer_pago_hist?: string | null
+          promedio_dias_primer_pago_reciente?: string | null
+          promedio_dias_ultimo_pago_hist?: string | null
+          promedio_dias_ultimo_pago_reciente?: string | null
+          promedio_pagos_por_factura?: string | null
+          std_compra_hist?: string | null
+          std_dias_primer_pago_hist?: string | null
+          std_dias_ultimo_pago_hist?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          anomalia_compra?: string | null
+          anomalia_pago?: string | null
+          CLIENTE?: string | null
+          desviacion_compra?: string | null
+          desviacion_pago?: string | null
+          etiqueta?: string | null
+          fecha_evaluacion?: string | null
+          num_facturas_pagadas?: string | null
+          promedio_compra_hist?: string | null
+          promedio_compra_reciente?: string | null
+          promedio_dias_primer_pago_hist?: string | null
+          promedio_dias_primer_pago_reciente?: string | null
+          promedio_dias_ultimo_pago_hist?: string | null
+          promedio_dias_ultimo_pago_reciente?: string | null
+          promedio_pagos_por_factura?: string | null
+          std_compra_hist?: string | null
+          std_dias_primer_pago_hist?: string | null
+          std_dias_ultimo_pago_hist?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_cartera_c2: {
+        Row: {
+          alerta_facturas: string | null
+          alerta_monto: string | null
+          CLIENTE: string | null
+          dias_vencido_max: string | null
+          etiqueta: string | null
+          facturas_vencidas: string | null
+          fecha_evaluacion: string | null
+          fecha_vence_mas_antigua: string | null
+          fecha_vence_mas_reciente: string | null
+          pct_facturas: string | null
+          pct_monto: string | null
+          saldo_vencido: string | null
+          umbral_gestion: string | null
+          umbral_negociacion: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          alerta_facturas?: string | null
+          alerta_monto?: string | null
+          CLIENTE?: string | null
+          dias_vencido_max?: string | null
+          etiqueta?: string | null
+          facturas_vencidas?: string | null
+          fecha_evaluacion?: string | null
+          fecha_vence_mas_antigua?: string | null
+          fecha_vence_mas_reciente?: string | null
+          pct_facturas?: string | null
+          pct_monto?: string | null
+          saldo_vencido?: string | null
+          umbral_gestion?: string | null
+          umbral_negociacion?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          alerta_facturas?: string | null
+          alerta_monto?: string | null
+          CLIENTE?: string | null
+          dias_vencido_max?: string | null
+          etiqueta?: string | null
+          facturas_vencidas?: string | null
+          fecha_evaluacion?: string | null
+          fecha_vence_mas_antigua?: string | null
+          fecha_vence_mas_reciente?: string | null
+          pct_facturas?: string | null
+          pct_monto?: string | null
+          saldo_vencido?: string | null
+          umbral_gestion?: string | null
+          umbral_negociacion?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_depositos_c5: {
+        Row: {
+          cantidad_fechas_deposito: string | null
+          CLIENTE: string | null
+          dias_pendiente: string | null
+          dias_sin_depositar: string | null
+          estado: string | null
+          etiqueta: string | null
+          fecha_deposito: string | null
+          fecha_deposito_raw: string | null
+          FECHA_DOCUMENTO: string | null
+          fecha_evaluacion: string | null
+          monto_recibo: string | null
+          pendiente: string | null
+          recibo: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          cantidad_fechas_deposito?: string | null
+          CLIENTE?: string | null
+          dias_pendiente?: string | null
+          dias_sin_depositar?: string | null
+          estado?: string | null
+          etiqueta?: string | null
+          fecha_deposito?: string | null
+          fecha_deposito_raw?: string | null
+          FECHA_DOCUMENTO?: string | null
+          fecha_evaluacion?: string | null
+          monto_recibo?: string | null
+          pendiente?: string | null
+          recibo?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          cantidad_fechas_deposito?: string | null
+          CLIENTE?: string | null
+          dias_pendiente?: string | null
+          dias_sin_depositar?: string | null
+          estado?: string | null
+          etiqueta?: string | null
+          fecha_deposito?: string | null
+          fecha_deposito_raw?: string | null
+          FECHA_DOCUMENTO?: string | null
+          fecha_evaluacion?: string | null
+          monto_recibo?: string | null
+          pendiente?: string | null
+          recibo?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_fac_c1: {
+        Row: {
+          CLIENTE: string | null
+          dias_entre_emision_y_ultimo_pago: string | null
+          etiqueta: string | null
+          factura_anterior: string | null
+          factura_evaluada: string | null
+          fecha_emision: string | null
+          fecha_evaluacion: string | null
+          fecha_factura_anterior: string | null
+          fecha_ultimo_pago: string | null
+          fecha_vence_anterior: string | null
+          monto_factura_anterior: string | null
+          monto_factura_nueva: string | null
+          pagado_antes_emision: string | null
+          pct_saldo_pendiente: string | null
+          saldo_actual_anterior: string | null
+          saldo_al_momento_emision: string | null
+          total_pagado_historico: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          CLIENTE?: string | null
+          dias_entre_emision_y_ultimo_pago?: string | null
+          etiqueta?: string | null
+          factura_anterior?: string | null
+          factura_evaluada?: string | null
+          fecha_emision?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura_anterior?: string | null
+          fecha_ultimo_pago?: string | null
+          fecha_vence_anterior?: string | null
+          monto_factura_anterior?: string | null
+          monto_factura_nueva?: string | null
+          pagado_antes_emision?: string | null
+          pct_saldo_pendiente?: string | null
+          saldo_actual_anterior?: string | null
+          saldo_al_momento_emision?: string | null
+          total_pagado_historico?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          CLIENTE?: string | null
+          dias_entre_emision_y_ultimo_pago?: string | null
+          etiqueta?: string | null
+          factura_anterior?: string | null
+          factura_evaluada?: string | null
+          fecha_emision?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura_anterior?: string | null
+          fecha_ultimo_pago?: string | null
+          fecha_vence_anterior?: string | null
+          monto_factura_anterior?: string | null
+          monto_factura_nueva?: string | null
+          pagado_antes_emision?: string | null
+          pct_saldo_pendiente?: string | null
+          saldo_actual_anterior?: string | null
+          saldo_al_momento_emision?: string | null
+          total_pagado_historico?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
       febeca_mayoria: {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: string | null
+          etiqueta: number | null
           fecha_evaluacion: string | null
-          pred_LGB: string | null
-          pred_LR: string | null
-          pred_RF: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
           prioridad: string | null
-          prob_ensemble: string | null
-          prob_LGB: string | null
-          prob_LR: string | null
-          prob_RF: string | null
-          score_seccion_1: string | null
-          votos: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Relationships: []
@@ -3247,6 +3907,87 @@ export type Database = {
           version?: string | null
           votos?: string | null
           ZONA?: string | null
+        }
+        Relationships: []
+      }
+      febeca_pagos_c4: {
+        Row: {
+          codigo_cliente: string | null
+          contribuyente_cliente: string | null
+          contribuyente_pago: string | null
+          descripcion_alerta: string | null
+          descripcion_xrt: string | null
+          documento_pago: string | null
+          es_contribuyente_diferente: string | null
+          etiqueta: string | null
+          factura: string | null
+          fecha_aplicacion: string | null
+          fecha_evaluacion: string | null
+          fecha_factura: string | null
+          fecha_vence_factura: string | null
+          fecha_xrt: string | null
+          monto_aplicado: string | null
+          monto_documento_pago: string | null
+          monto_factura: string | null
+          monto_xrt: string | null
+          REFERENCE_NUMBER: string | null
+          tipo_contribuyente: string | null
+          vendedor_factura: string | null
+          vendedor_pagador: string | null
+          ZONA: string | null
+          zona_factura: string | null
+        }
+        Insert: {
+          codigo_cliente?: string | null
+          contribuyente_cliente?: string | null
+          contribuyente_pago?: string | null
+          descripcion_alerta?: string | null
+          descripcion_xrt?: string | null
+          documento_pago?: string | null
+          es_contribuyente_diferente?: string | null
+          etiqueta?: string | null
+          factura?: string | null
+          fecha_aplicacion?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura?: string | null
+          fecha_vence_factura?: string | null
+          fecha_xrt?: string | null
+          monto_aplicado?: string | null
+          monto_documento_pago?: string | null
+          monto_factura?: string | null
+          monto_xrt?: string | null
+          REFERENCE_NUMBER?: string | null
+          tipo_contribuyente?: string | null
+          vendedor_factura?: string | null
+          vendedor_pagador?: string | null
+          ZONA?: string | null
+          zona_factura?: string | null
+        }
+        Update: {
+          codigo_cliente?: string | null
+          contribuyente_cliente?: string | null
+          contribuyente_pago?: string | null
+          descripcion_alerta?: string | null
+          descripcion_xrt?: string | null
+          documento_pago?: string | null
+          es_contribuyente_diferente?: string | null
+          etiqueta?: string | null
+          factura?: string | null
+          fecha_aplicacion?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura?: string | null
+          fecha_vence_factura?: string | null
+          fecha_xrt?: string | null
+          monto_aplicado?: string | null
+          monto_documento_pago?: string | null
+          monto_factura?: string | null
+          monto_xrt?: string | null
+          REFERENCE_NUMBER?: string | null
+          tipo_contribuyente?: string | null
+          vendedor_factura?: string | null
+          vendedor_pagador?: string | null
+          ZONA?: string | null
+          zona_factura?: string | null
         }
         Relationships: []
       }
@@ -3674,52 +4415,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: string | null
+          etiqueta: number | null
           fecha_evaluacion: string | null
-          pred_LGB: string | null
-          pred_LR: string | null
-          pred_RF: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
           prioridad: string | null
-          prob_ensemble: string | null
-          prob_LGB: string | null
-          prob_LR: string | null
-          prob_RF: string | null
-          score_seccion_1: string | null
-          votos: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Relationships: []
@@ -4146,6 +4887,7 @@ export type Database = {
           platform: string | null
           processing_time_ms: number | null
           prompt_json: Json | null
+          prompt_text: string | null
           tokens_input: number | null
           tokens_output: number | null
           type: string | null
@@ -4165,6 +4907,7 @@ export type Database = {
           platform?: string | null
           processing_time_ms?: number | null
           prompt_json?: Json | null
+          prompt_text?: string | null
           tokens_input?: number | null
           tokens_output?: number | null
           type?: string | null
@@ -4184,6 +4927,7 @@ export type Database = {
           platform?: string | null
           processing_time_ms?: number | null
           prompt_json?: Json | null
+          prompt_text?: string | null
           tokens_input?: number | null
           tokens_output?: number | null
           type?: string | null
@@ -4864,6 +5608,60 @@ export type Database = {
         }
         Relationships: []
       }
+      linea_c9: {
+        Row: {
+          ARTICULO: string | null
+          CANTIDAD: string | null
+          CLIENTE: string | null
+          desc_linea_decimal: string | null
+          etiqueta: number | null
+          FACTURA: string | null
+          FECHA: string | null
+          fecha_evaluacion: string | null
+          LINEA: number | null
+          monto_desc_linea: string | null
+          nivel_alerta: string | null
+          PEDIDO_LINEA: number | null
+          precio_total_con_desc: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          ARTICULO?: string | null
+          CANTIDAD?: string | null
+          CLIENTE?: string | null
+          desc_linea_decimal?: string | null
+          etiqueta?: number | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          LINEA?: number | null
+          monto_desc_linea?: string | null
+          nivel_alerta?: string | null
+          PEDIDO_LINEA?: number | null
+          precio_total_con_desc?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          ARTICULO?: string | null
+          CANTIDAD?: string | null
+          CLIENTE?: string | null
+          desc_linea_decimal?: string | null
+          etiqueta?: number | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          LINEA?: number | null
+          monto_desc_linea?: string | null
+          nivel_alerta?: string | null
+          PEDIDO_LINEA?: number | null
+          precio_total_con_desc?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
       manager_goals: {
         Row: {
           confidence: number | null
@@ -4908,6 +5706,8 @@ export type Database = {
           company: string
           created_at: string
           description: string | null
+          email_subject: string | null
+          email_template_html: string | null
           id: string
           interviews_count: number
           role: string
@@ -4919,6 +5719,8 @@ export type Database = {
           company: string
           created_at?: string
           description?: string | null
+          email_subject?: string | null
+          email_template_html?: string | null
           id?: string
           interviews_count?: number
           role: string
@@ -4930,6 +5732,8 @@ export type Database = {
           company?: string
           created_at?: string
           description?: string | null
+          email_subject?: string | null
+          email_template_html?: string | null
           id?: string
           interviews_count?: number
           role?: string
@@ -5049,6 +5853,345 @@ export type Database = {
           id?: number
           message?: Json
           session_id?: string
+        }
+        Relationships: []
+      }
+      mayoria: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      mayoria_detalle: {
+        Row: {
+          cartera_total: number | null
+          cartera_vencida: number | null
+          clientes_afectados: number | null
+          clientes_anomalos: number | null
+          consenso: string | null
+          contribuyentes_distintos: number | null
+          desc_general_maximo: number | null
+          desc_general_promedio: number | null
+          desc_linea_maximo: number | null
+          desc_linea_ponderado: number | null
+          desc_linea_promedio_simple: number | null
+          desc_maximo_zona: number | null
+          empresa: string | null
+          empresa_mayoria: string | null
+          etiqueta: number | null
+          etiqueta_mayoria: number | null
+          exp_C1: string | null
+          exp_C10: string | null
+          exp_C11: number | null
+          exp_C2: string | null
+          exp_C3: string | null
+          exp_C4: string | null
+          exp_C5: string | null
+          exp_C6: string | null
+          exp_C7: string | null
+          exp_C8: string | null
+          exp_C9: string | null
+          facturas_anuladas: number | null
+          facturas_con_desc_general: number | null
+          facturas_con_devolucion: number | null
+          facturas_sobre_umbral_monto: number | null
+          fecha_evaluacion: string | null
+          lineas_con_descuento: number | null
+          lineas_desc_critico: number | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_depositados: number | null
+          max_dias_pendientes: number | null
+          max_monto_pago: number | null
+          monto_descuento_general_total: number | null
+          monto_pendiente: number | null
+          monto_peor_factura: number | null
+          monto_total_devuelto: number | null
+          monto_total_facturado: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pagos_tercero: number | null
+          pagos_vendedor_diferente: number | null
+          pagos_vendedor_propio: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prioridad_mayoria: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          recibos_pendientes: number | null
+          saldo_previo_promedio: number | null
+          score_atraso_depositos: number | null
+          score_cartera_vencida: number | null
+          score_comportamiento_clientes: number | null
+          score_descuento_politica: number | null
+          score_devolucion_cantidad: number | null
+          score_devolucion_monto: number | null
+          score_distribucion_cliente: number | null
+          score_distribucion_monto: number | null
+          score_documentos_anulados: number | null
+          score_facturacion_saldo: number | null
+          score_pagos_zona: number | null
+          score_pedidos_cancelados: number | null
+          score_seccion_1: number | null
+          score_seccion_1_mayoria: number | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_monto: string | null
+          total_clientes_evaluados: number | null
+          total_facturas: number | null
+          total_facturas_zona: number | null
+          total_lineas: number | null
+          total_monto_pagos_zona: number | null
+          total_pedidos: number | null
+          version: string | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          consenso?: string | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          empresa?: string | null
+          empresa_mayoria?: string | null
+          etiqueta?: number | null
+          etiqueta_mayoria?: number | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: number | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prioridad_mayoria?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          score_seccion_1_mayoria?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          consenso?: string | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          empresa?: string | null
+          empresa_mayoria?: string | null
+          etiqueta?: number | null
+          etiqueta_mayoria?: number | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: number | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prioridad_mayoria?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          score_seccion_1_mayoria?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          votos?: number | null
+          ZONA?: string | null
         }
         Relationships: []
       }
@@ -5602,6 +6745,495 @@ export type Database = {
           },
         ]
       }
+      ns_anomalos_c3: {
+        Row: {
+          anomalia_compra: number | null
+          anomalia_pago: number | null
+          CLIENTE: string | null
+          desviacion_compra: number | null
+          desviacion_pago: number | null
+          fecha_evaluacion: string | null
+          num_facturas_pagadas: number | null
+          promedio_compra_hist: string | null
+          promedio_compra_reciente: string | null
+          promedio_dias_primer_pago_hist: number | null
+          promedio_dias_primer_pago_reciente: number | null
+          promedio_dias_ultimo_pago_hist: number | null
+          promedio_dias_ultimo_pago_reciente: number | null
+          promedio_pagos_por_factura: number | null
+          std_compra_hist: number | null
+          std_dias_primer_pago_hist: number | null
+          std_dias_ultimo_pago_hist: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          anomalia_compra?: number | null
+          anomalia_pago?: number | null
+          CLIENTE?: string | null
+          desviacion_compra?: number | null
+          desviacion_pago?: number | null
+          fecha_evaluacion?: string | null
+          num_facturas_pagadas?: number | null
+          promedio_compra_hist?: string | null
+          promedio_compra_reciente?: string | null
+          promedio_dias_primer_pago_hist?: number | null
+          promedio_dias_primer_pago_reciente?: number | null
+          promedio_dias_ultimo_pago_hist?: number | null
+          promedio_dias_ultimo_pago_reciente?: number | null
+          promedio_pagos_por_factura?: number | null
+          std_compra_hist?: number | null
+          std_dias_primer_pago_hist?: number | null
+          std_dias_ultimo_pago_hist?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          anomalia_compra?: number | null
+          anomalia_pago?: number | null
+          CLIENTE?: string | null
+          desviacion_compra?: number | null
+          desviacion_pago?: number | null
+          fecha_evaluacion?: string | null
+          num_facturas_pagadas?: number | null
+          promedio_compra_hist?: string | null
+          promedio_compra_reciente?: string | null
+          promedio_dias_primer_pago_hist?: number | null
+          promedio_dias_primer_pago_reciente?: number | null
+          promedio_dias_ultimo_pago_hist?: number | null
+          promedio_dias_ultimo_pago_reciente?: number | null
+          promedio_pagos_por_factura?: number | null
+          std_compra_hist?: number | null
+          std_dias_primer_pago_hist?: number | null
+          std_dias_ultimo_pago_hist?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_cabecera_c8: {
+        Row: {
+          CLIENTE: string | null
+          desc_general_combinado: number | null
+          FACTURA: string | null
+          FECHA: string | null
+          fecha_evaluacion: string | null
+          monto_descuento_total: number | null
+          MONTO_DESCUENTO1: number | null
+          MONTO_DESCUENTO2: number | null
+          nivel_alerta: string | null
+          PORC_DESC1_DECIMAL: string | null
+          PORC_DESC2_DECIMAL: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          CLIENTE?: string | null
+          desc_general_combinado?: number | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          monto_descuento_total?: number | null
+          MONTO_DESCUENTO1?: number | null
+          MONTO_DESCUENTO2?: number | null
+          nivel_alerta?: string | null
+          PORC_DESC1_DECIMAL?: string | null
+          PORC_DESC2_DECIMAL?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          CLIENTE?: string | null
+          desc_general_combinado?: number | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          monto_descuento_total?: number | null
+          MONTO_DESCUENTO1?: number | null
+          MONTO_DESCUENTO2?: number | null
+          nivel_alerta?: string | null
+          PORC_DESC1_DECIMAL?: string | null
+          PORC_DESC2_DECIMAL?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_depositos_c5: {
+        Row: {
+          cantidad_fechas_deposito: number | null
+          CLIENTE: string | null
+          dias_pendiente: number | null
+          dias_sin_depositar: number | null
+          estado: string | null
+          fecha_deposito: string | null
+          fecha_deposito_raw: string | null
+          FECHA_DOCUMENTO: string | null
+          fecha_evaluacion: string | null
+          monto_recibo: string | null
+          pendiente: number | null
+          recibo: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          cantidad_fechas_deposito?: number | null
+          CLIENTE?: string | null
+          dias_pendiente?: number | null
+          dias_sin_depositar?: number | null
+          estado?: string | null
+          fecha_deposito?: string | null
+          fecha_deposito_raw?: string | null
+          FECHA_DOCUMENTO?: string | null
+          fecha_evaluacion?: string | null
+          monto_recibo?: string | null
+          pendiente?: number | null
+          recibo?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          cantidad_fechas_deposito?: number | null
+          CLIENTE?: string | null
+          dias_pendiente?: number | null
+          dias_sin_depositar?: number | null
+          estado?: string | null
+          fecha_deposito?: string | null
+          fecha_deposito_raw?: string | null
+          FECHA_DOCUMENTO?: string | null
+          fecha_evaluacion?: string | null
+          monto_recibo?: string | null
+          pendiente?: number | null
+          recibo?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_dev_facturas_c7: {
+        Row: {
+          FACTURA: string | null
+          fecha_evaluacion: string | null
+          fecha_primera_devolucion: string | null
+          fecha_ultima_devolucion: string | null
+          monto_devuelto: number | null
+          monto_factura: string | null
+          notas_devolucion: string | null
+          num_notas_devolucion: number | null
+          pct_devolucion: number | null
+          supera_umbral_3pct: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion?: number | null
+          supera_umbral_3pct?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion?: number | null
+          supera_umbral_3pct?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_devolucion_c6: {
+        Row: {
+          FACTURA: string | null
+          fecha_evaluacion: string | null
+          fecha_primera_devolucion: string | null
+          fecha_ultima_devolucion: string | null
+          monto_devuelto: number | null
+          monto_factura: string | null
+          notas_devolucion: string | null
+          num_notas_devolucion: number | null
+          pct_devolucion_monto: number | null
+          supera_umbral_monto: number | null
+          tiene_devolucion: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion_monto?: number | null
+          supera_umbral_monto?: number | null
+          tiene_devolucion?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion_monto?: number | null
+          supera_umbral_monto?: number | null
+          tiene_devolucion?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_fac_c1: {
+        Row: {
+          CLIENTE: string | null
+          dias_entre_emision_y_ultimo_pago: number | null
+          factura_anterior: string | null
+          factura_evaluada: string | null
+          fecha_emision: string | null
+          fecha_evaluacion: string | null
+          fecha_factura_anterior: string | null
+          fecha_ultimo_pago: string | null
+          fecha_vence_anterior: string | null
+          monto_factura_anterior: string | null
+          monto_factura_nueva: string | null
+          pagado_antes_emision: number | null
+          pct_saldo_pendiente: number | null
+          saldo_actual_anterior: number | null
+          saldo_al_momento_emision: number | null
+          total_pagado_historico: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          CLIENTE?: string | null
+          dias_entre_emision_y_ultimo_pago?: number | null
+          factura_anterior?: string | null
+          factura_evaluada?: string | null
+          fecha_emision?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura_anterior?: string | null
+          fecha_ultimo_pago?: string | null
+          fecha_vence_anterior?: string | null
+          monto_factura_anterior?: string | null
+          monto_factura_nueva?: string | null
+          pagado_antes_emision?: number | null
+          pct_saldo_pendiente?: number | null
+          saldo_actual_anterior?: number | null
+          saldo_al_momento_emision?: number | null
+          total_pagado_historico?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          CLIENTE?: string | null
+          dias_entre_emision_y_ultimo_pago?: number | null
+          factura_anterior?: string | null
+          factura_evaluada?: string | null
+          fecha_emision?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura_anterior?: string | null
+          fecha_ultimo_pago?: string | null
+          fecha_vence_anterior?: string | null
+          monto_factura_anterior?: string | null
+          monto_factura_nueva?: string | null
+          pagado_antes_emision?: number | null
+          pct_saldo_pendiente?: number | null
+          saldo_actual_anterior?: number | null
+          saldo_al_momento_emision?: number | null
+          total_pagado_historico?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_linea_c9: {
+        Row: {
+          ARTICULO: string | null
+          CANTIDAD: string | null
+          CLIENTE: string | null
+          desc_linea_decimal: string | null
+          FACTURA: string | null
+          FECHA: string | null
+          fecha_evaluacion: string | null
+          LINEA: number | null
+          monto_desc_linea: string | null
+          nivel_alerta: string | null
+          PEDIDO_LINEA: number | null
+          precio_total_con_desc: string | null
+          VENDEDOR: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          ARTICULO?: string | null
+          CANTIDAD?: string | null
+          CLIENTE?: string | null
+          desc_linea_decimal?: string | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          LINEA?: number | null
+          monto_desc_linea?: string | null
+          nivel_alerta?: string | null
+          PEDIDO_LINEA?: number | null
+          precio_total_con_desc?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          ARTICULO?: string | null
+          CANTIDAD?: string | null
+          CLIENTE?: string | null
+          desc_linea_decimal?: string | null
+          FACTURA?: string | null
+          FECHA?: string | null
+          fecha_evaluacion?: string | null
+          LINEA?: number | null
+          monto_desc_linea?: string | null
+          nivel_alerta?: string | null
+          PEDIDO_LINEA?: number | null
+          precio_total_con_desc?: string | null
+          VENDEDOR?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_nocartera_c2: {
+        Row: {
+          alerta_facturas: string | null
+          alerta_monto: string | null
+          CLIENTE: string | null
+          dias_vencido_max: number | null
+          facturas_vencidas: number | null
+          fecha_evaluacion: string | null
+          fecha_vence_mas_antigua: string | null
+          fecha_vence_mas_reciente: string | null
+          pct_facturas: number | null
+          pct_monto: number | null
+          saldo_vencido: number | null
+          umbral_gestion: number | null
+          umbral_negociacion: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          alerta_facturas?: string | null
+          alerta_monto?: string | null
+          CLIENTE?: string | null
+          dias_vencido_max?: number | null
+          facturas_vencidas?: number | null
+          fecha_evaluacion?: string | null
+          fecha_vence_mas_antigua?: string | null
+          fecha_vence_mas_reciente?: string | null
+          pct_facturas?: number | null
+          pct_monto?: number | null
+          saldo_vencido?: number | null
+          umbral_gestion?: number | null
+          umbral_negociacion?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          alerta_facturas?: string | null
+          alerta_monto?: string | null
+          CLIENTE?: string | null
+          dias_vencido_max?: number | null
+          facturas_vencidas?: number | null
+          fecha_evaluacion?: string | null
+          fecha_vence_mas_antigua?: string | null
+          fecha_vence_mas_reciente?: string | null
+          pct_facturas?: number | null
+          pct_monto?: number | null
+          saldo_vencido?: number | null
+          umbral_gestion?: number | null
+          umbral_negociacion?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      ns_pagos_c4: {
+        Row: {
+          codigo_cliente: string | null
+          contribuyente_cliente: string | null
+          contribuyente_pago: string | null
+          descripcion_alerta: string | null
+          descripcion_xrt: string | null
+          documento_pago: string | null
+          es_contribuyente_diferente: boolean | null
+          factura: string | null
+          fecha_aplicacion: string | null
+          fecha_evaluacion: string | null
+          fecha_factura: string | null
+          fecha_vence_factura: string | null
+          fecha_xrt: string | null
+          monto_aplicado: string | null
+          monto_documento_pago: string | null
+          monto_factura: string | null
+          monto_xrt: string | null
+          REFERENCE_NUMBER: string | null
+          tipo_contribuyente: string | null
+          vendedor_factura: string | null
+          vendedor_pagador: string | null
+          ZONA: string | null
+          zona_factura: string | null
+        }
+        Insert: {
+          codigo_cliente?: string | null
+          contribuyente_cliente?: string | null
+          contribuyente_pago?: string | null
+          descripcion_alerta?: string | null
+          descripcion_xrt?: string | null
+          documento_pago?: string | null
+          es_contribuyente_diferente?: boolean | null
+          factura?: string | null
+          fecha_aplicacion?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura?: string | null
+          fecha_vence_factura?: string | null
+          fecha_xrt?: string | null
+          monto_aplicado?: string | null
+          monto_documento_pago?: string | null
+          monto_factura?: string | null
+          monto_xrt?: string | null
+          REFERENCE_NUMBER?: string | null
+          tipo_contribuyente?: string | null
+          vendedor_factura?: string | null
+          vendedor_pagador?: string | null
+          ZONA?: string | null
+          zona_factura?: string | null
+        }
+        Update: {
+          codigo_cliente?: string | null
+          contribuyente_cliente?: string | null
+          contribuyente_pago?: string | null
+          descripcion_alerta?: string | null
+          descripcion_xrt?: string | null
+          documento_pago?: string | null
+          es_contribuyente_diferente?: boolean | null
+          factura?: string | null
+          fecha_aplicacion?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura?: string | null
+          fecha_vence_factura?: string | null
+          fecha_xrt?: string | null
+          monto_aplicado?: string | null
+          monto_documento_pago?: string | null
+          monto_factura?: string | null
+          monto_xrt?: string | null
+          REFERENCE_NUMBER?: string | null
+          tipo_contribuyente?: string | null
+          vendedor_factura?: string | null
+          vendedor_pagador?: string | null
+          ZONA?: string | null
+          zona_factura?: string | null
+        }
+        Relationships: []
+      }
       olo_chat_histories: {
         Row: {
           created_at: string
@@ -5961,6 +7593,132 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      pagos_c4: {
+        Row: {
+          codigo_cliente: string | null
+          contribuyente_cliente: string | null
+          contribuyente_pago: string | null
+          descripcion_alerta: string | null
+          descripcion_xrt: string | null
+          documento_pago: string | null
+          es_contribuyente_diferente: boolean | null
+          etiqueta: number | null
+          factura: string | null
+          fecha_aplicacion: string | null
+          fecha_evaluacion: string | null
+          fecha_factura: string | null
+          fecha_vence_factura: string | null
+          fecha_xrt: string | null
+          monto_aplicado: string | null
+          monto_documento_pago: string | null
+          monto_factura: string | null
+          monto_xrt: string | null
+          REFERENCE_NUMBER: string | null
+          tipo_contribuyente: string | null
+          vendedor_factura: string | null
+          vendedor_pagador: string | null
+          ZONA: string | null
+          zona_factura: string | null
+        }
+        Insert: {
+          codigo_cliente?: string | null
+          contribuyente_cliente?: string | null
+          contribuyente_pago?: string | null
+          descripcion_alerta?: string | null
+          descripcion_xrt?: string | null
+          documento_pago?: string | null
+          es_contribuyente_diferente?: boolean | null
+          etiqueta?: number | null
+          factura?: string | null
+          fecha_aplicacion?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura?: string | null
+          fecha_vence_factura?: string | null
+          fecha_xrt?: string | null
+          monto_aplicado?: string | null
+          monto_documento_pago?: string | null
+          monto_factura?: string | null
+          monto_xrt?: string | null
+          REFERENCE_NUMBER?: string | null
+          tipo_contribuyente?: string | null
+          vendedor_factura?: string | null
+          vendedor_pagador?: string | null
+          ZONA?: string | null
+          zona_factura?: string | null
+        }
+        Update: {
+          codigo_cliente?: string | null
+          contribuyente_cliente?: string | null
+          contribuyente_pago?: string | null
+          descripcion_alerta?: string | null
+          descripcion_xrt?: string | null
+          documento_pago?: string | null
+          es_contribuyente_diferente?: boolean | null
+          etiqueta?: number | null
+          factura?: string | null
+          fecha_aplicacion?: string | null
+          fecha_evaluacion?: string | null
+          fecha_factura?: string | null
+          fecha_vence_factura?: string | null
+          fecha_xrt?: string | null
+          monto_aplicado?: string | null
+          monto_documento_pago?: string | null
+          monto_factura?: string | null
+          monto_xrt?: string | null
+          REFERENCE_NUMBER?: string | null
+          tipo_contribuyente?: string | null
+          vendedor_factura?: string | null
+          vendedor_pagador?: string | null
+          ZONA?: string | null
+          zona_factura?: string | null
+        }
+        Relationships: []
+      }
+      pagos_c6: {
+        Row: {
+          etiqueta: number | null
+          FACTURA: string | null
+          fecha_evaluacion: string | null
+          fecha_primera_devolucion: string | null
+          fecha_ultima_devolucion: string | null
+          monto_devuelto: number | null
+          monto_factura: string | null
+          notas_devolucion: string | null
+          num_notas_devolucion: number | null
+          pct_devolucion: number | null
+          supera_umbral_3pct: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          etiqueta?: number | null
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion?: number | null
+          supera_umbral_3pct?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          etiqueta?: number | null
+          FACTURA?: string | null
+          fecha_evaluacion?: string | null
+          fecha_primera_devolucion?: string | null
+          fecha_ultima_devolucion?: string | null
+          monto_devuelto?: number | null
+          monto_factura?: string | null
+          notas_devolucion?: string | null
+          num_notas_devolucion?: number | null
+          pct_devolucion?: number | null
+          supera_umbral_3pct?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
       }
       personnel_requisitions: {
         Row: {
@@ -6779,6 +8537,7 @@ export type Database = {
           email: string | null
           full_name: string | null
           id: string
+          notes: string | null
           position: string | null
           razon_social: string | null
           rif: string | null
@@ -6794,6 +8553,7 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id: string
+          notes?: string | null
           position?: string | null
           razon_social?: string | null
           rif?: string | null
@@ -6809,6 +8569,7 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+          notes?: string | null
           position?: string | null
           razon_social?: string | null
           rif?: string | null
@@ -7204,6 +8965,129 @@ export type Database = {
         }
         Relationships: []
       }
+      resumen: {
+        Row: {
+          fecha_evaluacion: string | null
+          ZONA: string | null
+        }
+        Insert: {
+          fecha_evaluacion?: string | null
+          ZONA?: string | null
+        }
+        Update: {
+          fecha_evaluacion?: string | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      Ret_ISLR_GALAC: {
+        Row: {
+          created_at: string
+          EMPRESA: string | null
+          Factura: string | null
+          Fecha: string | null
+          id: string
+          MontoRetencion: number | null
+          NumeroComprobante: string | null
+          PorcentajeDeRetencion: string | null
+          PROVEEDOR: string | null
+        }
+        Insert: {
+          created_at?: string
+          EMPRESA?: string | null
+          Factura?: string | null
+          Fecha?: string | null
+          id?: string
+          MontoRetencion?: number | null
+          NumeroComprobante?: string | null
+          PorcentajeDeRetencion?: string | null
+          PROVEEDOR?: string | null
+        }
+        Update: {
+          created_at?: string
+          EMPRESA?: string | null
+          Factura?: string | null
+          Fecha?: string | null
+          id?: string
+          MontoRetencion?: number | null
+          NumeroComprobante?: string | null
+          PorcentajeDeRetencion?: string | null
+          PROVEEDOR?: string | null
+        }
+        Relationships: []
+      }
+      Ret_IVA_GALAC: {
+        Row: {
+          created_at: string
+          EMPRESA: string | null
+          Factura: string | null
+          FechaDocumento: string | null
+          id: string
+          MontoIVAAlicuotaGeneral: number | null
+          MontoIvaRetenido: number | null
+          NumeroDeComprobante: string | null
+          Porcentaje: number | null
+          PROVEEDOR: string | null
+        }
+        Insert: {
+          created_at?: string
+          EMPRESA?: string | null
+          Factura?: string | null
+          FechaDocumento?: string | null
+          id?: string
+          MontoIVAAlicuotaGeneral?: number | null
+          MontoIvaRetenido?: number | null
+          NumeroDeComprobante?: string | null
+          Porcentaje?: number | null
+          PROVEEDOR?: string | null
+        }
+        Update: {
+          created_at?: string
+          EMPRESA?: string | null
+          Factura?: string | null
+          FechaDocumento?: string | null
+          id?: string
+          MontoIVAAlicuotaGeneral?: number | null
+          MontoIvaRetenido?: number | null
+          NumeroDeComprobante?: string | null
+          Porcentaje?: number | null
+          PROVEEDOR?: string | null
+        }
+        Relationships: []
+      }
+      Ret_Mun_GALAC: {
+        Row: {
+          created_at: string
+          EMPRESA: string | null
+          Factura: string | null
+          Fecha: string | null
+          id: number
+          MontoRetenidoImpuestoMunicipal: number | null
+          NumeroComprobanteImpuestoMunicipal: string | null
+          PROVEEDOR: string | null
+        }
+        Insert: {
+          created_at?: string
+          EMPRESA?: string | null
+          Factura?: string | null
+          Fecha?: string | null
+          id?: number
+          MontoRetenidoImpuestoMunicipal?: number | null
+          NumeroComprobanteImpuestoMunicipal?: string | null
+          PROVEEDOR?: string | null
+        }
+        Update: {
+          created_at?: string
+          EMPRESA?: string | null
+          Factura?: string | null
+          Fecha?: string | null
+          id?: number
+          MontoRetenidoImpuestoMunicipal?: number | null
+          NumeroComprobanteImpuestoMunicipal?: string | null
+          PROVEEDOR?: string | null
+        }
+        Relationships: []
+      }
       roles: {
         Row: {
           created_at: string | null
@@ -7259,52 +9143,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: string | null
+          etiqueta: number | null
           fecha_evaluacion: string | null
-          pred_LGB: string | null
-          pred_LR: string | null
-          pred_RF: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
           prioridad: string | null
-          prob_ensemble: string | null
-          prob_LGB: string | null
-          prob_LR: string | null
-          prob_RF: string | null
-          score_seccion_1: string | null
-          votos: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Relationships: []
@@ -7733,52 +9617,52 @@ export type Database = {
         Row: {
           consenso: string | null
           empresa: string | null
-          etiqueta: string | null
+          etiqueta: number | null
           fecha_evaluacion: string | null
-          pred_LGB: string | null
-          pred_LR: string | null
-          pred_RF: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
           prioridad: string | null
-          prob_ensemble: string | null
-          prob_LGB: string | null
-          prob_LR: string | null
-          prob_RF: string | null
-          score_seccion_1: string | null
-          votos: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
           ZONA: string | null
         }
         Insert: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Update: {
           consenso?: string | null
           empresa?: string | null
-          etiqueta?: string | null
+          etiqueta?: number | null
           fecha_evaluacion?: string | null
-          pred_LGB?: string | null
-          pred_LR?: string | null
-          pred_RF?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
           prioridad?: string | null
-          prob_ensemble?: string | null
-          prob_LGB?: string | null
-          prob_LR?: string | null
-          prob_RF?: string | null
-          score_seccion_1?: string | null
-          votos?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
           ZONA?: string | null
         }
         Relationships: []
@@ -9125,6 +11009,345 @@ export type Database = {
           id?: number
           message?: Json
           session_id?: string
+        }
+        Relationships: []
+      }
+      unanimidad: {
+        Row: {
+          consenso: string | null
+          empresa: string | null
+          etiqueta: number | null
+          fecha_evaluacion: string | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          score_seccion_1: number | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          consenso?: string | null
+          empresa?: string | null
+          etiqueta?: number | null
+          fecha_evaluacion?: string | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          score_seccion_1?: number | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Relationships: []
+      }
+      unanimidad_detalle: {
+        Row: {
+          cartera_total: number | null
+          cartera_vencida: number | null
+          clientes_afectados: number | null
+          clientes_anomalos: number | null
+          consenso: string | null
+          contribuyentes_distintos: number | null
+          desc_general_maximo: number | null
+          desc_general_promedio: number | null
+          desc_linea_maximo: number | null
+          desc_linea_ponderado: number | null
+          desc_linea_promedio_simple: number | null
+          desc_maximo_zona: number | null
+          empresa: string | null
+          empresa_unanimidad: string | null
+          etiqueta: number | null
+          etiqueta_unanimidad: number | null
+          exp_C1: string | null
+          exp_C10: string | null
+          exp_C11: number | null
+          exp_C2: string | null
+          exp_C3: string | null
+          exp_C4: string | null
+          exp_C5: string | null
+          exp_C6: string | null
+          exp_C7: string | null
+          exp_C8: string | null
+          exp_C9: string | null
+          facturas_anuladas: number | null
+          facturas_con_desc_general: number | null
+          facturas_con_devolucion: number | null
+          facturas_sobre_umbral_monto: number | null
+          fecha_evaluacion: string | null
+          lineas_con_descuento: number | null
+          lineas_desc_critico: number | null
+          max_concentracion_cliente: number | null
+          max_concentracion_monto: number | null
+          max_dias_depositados: number | null
+          max_dias_pendientes: number | null
+          max_monto_pago: number | null
+          monto_descuento_general_total: number | null
+          monto_pendiente: number | null
+          monto_peor_factura: number | null
+          monto_total_devuelto: number | null
+          monto_total_facturado: number | null
+          num_pagos_contribuyente_diferente: number | null
+          pagos_tercero: number | null
+          pagos_vendedor_diferente: number | null
+          pagos_vendedor_propio: number | null
+          pct_cartera_vencida: number | null
+          pct_clientes_anomalos: number | null
+          pct_facturas_anuladas: number | null
+          pct_facturas_con_devolucion: number | null
+          pct_facturas_con_saldo_previo: number | null
+          pct_pedidos_cancelados: number | null
+          pedidos_cancelados: number | null
+          peor_caso_pct_devolucion: number | null
+          pred_LGB: number | null
+          pred_LR: number | null
+          pred_RF: number | null
+          prioridad: string | null
+          prioridad_unanimidad: string | null
+          prob_ensemble: number | null
+          prob_LGB: number | null
+          prob_LR: number | null
+          prob_RF: number | null
+          recibos_pendientes: number | null
+          saldo_previo_promedio: number | null
+          score_atraso_depositos: number | null
+          score_cartera_vencida: number | null
+          score_comportamiento_clientes: number | null
+          score_descuento_politica: number | null
+          score_devolucion_cantidad: number | null
+          score_devolucion_monto: number | null
+          score_distribucion_cliente: number | null
+          score_distribucion_monto: number | null
+          score_documentos_anulados: number | null
+          score_facturacion_saldo: number | null
+          score_pagos_zona: number | null
+          score_pedidos_cancelados: number | null
+          score_seccion_1: number | null
+          score_seccion_1_unanimidad: number | null
+          tipo_alerta_cliente: string | null
+          tipo_alerta_monto: string | null
+          total_clientes_evaluados: number | null
+          total_facturas: number | null
+          total_facturas_zona: number | null
+          total_lineas: number | null
+          total_monto_pagos_zona: number | null
+          total_pedidos: number | null
+          version: string | null
+          votos: number | null
+          ZONA: string | null
+        }
+        Insert: {
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          consenso?: string | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          empresa?: string | null
+          empresa_unanimidad?: string | null
+          etiqueta?: number | null
+          etiqueta_unanimidad?: number | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: number | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prioridad_unanimidad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          score_seccion_1_unanimidad?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          votos?: number | null
+          ZONA?: string | null
+        }
+        Update: {
+          cartera_total?: number | null
+          cartera_vencida?: number | null
+          clientes_afectados?: number | null
+          clientes_anomalos?: number | null
+          consenso?: string | null
+          contribuyentes_distintos?: number | null
+          desc_general_maximo?: number | null
+          desc_general_promedio?: number | null
+          desc_linea_maximo?: number | null
+          desc_linea_ponderado?: number | null
+          desc_linea_promedio_simple?: number | null
+          desc_maximo_zona?: number | null
+          empresa?: string | null
+          empresa_unanimidad?: string | null
+          etiqueta?: number | null
+          etiqueta_unanimidad?: number | null
+          exp_C1?: string | null
+          exp_C10?: string | null
+          exp_C11?: number | null
+          exp_C2?: string | null
+          exp_C3?: string | null
+          exp_C4?: string | null
+          exp_C5?: string | null
+          exp_C6?: string | null
+          exp_C7?: string | null
+          exp_C8?: string | null
+          exp_C9?: string | null
+          facturas_anuladas?: number | null
+          facturas_con_desc_general?: number | null
+          facturas_con_devolucion?: number | null
+          facturas_sobre_umbral_monto?: number | null
+          fecha_evaluacion?: string | null
+          lineas_con_descuento?: number | null
+          lineas_desc_critico?: number | null
+          max_concentracion_cliente?: number | null
+          max_concentracion_monto?: number | null
+          max_dias_depositados?: number | null
+          max_dias_pendientes?: number | null
+          max_monto_pago?: number | null
+          monto_descuento_general_total?: number | null
+          monto_pendiente?: number | null
+          monto_peor_factura?: number | null
+          monto_total_devuelto?: number | null
+          monto_total_facturado?: number | null
+          num_pagos_contribuyente_diferente?: number | null
+          pagos_tercero?: number | null
+          pagos_vendedor_diferente?: number | null
+          pagos_vendedor_propio?: number | null
+          pct_cartera_vencida?: number | null
+          pct_clientes_anomalos?: number | null
+          pct_facturas_anuladas?: number | null
+          pct_facturas_con_devolucion?: number | null
+          pct_facturas_con_saldo_previo?: number | null
+          pct_pedidos_cancelados?: number | null
+          pedidos_cancelados?: number | null
+          peor_caso_pct_devolucion?: number | null
+          pred_LGB?: number | null
+          pred_LR?: number | null
+          pred_RF?: number | null
+          prioridad?: string | null
+          prioridad_unanimidad?: string | null
+          prob_ensemble?: number | null
+          prob_LGB?: number | null
+          prob_LR?: number | null
+          prob_RF?: number | null
+          recibos_pendientes?: number | null
+          saldo_previo_promedio?: number | null
+          score_atraso_depositos?: number | null
+          score_cartera_vencida?: number | null
+          score_comportamiento_clientes?: number | null
+          score_descuento_politica?: number | null
+          score_devolucion_cantidad?: number | null
+          score_devolucion_monto?: number | null
+          score_distribucion_cliente?: number | null
+          score_distribucion_monto?: number | null
+          score_documentos_anulados?: number | null
+          score_facturacion_saldo?: number | null
+          score_pagos_zona?: number | null
+          score_pedidos_cancelados?: number | null
+          score_seccion_1?: number | null
+          score_seccion_1_unanimidad?: number | null
+          tipo_alerta_cliente?: string | null
+          tipo_alerta_monto?: string | null
+          total_clientes_evaluados?: number | null
+          total_facturas?: number | null
+          total_facturas_zona?: number | null
+          total_lineas?: number | null
+          total_monto_pagos_zona?: number | null
+          total_pedidos?: number | null
+          version?: string | null
+          votos?: number | null
+          ZONA?: string | null
         }
         Relationships: []
       }
@@ -10703,6 +12926,7 @@ export type Database = {
         | "gerente"
         | "jefe"
         | "evaluador"
+        | "funcional"
       approval_status: "pending" | "approved" | "rejected"
       catalog_item_type:
         | "training"
@@ -10864,6 +13088,7 @@ export const Constants = {
         "gerente",
         "jefe",
         "evaluador",
+        "funcional",
       ],
       approval_status: ["pending", "approved", "rejected"],
       catalog_item_type: [
