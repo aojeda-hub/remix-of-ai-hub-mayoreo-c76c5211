@@ -76,7 +76,8 @@ const DEPARTMENTS = [
   "Inteligencia Comercial",
   "Reposición",
   "Procesos",
-  "Integridad de Datos",
+  "Datos Maestros",
+  "SSOO",
   "Todos",
 ] as const;
 
