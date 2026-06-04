@@ -33,7 +33,7 @@ const DEPARTMENTS = [
   "Servicios", "Operaciones", "Sistemas", "CEDI y Transporte", "Dirección",
   "Ventas", "Centro de Distribución", "Mercadeo", "Administración Comercial",
   "Desarrollo Humano", "Inteligencia Comercial", "Reposición", "Procesos",
-  "Datos Maestros", "SSOO", "Todos",
+  "Datos Maestros", "Servicios Operacionales", "Todos",
 ] as const;
 
 const SILOS = [
