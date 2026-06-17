@@ -2132,6 +2132,7 @@ export type Database = {
           dias_pendiente: number | null
           dias_sin_depositar: number | null
           estado: string | null
+          etiqueta: number | null
           fecha_deposito: string | null
           fecha_deposito_raw: string | null
           FECHA_DOCUMENTO: string | null
@@ -2148,6 +2149,7 @@ export type Database = {
           dias_pendiente?: number | null
           dias_sin_depositar?: number | null
           estado?: string | null
+          etiqueta?: number | null
           fecha_deposito?: string | null
           fecha_deposito_raw?: string | null
           FECHA_DOCUMENTO?: string | null
@@ -2164,6 +2166,7 @@ export type Database = {
           dias_pendiente?: number | null
           dias_sin_depositar?: number | null
           estado?: string | null
+          etiqueta?: number | null
           fecha_deposito?: string | null
           fecha_deposito_raw?: string | null
           FECHA_DOCUMENTO?: string | null
@@ -3143,7 +3146,7 @@ export type Database = {
           saldo_actual_anterior: number | null
           saldo_al_momento_emision: number | null
           total_pagado_historico: string | null
-          zona: string | null
+          ZONA: string | null
         }
         Insert: {
           CLIENTE?: string | null
@@ -3163,7 +3166,7 @@ export type Database = {
           saldo_actual_anterior?: number | null
           saldo_al_momento_emision?: number | null
           total_pagado_historico?: string | null
-          zona?: string | null
+          ZONA?: string | null
         }
         Update: {
           CLIENTE?: string | null
@@ -3183,7 +3186,7 @@ export type Database = {
           saldo_actual_anterior?: number | null
           saldo_al_momento_emision?: number | null
           total_pagado_historico?: string | null
-          zona?: string | null
+          ZONA?: string | null
         }
         Relationships: []
       }
@@ -4890,7 +4893,7 @@ export type Database = {
           prompt_text: string | null
           tokens_input: number | null
           tokens_output: number | null
-          type: string | null
+          type: string
           user_id: string | null
           video_url: string | null
         }
@@ -4910,7 +4913,7 @@ export type Database = {
           prompt_text?: string | null
           tokens_input?: number | null
           tokens_output?: number | null
-          type?: string | null
+          type?: string
           user_id?: string | null
           video_url?: string | null
         }
@@ -4930,7 +4933,7 @@ export type Database = {
           prompt_text?: string | null
           tokens_input?: number | null
           tokens_output?: number | null
-          type?: string | null
+          type?: string
           user_id?: string | null
           video_url?: string | null
         }
@@ -5929,7 +5932,7 @@ export type Database = {
           etiqueta: number | null
           etiqueta_mayoria: number | null
           exp_C1: string | null
-          exp_C10: string | null
+          exp_C10: number | null
           exp_C11: number | null
           exp_C2: string | null
           exp_C3: string | null
@@ -6023,7 +6026,7 @@ export type Database = {
           etiqueta?: number | null
           etiqueta_mayoria?: number | null
           exp_C1?: string | null
-          exp_C10?: string | null
+          exp_C10?: number | null
           exp_C11?: number | null
           exp_C2?: string | null
           exp_C3?: string | null
@@ -6117,7 +6120,7 @@ export type Database = {
           etiqueta?: number | null
           etiqueta_mayoria?: number | null
           exp_C1?: string | null
-          exp_C10?: string | null
+          exp_C10?: number | null
           exp_C11?: number | null
           exp_C2?: string | null
           exp_C3?: string | null
@@ -7158,6 +7161,7 @@ export type Database = {
       }
       ns_pagos_c4: {
         Row: {
+          cliente_dueno_contribuyente: string | null
           codigo_cliente: string | null
           contribuyente_cliente: string | null
           contribuyente_pago: string | null
@@ -7175,6 +7179,7 @@ export type Database = {
           monto_documento_pago: string | null
           monto_factura: string | null
           monto_xrt: string | null
+          nombre_dueno_contribuyente: string | null
           REFERENCE_NUMBER: string | null
           tipo_contribuyente: string | null
           vendedor_factura: string | null
@@ -7183,6 +7188,7 @@ export type Database = {
           zona_factura: string | null
         }
         Insert: {
+          cliente_dueno_contribuyente?: string | null
           codigo_cliente?: string | null
           contribuyente_cliente?: string | null
           contribuyente_pago?: string | null
@@ -7200,6 +7206,7 @@ export type Database = {
           monto_documento_pago?: string | null
           monto_factura?: string | null
           monto_xrt?: string | null
+          nombre_dueno_contribuyente?: string | null
           REFERENCE_NUMBER?: string | null
           tipo_contribuyente?: string | null
           vendedor_factura?: string | null
@@ -7208,6 +7215,7 @@ export type Database = {
           zona_factura?: string | null
         }
         Update: {
+          cliente_dueno_contribuyente?: string | null
           codigo_cliente?: string | null
           contribuyente_cliente?: string | null
           contribuyente_pago?: string | null
@@ -7225,6 +7233,7 @@ export type Database = {
           monto_documento_pago?: string | null
           monto_factura?: string | null
           monto_xrt?: string | null
+          nombre_dueno_contribuyente?: string | null
           REFERENCE_NUMBER?: string | null
           tipo_contribuyente?: string | null
           vendedor_factura?: string | null
@@ -8834,6 +8843,39 @@ export type Database = {
           updated_at?: string | null
           url?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      REBATE_GLOBAL_ARTICULO: {
+        Row: {
+          ARTICULO: string
+          created_at: string
+          DOCUMENTO: string | null
+          EMBARQUE: string
+          key: string
+          MARK_UP: number | null
+          REBATE_GLOBAL_ART: number | null
+          REFERENCIA: string | null
+        }
+        Insert: {
+          ARTICULO: string
+          created_at?: string
+          DOCUMENTO?: string | null
+          EMBARQUE: string
+          key?: string
+          MARK_UP?: number | null
+          REBATE_GLOBAL_ART?: number | null
+          REFERENCIA?: string | null
+        }
+        Update: {
+          ARTICULO?: string
+          created_at?: string
+          DOCUMENTO?: string | null
+          EMBARQUE?: string
+          key?: string
+          MARK_UP?: number | null
+          REBATE_GLOBAL_ART?: number | null
+          REFERENCIA?: string | null
         }
         Relationships: []
       }
@@ -11085,7 +11127,7 @@ export type Database = {
           etiqueta: number | null
           etiqueta_unanimidad: number | null
           exp_C1: string | null
-          exp_C10: string | null
+          exp_C10: number | null
           exp_C11: number | null
           exp_C2: string | null
           exp_C3: string | null
@@ -11094,7 +11136,7 @@ export type Database = {
           exp_C6: string | null
           exp_C7: string | null
           exp_C8: string | null
-          exp_C9: string | null
+          exp_C9: number | null
           facturas_anuladas: number | null
           facturas_con_desc_general: number | null
           facturas_con_devolucion: number | null
@@ -11179,7 +11221,7 @@ export type Database = {
           etiqueta?: number | null
           etiqueta_unanimidad?: number | null
           exp_C1?: string | null
-          exp_C10?: string | null
+          exp_C10?: number | null
           exp_C11?: number | null
           exp_C2?: string | null
           exp_C3?: string | null
@@ -11188,7 +11230,7 @@ export type Database = {
           exp_C6?: string | null
           exp_C7?: string | null
           exp_C8?: string | null
-          exp_C9?: string | null
+          exp_C9?: number | null
           facturas_anuladas?: number | null
           facturas_con_desc_general?: number | null
           facturas_con_devolucion?: number | null
@@ -11273,7 +11315,7 @@ export type Database = {
           etiqueta?: number | null
           etiqueta_unanimidad?: number | null
           exp_C1?: string | null
-          exp_C10?: string | null
+          exp_C10?: number | null
           exp_C11?: number | null
           exp_C2?: string | null
           exp_C3?: string | null
@@ -11282,7 +11324,7 @@ export type Database = {
           exp_C6?: string | null
           exp_C7?: string | null
           exp_C8?: string | null
-          exp_C9?: string | null
+          exp_C9?: number | null
           facturas_anuladas?: number | null
           facturas_con_desc_general?: number | null
           facturas_con_devolucion?: number | null
