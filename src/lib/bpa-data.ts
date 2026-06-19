@@ -316,8 +316,8 @@ export const BPA_HIERARCHY: SiloNode[] = [
         name: "Logística",
         activities: [
           {
-            name: "Logística 3PL",
-            tasks: ["Seguimiento SLA 3PL", "Análisis de indicadores", "Aplicación de Ajustes", "Monitoreo de KPIs logísticos"],
+            name: "Logística",
+            tasks: ["Seguimiento SLA", "Análisis de indicadores", "Aplicación de Ajustes", "Monitoreo de KPIs logísticos"],
           },
         ],
       },
